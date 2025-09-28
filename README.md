@@ -336,6 +336,8 @@ npm run tauri:build
 
 ## ⚠️ **Testing & Bug Reports**
 
+**NOTE**: The game is currently in beta and was rarely tested due to lack of time and resources. I am open to bug reports and suggestions before the full release later this year.
+
 **🚨 Important Notice**: These builds have been rarely tested across different systems and configurations. While we strive for compatibility, you may encounter issues specific to your setup.
 
 ### **🐛 We're Open to Bug Reports & Suggestions!**

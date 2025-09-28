@@ -1,0 +1,47 @@
+# Release Notes – v0.1.0-beta
+
+## 🆕 Highlights
+- First open beta of *What is Life*, a modern idle life simulation experience.
+- Cross-platform support foundation: Linux (AppImage/DEB/RPM), Windows MSI automation, Android pipeline prepared.
+- Complete open-source release with documentation, scripts, and workflow automation for community collaboration.
+
+## 🎮 Gameplay & Systems
+- Ten core activities implemented: Search, Crime, Work, Hunt, Fish, Dig, Post, Stream, Explore, Garden.
+- Progression: 50-level XP system, 20+ achievements, dynamic title rewards, death penalty balancing.
+- Advanced RNG and inventory systems with item tiers, requirements, and WDYFT tracking.
+- LAN multiplayer mini-games (Russian Roulette, Fight, Race) with peer-to-peer messaging.
+
+## 🖥️ Platform & Build Support
+- Linux x64 builds: AppImage, DEB, RPM packages in `src-tauri/target/x86_64-unknown-linux-gnu/release/bundle/`.
+- Windows: MSI/EXE packaging via GitHub Actions; interim WSL bootstrapper for immediate compatibility.
+- macOS/iOS: Community-driven builds encouraged using provided pipelines.
+- Android: Capacitor/Gradle build scripts ready for APK generation.
+
+## 📦 Repository & Tooling
+- Complete source tree (`web/`, `src-tauri/`, `android/`, `docs/`).
+- Icon generation pipeline (`scripts/generate-icons.sh`) from a single source image.
+- Build scripts for Linux/Windows cross-compilation (`scripts/build-windows.sh`, `scripts/build-windows.bat`).
+- CI/CD pipeline (`.github/workflows/build-release.yml`) covering Linux, Windows, macOS, Android builds and release packaging.
+
+## 📚 Documentation
+- `README.md` for project overview and platform notices.
+- `docs/gameplay/GAME_GUIDE.md` for activities, strategies, and multiplayer.
+- `docs/development/DEVELOPMENT_GUIDE.md` for setup, architecture, design system, contributions.
+- `docs/SYSTEM_REQUIREMENTS.md` for hardware/software requirements.
+- `docs/ICON_SPECIFICATIONS.md` for detailed icon design guidance.
+
+## 🔍 Testing Notes
+- Builds are beta quality with limited cross-platform testing.
+- Known gaps: additional multiplayer validation, macOS/iOS native builds, Android APK finalization.
+- Feedback welcomed through GitHub Issues, Discussions, or email.
+
+## 🙋 Call for Contributors
+- Seeking macOS/iOS maintainers to produce native builds and manage updates.
+- Contributions welcome for platform QA, feature development, and performance tuning.
+
+## ✅ Release Artifacts (from CI/CD)
+- Linux AppImage, DEB, RPM packages.
+- Windows MSI/EXE and Android APKs (generated post-release by GitHub Actions workflows).
+
+**Maintained by:** CodeNameOperative
+**Repository:** https://github.com/codenameoperative/what-is-life
