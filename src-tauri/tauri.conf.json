@@ -1,0 +1,84 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "build": {
+    "beforeBuildCommand": "npm run --prefix web build",
+    "beforeDevCommand": "npm run --prefix web dev",
+    "devPath": "http://localhost:5173",
+    "distDir": "../web/dist"
+  },
+  "package": {
+    "productName": "What Is Life",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "fs": {
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "copyFile": true,
+        "createDir": true,
+        "removeDir": true,
+        "removeFile": true,
+        "renameFile": true,
+        "exists": true,
+        "scope": ["$APPDATA", "$APPDATA/*", "$DOCUMENT", "$DOCUMENT/*"]
+      }
+    },
+    "bundle": {
+      "active": true,
+      "category": "Game",
+      "copyright": "© 2025 CodeNameOperative",
+      "deb": {
+        "depends": ["libwebkit2gtk-4.0-37", "libgtk-3-0", "libappindicator3-1"]
+      },
+      "appimage": {
+        "bundleMediaFramework": false
+      },
+      "rpm": {
+        "depends": ["webkit2gtk3", "gtk3", "libappindicator-gtk3"]
+      },
+      "externalBin": [],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "com.whatislife.app",
+      "longDescription": "Life is full of adventures... A unique life simulation game with hunting, crime, and exploration activities.",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "Life simulation game with adventures",
+      "targets": ["app", "appimage", "deb", "rpm"],
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 700,
+        "resizable": true,
+        "title": "What Is Life?",
+        "width": 1000
+      }
+    ]
+  }
+}

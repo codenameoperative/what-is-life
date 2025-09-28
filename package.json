@@ -1,0 +1,35 @@
+{
+  "name": "what-is-life-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run --prefix web dev",
+    "build": "npm run --prefix web build",
+    "type-check": "npm run --prefix web type-check",
+    "tauri": "npx tauri",
+    "tauri:dev": "npx tauri dev",
+    "tauri:build": "npx tauri build",
+    "tauri:build:linux:x64": "npx tauri build --target x86_64-unknown-linux-gnu",
+    "tauri:build:linux:arm64": "npx tauri build --target aarch64-unknown-linux-gnu",
+    "tauri:build:linux:i686": "npx tauri build --target i686-unknown-linux-gnu",
+    "tauri:build:windows": "npx tauri build --target x86_64-pc-windows-msvc",
+    "tauri:build:macos": "npx tauri build --target x86_64-apple-darwin",
+    "tauri:build:all": "npm run tauri:build:linux:x64 && npm run tauri:build:linux:arm64 && npm run tauri:build:linux:i686",
+    "android:build": "cd web && npx cap sync android && cd android && ./gradlew assembleDebug",
+    "android:build:release": "cd web && npx cap sync android && cd android && ./gradlew assembleRelease",
+    "android:build:arm64": "cd web && npx cap sync android && cd android && ./gradlew assembleDebug -PabiFilter=arm64-v8a",
+    "android:build:x86_64": "cd web && npx cap sync android && cd android && ./gradlew assembleDebug -PabiFilter=x86_64",
+    "android:build:arm32": "cd web && npx cap sync android && cd android && ./gradlew assembleDebug -PabiFilter=armeabi-v7a",
+    "android:build:x86": "cd web && npx cap sync android && cd android && ./gradlew assembleDebug -PabiFilter=x86",
+    "android:build:all": "npm run android:build:arm64 && npm run android:build:x86_64 && npm run android:build:arm32 && npm run android:build:x86"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.6.1",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/cli": "^7.4.3",
+    "@capacitor/core": "^7.4.3"
+  }
+}

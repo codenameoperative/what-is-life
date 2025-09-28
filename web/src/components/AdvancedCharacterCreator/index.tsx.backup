@@ -1,0 +1,464 @@
+import { useState } from 'react'
+
+export interface AdvancedCharacterData {
+  appearance: {
+    skinTone: number
+    hairStyle: number
+    hairColor: number
+    eyeColor: number
+    bodyType: number
+    age: number
+  }
+  clothing: {
+    top: number
+    bottom: number
+    shoes: number
+    accessories: number[]
+  }
+  traits: {
+    personality: string
+    background: string
+    specialAbility: string
+  }
+}
+
+interface AdvancedCharacterCreatorProps {
+  onComplete: (characterData: AdvancedCharacterData) => void
+  onCancel: () => void
+}
+
+const SKIN_TONES = ['#FFDBAC', '#F1C27D', '#E0AC69', '#C68642', '#8D5524']
+const HAIR_STYLES = ['Short', 'Medium', 'Long', 'Curly', 'Bald']
+const HAIR_COLORS = ['#000000', '#8B4513', '#FFD700', '#FF6347', '#C0C0C0']
+const EYE_COLORS = ['#0000FF', '#008000', '#8B4513', '#000000', '#FF0000']
+const BODY_TYPES = ['Slim', 'Average', 'Athletic', 'Heavy', 'Muscular']
+
+export default function AdvancedCharacterCreator({ onComplete, onCancel }: AdvancedCharacterCreatorProps) {
+  const [characterData, setCharacterData] = useState<AdvancedCharacterData>({
+    appearance: {
+      skinTone: 0,
+      hairStyle: 0,
+      hairColor: 0,
+      eyeColor: 0,
+      bodyType: 0,
+      age: 25
+    },
+    clothing: {
+      top: 0,
+      bottom: 0,
+      shoes: 0,
+      accessories: []
+    },
+    traits: {
+      personality: 'Adventurous',
+      background: 'Mysterious Wanderer',
+      specialAbility: 'Quick Learner'
+    }
+  })
+
+  const handleComplete = () => {
+    onComplete(characterData)
+  }
+
+  const updateAppearance = (key: keyof AdvancedCharacterData['appearance'], value: number) => {
+    setCharacterData(prev => ({
+      ...prev,
+      appearance: {
+        ...prev.appearance,
+        [key]: value
+      }
+    }))
+  }
+
+  const updateTraits = (key: keyof AdvancedCharacterData['traits'], value: string) => {
+    setCharacterData(prev => ({
+      ...prev,
+      traits: {
+        ...prev.traits,
+        [key]: value
+      }
+    }))
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onCancel} />
+
+      {/* Modal */}
+      <div className="relative w-[min(95vw,900px)] max-h-[90vh] overflow-y-auto bg-neutral-950/90 border border-neutral-800 rounded-xl shadow-2xl">
+        <div className="p-6 border-b border-neutral-800">
+          <h2 className="text-2xl font-bold text-white text-center">Create Your Character</h2>
+        </div>
+
+        <div className="p-6 space-y-6">
+          {/* Character Preview */}
+          <div className="flex justify-center">
+            <div className="w-32 h-32 bg-neutral-800 rounded-full flex items-center justify-center text-6xl border-4 border-neutral-600">
+              👤
+            </div>
+          </div>
+
+          {/* Appearance Section */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-white">Appearance</h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Skin Tone */}
+              <div>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Skin Tone</label>
+                <select
+                  value={characterData.appearance.skinTone}
+                  onChange={(e) => updateAppearance('skinTone', parseInt(e.target.value))}
+                  className="w-full bg-neutral-900/70 border border-neutral-800 rounded-lg px-4 py-3 text-white"
+                >
+                  {SKIN_TONES.map((tone, index) => (
+                    <option key={index} value={index}>Tone {index + 1}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Hair Style */}
+              <div>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Hair Style</label>
+                <select
+                  value={characterData.appearance.hairStyle}
+                  onChange={(e) => updateAppearance('hairStyle', parseInt(e.target.value))}
+                  className="w-full bg-neutral-900/70 border border-neutral-800 rounded-lg px-4 py-3 text-white"
+                >
+                  {HAIR_STYLES.map((style, index) => (
+                    <option key={index} value={index}>{style}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Hair Color */}
+              <div>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Hair Color</label>
+                <select
+                  value={characterData.appearance.hairColor}
+                  onChange={(e) => updateAppearance('hairColor', parseInt(e.target.value))}
+                  className="w-full bg-neutral-900/70 border border-neutral-800 rounded-lg px-4 py-3 text-white"
+                >
+                  {HAIR_COLORS.map((color, index) => (
+                    <option key={index} value={index}>Color {index + 1}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Eye Color */}
+              <div>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Eye Color</label>
+                <select
+                  value={characterData.appearance.eyeColor}
+                  onChange={(e) => updateAppearance('eyeColor', parseInt(e.target.value))}
+                  className="w-full bg-neutral-900/70 border border-neutral-800 rounded-lg px-4 py-3 text-white"
+                >
+                  {EYE_COLORS.map((color, index) => (
+                    <option key={index} value={index}>Color {index + 1}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Body Type */}
+              <div>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Body Type</label>
+                <select
+                  value={characterData.appearance.bodyType}
+                  onChange={(e) => updateAppearance('bodyType', parseInt(e.target.value))}
+                  className="w-full bg-neutral-900/70 border border-neutral-800 rounded-lg px-4 py-3 text-white"
+                >
+                  {BODY_TYPES.map((type, index) => (
+                    <option key={index} value={index}>{type}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Age */}
+              <div>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Age</label>
+                <input
+                  type="number"
+                  min="18"
+                  max="80"
+                  value={characterData.appearance.age}
+                  onChange={(e) => updateAppearance('age', parseInt(e.target.value) || 25)}
+                  className="w-full bg-neutral-900/70 border border-neutral-800 rounded-lg px-4 py-3 text-white"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Traits Section */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-white">Character Traits</h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Personality</label>
+                <select
+                  value={characterData.traits.personality}
+                  onChange={(e) => updateTraits('personality', e.target.value)}
+                  className="w-full bg-neutral-900/70 border border-neutral-800 rounded-lg px-4 py-3 text-white"
+                >
+                  <option>Adventurous</option>
+                  <option>Analytical</option>
+                  <option>Brave</option>
+                  <option>Creative</option>
+                  <option>Diplomatic</option>
+                  <option>Energetic</option>
+                  <option>Honest</option>
+                  <option>Optimistic</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Background</label>
+                <select
+                  value={characterData.traits.background}
+                  onChange={(e) => updateTraits('background', e.target.value)}
+                  className="w-full bg-neutral-900/70 border border-neutral-800 rounded-lg px-4 py-3 text-white"
+                >
+                  <option>Mysterious Wanderer</option>
+                  <option>Street Smart Survivor</option>
+                  <option>Former Adventurer</option>
+                  <option>Tech-Savvy Innovator</option>
+                  <option>Community Leader</option>
+                  <option>Creative Artist</option>
+                  <option>Hardened Veteran</option>
+                  <option>Aspiring Entrepreneur</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Special Ability</label>
+                <select
+                  value={characterData.traits.specialAbility}
+                  onChange={(e) => updateTraits('specialAbility', e.target.value)}
+                  className="w-full bg-neutral-900/70 border border-neutral-800 rounded-lg px-4 py-3 text-white"
+                >
+                  <option>Quick Learner</option>
+                  <option>Lucky Charm</option>
+                  <option>Night Vision</option>
+                  <option>Enhanced Reflexes</option>
+                  <option>Persuasive Speech</option>
+                  <option>Resourceful Mind</option>
+                  <option>Endurance Expert</option>
+                  <option>Tech Proficiency</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-4 pt-4">
+            <button
+              onClick={onCancel}
+              className="flex-1 bg-neutral-700 hover:bg-neutral-600 py-3 px-4 rounded-lg text-white font-medium transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleComplete}
+              className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 py-3 px-4 rounded-lg text-white font-medium transition-all duration-200 shadow-lg"
+            >
+              Create Character
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+    const panelX = 500
+    const panelY = 150
+    const panelWidth = 250
+    const panelHeight = 350
+
+    // Panel background
+    const panel = this.add.rectangle(panelX, panelY, panelWidth, panelHeight, 0x2a2a2a)
+    panel.setStrokeStyle(2, 0x444444)
+
+    // Panel title
+    this.add.text(panelX, panelY - 160, 'Customization', {
+      fontSize: '20px',
+      color: '#ffffff',
+      fontFamily: 'Arial'
+    }).setOrigin(0.5)
+
+    // Skin tone selector
+    this.createSelector(panelX - 100, panelY - 120, 'Skin Tone', ['Light', 'Medium', 'Dark', 'Tan'], (value) => {
+      this.updateSkinTone(['light', 'medium', 'dark', 'tan'].indexOf(value))
+    })
+
+    // Hair style selector
+    this.createSelector(panelX - 100, panelY - 80, 'Hair Style', ['Short', 'Long', 'Curly', 'Bald'], (value) => {
+      this.updateHairStyle(['short', 'long', 'curly', 'bald'].indexOf(value))
+    })
+
+    // Personality selector
+    this.createSelector(panelX - 100, panelY - 40, 'Personality', ['Brave', 'Clever', 'Kind', 'Mysterious'], (value) => {
+      this.updatePersonality(['brave', 'clever', 'kind', 'mysterious'].indexOf(value))
+    })
+
+    // Background selector
+    this.createSelector(panelX - 100, panelY, 'Background', ['Adventurer', 'Scholar', 'Artist', 'Merchant'], (value) => {
+      this.updateBackground(['adventurer', 'scholar', 'artist', 'merchant'].indexOf(value))
+    })
+  }
+
+  private createSelector(x: number, y: number, label: string, options: string[], onChange: (value: string) => void) {
+    const labelText = this.add.text(x, y, label + ':', {
+      fontSize: '14px',
+      color: '#cccccc',
+      fontFamily: 'Arial'
+    })
+
+    const selector = this.add.container(x + 80, y)
+    const bg = this.add.rectangle(0, 0, 120, 25, 0x444444)
+    const text = this.add.text(0, 0, options[0], {
+      fontSize: '12px',
+      color: '#ffffff',
+      fontFamily: 'Arial'
+    }).setOrigin(0.5)
+
+    selector.add([bg, text])
+    selector.setInteractive(new Phaser.Geom.Rectangle(-60, -12.5, 120, 25), Phaser.Geom.Rectangle.Contains)
+    selector.on('pointerdown', () => {
+      const currentIndex = options.indexOf(text.text)
+      const nextIndex = (currentIndex + 1) % options.length
+      text.setText(options[nextIndex])
+      onChange(options[nextIndex].toLowerCase())
+    })
+
+    this.uiElements.push(labelText, selector)
+  }
+
+  private createNavigationButtons() {
+    const buttonY = 520
+
+    // Cancel button
+    const cancelButton = this.add.container(250, buttonY)
+    const cancelBg = this.add.rectangle(0, 0, 100, 40, 0x666666)
+    const cancelText = this.add.text(0, 0, 'Cancel', {
+      fontSize: '16px',
+      color: '#ffffff',
+      fontFamily: 'Arial'
+    }).setOrigin(0.5)
+
+    cancelButton.add([cancelBg, cancelText])
+    cancelButton.setInteractive(new Phaser.Geom.Rectangle(-50, -20, 100, 40), Phaser.Geom.Rectangle.Contains)
+    cancelButton.on('pointerdown', () => {
+      this.scene.get('AdvancedCharacterCreationScene').events.emit('cancel')
+    })
+
+    // Create button
+    const createButton = this.add.container(550, buttonY)
+    const createBg = this.add.rectangle(0, 0, 100, 40, 0x4169E1)
+    const createText = this.add.text(0, 0, 'Create', {
+      fontSize: '16px',
+      color: '#ffffff',
+      fontFamily: 'Arial'
+    }).setOrigin(0.5)
+
+    createButton.add([createBg, createText])
+    createButton.setInteractive(new Phaser.Geom.Rectangle(-50, -20, 100, 40), Phaser.Geom.Rectangle.Contains)
+    createButton.on('pointerdown', () => {
+      this.scene.get('AdvancedCharacterCreationScene').events.emit('complete', this.characterData)
+    })
+
+    this.uiElements.push(cancelButton, createButton)
+  }
+
+  private updateSkinTone(index: number) {
+    this.characterData.appearance = {
+      skinTone: index,
+      hairStyle: this.characterData.appearance?.hairStyle ?? 0,
+      hairColor: this.characterData.appearance?.hairColor ?? 0,
+      eyeColor: this.characterData.appearance?.eyeColor ?? 0,
+      bodyType: this.characterData.appearance?.bodyType ?? 0,
+      age: this.characterData.appearance?.age ?? 25
+    }
+    // Update preview (would regenerate sprite with new skin tone)
+  }
+
+  private updateHairStyle(index: number) {
+    this.characterData.appearance = {
+      skinTone: this.characterData.appearance?.skinTone ?? 0,
+      hairStyle: index,
+      hairColor: this.characterData.appearance?.hairColor ?? 0,
+      eyeColor: this.characterData.appearance?.eyeColor ?? 0,
+      bodyType: this.characterData.appearance?.bodyType ?? 0,
+      age: this.characterData.appearance?.age ?? 25
+    }
+    // Update preview
+  }
+
+  private updatePersonality(index: number) {
+    this.characterData.traits = {
+      personality: ['brave', 'clever', 'kind', 'mysterious'][index],
+      background: this.characterData.traits?.background ?? 'adventurer',
+      specialAbility: this.characterData.traits?.specialAbility ?? 'none'
+    }
+  }
+
+  private updateBackground(index: number) {
+    this.characterData.traits = {
+      personality: this.characterData.traits?.personality ?? 'brave',
+      background: ['adventurer', 'scholar', 'artist', 'merchant'][index],
+      specialAbility: this.characterData.traits?.specialAbility ?? 'none'
+    }
+  }
+}
+
+export default function AdvancedCharacterCreator({ onComplete, onCancel }: AdvancedCharacterCreatorProps) {
+  const gameRef = useRef<Phaser.Game | null>(null)
+
+  useEffect(() => {
+    const config: Phaser.Types.Core.GameConfig = {
+      type: Phaser.AUTO,
+      width: 800,
+      height: 600,
+      parent: 'advanced-character-creator',
+      backgroundColor: '#1a1a1a',
+      scene: new AdvancedCharacterCreationScene((characterData) => {
+        onComplete(characterData)
+      })
+    }
+
+    gameRef.current = new Phaser.Game(config)
+
+    return () => {
+      if (gameRef.current) {
+        gameRef.current.destroy(true)
+      }
+    }
+  }, [onComplete])
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        onClick={onCancel}
+      />
+
+      {/* Game Container */}
+      <div
+        id="advanced-character-creator"
+        className="relative bg-neutral-900 rounded-lg overflow-hidden shadow-2xl"
+        style={{ width: '800px', height: '600px' }}
+      />
+
+      {/* Loading indicator */}
+      {!gameRef.current && (
+        <div className="absolute inset-0 flex items-center justify-center bg-neutral-900 rounded-lg">
+          <div className="text-center">
+            <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-white">Loading character creator...</p>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
