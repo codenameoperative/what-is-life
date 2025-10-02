@@ -17,9 +17,6 @@
    - Enter a unique username
    - Your player ID will be displayed
 
-3. **Choose Your First Activity**
-   - Press **ENTER** to start the first available activity
-   - Or click any unlocked activity button
 
 ---
 
@@ -27,7 +24,7 @@
 
 ### **Currency System**
 - **💰 Wallet**: Primary spending money
-- **🏦 Bank**: Interest-earning savings (coming soon)
+- **🏦 Bank**: Interest-earning savings (coming 2026 but basic bank functionlity works)
 - **📦 Stash**: Hidden emergency funds
 
 ### **Level Progression**
@@ -57,7 +54,7 @@
 - **Risk**: 30% failure rate with penalties
 - **Strategy**: Balance risk vs reward carefully
 
-### **3. 💼 Work** (No Requirements)
+### **3. 💼 Work** (Requires: Job)
 - **Description**: Steady income with job progression
 - **Cooldown**: 30 seconds
 - **Rewards**: 💰 10-50 WTC
@@ -150,8 +147,6 @@
 - **Confirm Deposits**: Require confirmation for bank deposits
 
 ### **Audio & Visual**
-- **Sound Effects**: Enable/disable audio feedback (coming soon)
-- **Light Mode**: Theme toggle (coming soon)
 - **Animation Speed**: Control UI animation timing
 
 ### **Automation Features**
@@ -178,26 +173,14 @@
 
 ## 💡 **Pro Tips & Strategies**
 
-### **Early Game (Levels 1-10)**
-- Focus on Search for item farming
-- Use Crime for quick WTC boosts
-- Save up for basic tools (Shovel, Fishing Rod)
+- **Start Safe (Lv. 1-10)**  Keep a `Revival Bill` in your inventory. Stick to `Search`, `Work`, or short `Stream` sessions until you can afford higher-risk runs.
+- **Stack Multipliers**  Combine `Garden` harvest boosts with `Automation` mode to keep WTC flowing while you plan the next upgrade.
+- **Gear Gateways**  Always buy activity gear in advance (e.g. `Hunting Rifle`, `Fishing Rod`). Missing items stall your grind and reduce automation efficiency.
+- **Momentum Windows**  When `Explore` or `Crime` reward streaks appear, cash in quickly, then return to safer loops before death risk stacks.
+- **Multiplayer Prep**  Before joining LAN mini-games, empty excess WTC into the bank to avoid heavy losses during PvP bets.
+- **Daily Reset**  Log in once per day even if you cannot grind—daily bonuses stack with the loyalty streak and keep passive timers running.
 
-### **Mid Game (Levels 10-25)**
-- Unlock Hunt/Fish for high-value activities
-- Invest in better equipment
-- Start building your item collection
-
-### **Late Game (Levels 25-50)**
-- Master Stream/Post for maximum income
-- Collect rare items and achievements
-- Use automation for passive progression
-
-### **Risk Management**
-- Always have Revival Bill for Explore
-- Balance high-risk/high-reward activities
-- Use Bank for interest-earning savings
-
+> These tips are “approved” best practices gathered from internal QA sessions. When the docs migrate to the GitHub Wiki, add a `Tips & Tricks` page and link this section as the starter content.
 ---
 
 ## 🔧 **Troubleshooting**
@@ -223,4 +206,4 @@
 
 ---
 
-**🎮 Enjoy your journey through What is Life!**
+**🎮 Enjoy your journey through What is Life! - CodeNameoperative**

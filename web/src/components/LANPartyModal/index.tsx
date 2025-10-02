@@ -97,8 +97,8 @@ export default function LANPartyModal({ open, onClose, onComplete, gameType, tar
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center modal-overlay" onClick={onClose}>
-      <div className="modal-content max-w-md" onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center modal-overlay backdrop-blur-sm" onClick={onClose}>
+      <div className="modal-content max-w-md glass-strong border border-border/50 shadow-2xl" onClick={(e) => e.stopPropagation()}>
         <div className="p-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="text-2xl">🌐</div>
@@ -172,7 +172,7 @@ export default function LANPartyModal({ open, onClose, onComplete, gameType, tar
             </div>
 
             {/* Quick Join */}
-            <div className="border-t border-border pt-4">
+            <div className="border-t border-border/30 pt-4">
               <button
                 onClick={handleQuickJoin}
                 disabled={!localIp || isCreating || isJoining}
@@ -187,7 +187,7 @@ export default function LANPartyModal({ open, onClose, onComplete, gameType, tar
 
             {/* Network Info */}
             {localIp && (
-              <div className="glass p-3 rounded-lg">
+              <div className="glass p-3 rounded-lg backdrop-blur-sm border border-border/30">
                 <div className="text-xs text-muted mb-1">Your Local IP:</div>
                 <div className="text-sm font-mono text-primary">{localIp}</div>
                 <div className="text-xs text-muted mt-1">

@@ -332,6 +332,30 @@ export const achievements: Record<string, Achievement> = {
     hidden: true
   },
 
+  retro_rewind: {
+    id: 'retro_rewind',
+    name: 'Retro Rewind',
+    description: 'Unlock the codenameoperative retro interface.',
+    icon: '🕹️',
+    category: 'special',
+    condition: { type: 'activity_count', target: 'secrets_retro', count: 1 },
+    reward: { title: 'Time Traveler', wtc: 404 },
+    rarity: 'legendary',
+    hidden: true
+  },
+
+  glitch_hunter: {
+    id: 'glitch_hunter',
+    name: 'Glitch Hunter',
+    description: 'Trigger the forbidden cheat protocol.',
+    icon: '👾',
+    category: 'special',
+    condition: { type: 'activity_count', target: 'secrets_cheat', count: 1 },
+    reward: { title: 'Glitch Hunter', items: ['error_404_wdyft'] },
+    rarity: 'mythical',
+    hidden: true
+  },
+
   hoarder: {
     id: 'hoarder',
     name: 'Hoarder',

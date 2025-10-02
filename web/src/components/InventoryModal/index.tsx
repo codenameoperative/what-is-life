@@ -56,18 +56,15 @@ export default function InventoryModal({ open, onClose }: Props) {
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center">
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fadeIn" onClick={onClose} />
-
+    <div className="fixed inset-0 z-50 flex items-start justify-center modal-overlay backdrop-blur-sm" onClick={onClose}>
       {/* Container */}
-      <div className="relative mt-16 w-[min(92vw,900px)] rounded-xl border border-neutral-800 bg-neutral-950/90 shadow-2xl animate-scaleIn">
-        <div className="p-4 border-b border-neutral-800 flex items-center gap-3">
-          <div className="text-sm text-neutral-300">Inventory</div>
+      <div className="relative mt-16 w-[min(92vw,900px)] glass-strong border border-border/50 shadow-2xl animate-scaleIn" onClick={(e) => e.stopPropagation()}>
+        <div className="p-4 border-b border-border/30 flex items-center gap-3 backdrop-blur-xl">
+          <div className="text-sm text-primary">Inventory</div>
           <div className="ml-auto" />
           <button
             onClick={onClose}
-            className="px-3 py-2 text-sm rounded-lg bg-neutral-900/70 border border-neutral-800 hover:bg-neutral-800"
+            className="px-3 py-2 text-sm rounded-lg glass hover:glass-strong transition-all duration-200 hover:scale-105"
           >
             Close
           </button>
@@ -75,8 +72,8 @@ export default function InventoryModal({ open, onClose }: Props) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
           {/* List */}
-          <div className="p-3 max-h-[60vh] overflow-y-auto border-r border-neutral-900/60">
-            <ul className="divide-y divide-neutral-900/60">
+          <div className="p-3 max-h-[60vh] overflow-y-auto border-r border-border/30">
+            <ul className="divide-y divide-border/30">
               {inv.length === 0 && (
                 <li className="px-3 py-6 text-center text-sm text-neutral-500">No items in inventory</li>
               )}

@@ -32,18 +32,18 @@ This guide covers building "What Is Life" for multiple platforms and architectur
 
 ## Quick Build Commands
 
-### Linux (All Architectures)
+### Linux (x64 Official Target)
 ```bash
 # Install dependencies
-npm install
+ELECTRON_SKIP_BINARY_DOWNLOAD=1 npm ci
+ELECTRON_SKIP_BINARY_DOWNLOAD=1 npm ci --prefix web
 
-# Build all Linux targets
-npm run tauri:build:all
+# Build the x64 release bundle
+npm run tauri:build:linux:x64
 
-# Or build specific architecture
-npm run tauri:build:linux:x64      # 64-bit Intel/AMD
-npm run tauri:build:linux:arm64    # 64-bit ARM
-npm run tauri:build:linux:i686     # 32-bit Intel
+# Optional (community-maintained targets)
+# npm run tauri:build:linux:arm64
+# npm run tauri:build:linux:i686
 ```
 
 ### Windows

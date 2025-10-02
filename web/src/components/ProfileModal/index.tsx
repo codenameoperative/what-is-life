@@ -44,14 +44,13 @@ export default function ProfileModal({ open, onClose, isOwnProfile = true }: Pro
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fadeIn" onClick={onClose} />
-      <div className="relative mt-16 w-[min(92vw,700px)] rounded-xl border border-neutral-800 bg-neutral-950/95 shadow-2xl animate-scaleIn">
-        <div className="p-4 border-b border-neutral-800 flex items-center gap-2">
-          <div className="text-sm text-neutral-300">Profile</div>
+    <div className="fixed inset-0 z-50 flex items-start justify-center modal-overlay backdrop-blur-sm" onClick={onClose}>
+      <div className="relative mt-16 w-[min(92vw,700px)] glass-strong border border-border/50 shadow-2xl animate-scaleIn" onClick={(e) => e.stopPropagation()}>
+        <div className="p-4 border-b border-border/30 flex items-center gap-2 backdrop-blur-xl">
+          <div className="text-sm text-primary">Profile</div>
           <button
             onClick={onClose}
-            className="ml-auto px-3 py-2 text-sm rounded-lg bg-neutral-900/70 border border-neutral-800 hover:bg-neutral-800"
+            className="ml-auto px-3 py-2 text-sm rounded-lg glass hover:glass-strong transition-all duration-200 hover:scale-105"
           >
             Close
           </button>
@@ -59,7 +58,7 @@ export default function ProfileModal({ open, onClose, isOwnProfile = true }: Pro
 
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Left Panel - Basic Info */}
-          <div className="p-6 border-r border-neutral-900/60">
+          <div className="p-6 border-r border-border/30">
             <div className="space-y-6">
               {/* Profile Header */}
               <div className="text-center">

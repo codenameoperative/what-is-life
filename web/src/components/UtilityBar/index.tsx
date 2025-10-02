@@ -54,7 +54,7 @@ export default function UtilityBar() {
   return (
     <div className="w-full flex justify-center">
       <div className="w-full max-w-2xl overflow-x-auto">
-        <ul className="flex items-center gap-2 min-w-max glass border border-border rounded-xl p-2 custom-scrollbar">
+        <ul className="flex items-center gap-2 min-w-max glass border border-border/30 rounded-xl p-2 backdrop-blur-xl custom-scrollbar">
           {items.map((label) => (
             <li key={label}>
               <button

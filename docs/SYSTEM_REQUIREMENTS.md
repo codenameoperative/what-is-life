@@ -1,4 +1,4 @@
-# 📋 What is Life - System Requirements
+# 📋 What is Life - System Requirements (not offical)
 
 ## 🎮 **Minimum Requirements**
 

@@ -4,7 +4,7 @@ import ProfileButton from '../ProfileButton'
 import SettingsModal from '../SettingsModal'
 import { invoke } from '@tauri-apps/api/core'
 
-export default function Header() {
+export default function Header({ retroModeActive, onCheat }: { retroModeActive?: boolean; onCheat?: () => void }) {
   const { state, actions } = useGame()
   const [showStashOnly, setShowStashOnly] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
@@ -28,7 +28,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="glass-strong sticky top-0 z-30 border-b border-border">
+      <header className="glass-strong sticky top-0 z-30 border-b border-border/50 backdrop-blur-xl">
         <div className="container-max h-16 flex items-center justify-between px-4">
           {/* Left: Profile + WTC Counters */}
           <div className="flex items-center gap-4">
@@ -81,6 +81,19 @@ export default function Header() {
               </svg>
               <span className="hidden sm:inline text-sm">Settings</span>
             </button>
+
+            {retroModeActive && onCheat && (
+              <button
+                type="button"
+                onClick={onCheat}
+                className="btn-secondary flex items-center gap-2 px-3 py-2 bg-yellow-600 hover:bg-yellow-700"
+                aria-label="Cheat"
+                title="Forbidden Cheat Protocol"
+              >
+                <span className="text-sm">👾</span>
+                <span className="hidden sm:inline text-sm">Cheat</span>
+              </button>
+            )}
 
             <button
               type="button"

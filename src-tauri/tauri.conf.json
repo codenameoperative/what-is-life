@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "What Is Life",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "tauri": {
     "allowlist": {
@@ -48,7 +48,7 @@
         "icons/icon.ico"
       ],
       "identifier": "com.whatislife.app",
-      "longDescription": "Life is full of adventures... A unique life simulation game with hunting, crime, and exploration activities.",
+      "longDescription": "Life is full of adventures..",
       "macOS": {
         "entitlements": null,
         "exceptionDomain": "",
@@ -57,7 +57,7 @@
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "Life simulation game with adventures",
+      "shortDescription": "Life has its highs and lows",
       "targets": ["app", "appimage", "deb", "rpm"],
       "windows": {
         "certificateThumbprint": null,

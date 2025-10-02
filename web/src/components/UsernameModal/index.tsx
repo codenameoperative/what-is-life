@@ -47,8 +47,8 @@ export default function UsernameModal({ open, onComplete }: Props) {
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center modal-overlay">
-      <div className="w-full max-w-md mx-4 modal-content p-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center modal-overlay backdrop-blur-sm">
+      <div className="w-full max-w-md mx-4 modal-content glass-strong border border-border/50 shadow-2xl p-6">
         <h2 className="text-xl font-semibold text-primary mb-2">Welcome to What is Life!</h2>
         <p className="text-muted text-sm mb-6">
           Enter a username to get started. This will be your unique identifier in the game.

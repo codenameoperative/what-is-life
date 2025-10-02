@@ -19,11 +19,14 @@ interface InitialUserData {
   }
   settings: {
     automatedGrinding: boolean
-    lightMode: boolean
     confirmSell: boolean
     confirmDeposit: boolean
-    soundEnabled: boolean
     animationSpeed: 'slow' | 'normal' | 'fast'
+    performanceMode: boolean
+  }
+  secrets: {
+    retroUnlocked: boolean
+    cheatUnlocked: boolean
   }
   inventory: Array<{ id: string; quantity?: number }>
   wallet: number
@@ -66,11 +69,14 @@ export const createInitialUserData = (username: string): InitialUserData => {
     },
     settings: {
       automatedGrinding: false,
-      lightMode: false,
       confirmSell: true,
       confirmDeposit: true,
-      soundEnabled: true,
-      animationSpeed: 'normal'
+      animationSpeed: 'normal',
+      performanceMode: false
+    },
+    secrets: {
+      retroUnlocked: false,
+      cheatUnlocked: false
     },
     inventory: [
       { id: 'hunting_rifle' },

@@ -1,4 +1,4 @@
-# 🎨 Icon Design Specifications - What is Life
+# 🎨 Icon Design Specifications - What is Life for those building their own builds
 
 ## 📋 **Icon Requirements Overview**
 

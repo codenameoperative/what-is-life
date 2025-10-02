@@ -35,22 +35,24 @@ A modern idle/incremental life simulation game built with React, TypeScript, Rus
 ### **Web Version** (Development/Testing)
 ```bash
 cd web
-npm install
+npm ci
 npm run dev
 ```
 
 ### **Desktop Builds** (Linux, Windows, macOS)
 ```bash
 # Install dependencies
-npm install
+npm ci
+npm ci --prefix web
 
 # Build for your platform
 npm run tauri:build
 
 # Or build for specific Linux architectures
-npm run tauri:build:linux:x64    # 64-bit Intel/AMD
-npm run tauri:build:linux:arm64  # 64-bit ARM
-npm run tauri:build:linux:i686   # 32-bit Intel
+npm run tauri:build:linux:x64    # 64-bit Intel/AMD (official release target)
+# Community builds (require extra setup):
+# npm run tauri:build:linux:arm64  # 64-bit ARM
+# npm run tauri:build:linux:i686   # 32-bit Intel
 ```
 
 ### **Android Build**
@@ -71,12 +73,12 @@ npm run android:build:all
 - **Death Penalties**: Higher levels bring greater rewards but greater risks
 
 ### **💰 Economic System**
-- **Multiple Currencies**: Wallet, Bank, Stash with different purposes
+- **Multiple banking system**: Wallet, Bank, Stash with different purposes
 - **Item Trading**: Buy, sell, and collect rare items with 7 tiers
 - **Market Dynamics**: Rotating shop inventory and special deals
 - **Universal Item System**: Weapons, tools, clothing, collectibles, animals, fish, ores
 
-### **🏆 Implemented Activities (10/10 Complete)**
+### **🏆 Implemented Activities**
 
 | Activity | Icon | Requirements | Cooldown | Rewards |
 |----------|------|--------------|----------|---------|
@@ -132,10 +134,9 @@ npm run android:build:all
 ## 📦 **Distribution**
 
 ### **Linux** 🐧
-- **`.deb`** packages for Debian/Ubuntu
-- **`.rpm`** packages for Fedora/RHEL
-- **`.AppImage`** universal binaries
-- **Multi-architecture**: x64, ARM64, i686
+- **`.deb`**, **`.rpm`**, and **`.AppImage`** bundles
+- **Official support**: x64 (Intel/AMD)
+- **Community builds**: ARM64 / i686 (require additional toolchains)
 
 ### **Windows** 🪟
 - **`.msi`** installer packages
@@ -152,9 +153,9 @@ npm run android:build:all
 > **🍎 Community Development Notice**: macOS and iOS versions can be built using the existing codebase and CI/CD pipeline. Community contributors who create and maintain these versions will be responsible for their ongoing updates, testing, and distribution. The Developer focuses on Linux, Windows, and Android platforms.
 
 ### **iOS** 📱
-- **Community-driven development** (not actively developed by the developer)
-- **Would require macOS build environment for development**
-- **App Store distribution** possible through community maintainers
+- **Community-driven development** (targeting early 2026)
+- **Requires macOS build environment**
+- **App Store distribution** handled by volunteer maintainers
 
 > **💻 Call for macOS Contributors**: We need developers with macOS machines to create native macOS `.app` bundles and iOS versions! The build system is ready - just run the GitHub Actions workflow or use the provided build scripts. Contributors will be credited and can maintain their own release channels.
 
@@ -201,7 +202,9 @@ what-is-life/
 - [x] Android support
 
 ### **🔄 In Progress**
-- [ ] Windows, MacOS, iOS, Android Native builds
+- [ ] Windows + macOS CI stabilization
+- [ ] Android packaging automation
+- [ ] Documentation migration to GitHub Wiki
 
 ### **🎯 Upcoming**
 - [ ] Item crafting system
@@ -309,10 +312,6 @@ npm run tauri:build
 - **Android APK packages** for mobile distribution
 - **macOS community builds** (call for contributors!)
 
-**📅 Tomorrow's Focus:**
-- Complete Windows GitHub Actions workflow
-- Android build optimization and APK generation
-- Community macOS build verification
 
 ### **🚀 How to Contribute**
 
@@ -347,7 +346,6 @@ We're actively developing and improving **What is Life**. Your feedback is cruci
 **📧 How to Report Issues:**
 - **GitHub Issues**: [Report bugs and request features](https://github.com/codenameoperative/what-is-life/issues)
 - **Discussions**: [Join the community discussion](https://github.com/codenameoperative/what-is-life/discussions)
-- **Email**: [codenameoperative@example.com](mailto:codenameoperative@example.com)
 
 **🔍 What to Include in Bug Reports:**
 - **Platform**: Linux/Windows/macOS + version
@@ -390,7 +388,7 @@ This project is developed by **CodeNameOperative**. See individual component lic
 
 - **Tauri Team** for the amazing desktop framework
 - **Capacitor Team** for cross-platform mobile support
-- **React & TypeScript** communities
+- **React & TypeScript** communities and creators
 - **Open source contributors**
 
 ---

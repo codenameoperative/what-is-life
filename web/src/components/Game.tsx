@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useRef, useCallback, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react'
 import Header from './Header'
 import UtilityBar from './UtilityBar'
 import Footer from './Footer'
@@ -16,12 +16,188 @@ import Toaster from './Toaster/index'
 import RussianRoulette from './MiniGames/RussianRoulette'
 import Fight from './MiniGames/Fight'
 import Race from './MiniGames/Race'
-import UsernameModal from './UsernameModal'
+import { ErrorLogViewer } from './ErrorLogViewer'
 import LANPartyModal from './LANPartyModal'
+import UsernameModal from './UsernameModal/index'
 import { useGame } from '../contexts/GameContext'
 import { useMultiplayer } from '../contexts/MultiplayerContext'
+import { useNotify } from '../contexts/NotifyContext'
 
-function Game() {
+const ACTIVITY_LIST = ['Search', 'Crime', 'Work', 'Hunt', 'Fish', 'Dig', 'Post', 'Stream', 'Explore', 'Garden'] as const
+type ActivityName = typeof ACTIVITY_LIST[number]
+
+const ACTIVITY_SHORTCUTS: Record<string, ActivityName> = {
+  Digit1: 'Search',
+  Digit2: 'Crime',
+  Digit3: 'Work',
+  Digit4: 'Hunt',
+  Digit5: 'Fish',
+  Digit6: 'Dig',
+  Digit7: 'Post',
+  Digit8: 'Stream',
+  Digit9: 'Explore',
+  Digit0: 'Garden'
+}
+
+const ACTIVITY_SHORTCUT_LABELS: Record<ActivityName, string> = {
+  Search: '1',
+  Crime: '2',
+  Work: '3',
+  Hunt: '4',
+  Fish: '5',
+  Dig: '6',
+  Post: '7',
+  Stream: '8',
+  Explore: '9',
+  Garden: '0'
+}
+
+const ACTIVITY_THEME: Record<ActivityName | 'default', { primary: string; secondary: string; pointer: string }> = {
+  default: {
+    primary: 'rgba(107, 77, 255, 0.55)',
+    secondary: 'rgba(59, 255, 215, 0.35)',
+    pointer: 'rgba(255, 255, 255, 0.18)'
+  },
+  Search: {
+    primary: 'rgba(59, 255, 215, 0.58)',
+    secondary: 'rgba(59, 255, 215, 0.28)',
+    pointer: 'rgba(59, 255, 215, 0.2)'
+  },
+  Crime: {
+    primary: 'rgba(255, 113, 198, 0.55)',
+    secondary: 'rgba(255, 113, 198, 0.26)',
+    pointer: 'rgba(255, 113, 198, 0.18)'
+  },
+  Work: {
+    primary: 'rgba(107, 77, 255, 0.5)',
+    secondary: 'rgba(107, 77, 255, 0.26)',
+    pointer: 'rgba(107, 77, 255, 0.18)'
+  },
+  Hunt: {
+    primary: 'rgba(255, 148, 77, 0.52)',
+    secondary: 'rgba(255, 148, 77, 0.24)',
+    pointer: 'rgba(255, 169, 113, 0.18)'
+  },
+  Fish: {
+    primary: 'rgba(59, 206, 255, 0.5)',
+    secondary: 'rgba(59, 206, 255, 0.24)',
+    pointer: 'rgba(59, 206, 255, 0.18)'
+  },
+  Dig: {
+    primary: 'rgba(255, 200, 113, 0.5)',
+    secondary: 'rgba(255, 200, 113, 0.24)',
+    pointer: 'rgba(255, 214, 150, 0.18)'
+  },
+  Post: {
+    primary: 'rgba(255, 113, 198, 0.5)',
+    secondary: 'rgba(255, 113, 198, 0.22)',
+    pointer: 'rgba(255, 140, 210, 0.18)'
+  },
+  Stream: {
+    primary: 'rgba(93, 126, 255, 0.5)',
+    secondary: 'rgba(93, 126, 255, 0.24)',
+    pointer: 'rgba(128, 154, 255, 0.18)'
+  },
+  Explore: {
+    primary: 'rgba(255, 255, 113, 0.5)',
+    secondary: 'rgba(255, 255, 113, 0.22)',
+    pointer: 'rgba(255, 255, 152, 0.18)'
+  },
+  Garden: {
+    primary: 'rgba(132, 255, 170, 0.5)',
+    secondary: 'rgba(132, 255, 170, 0.24)',
+    pointer: 'rgba(150, 255, 190, 0.18)'
+  }
+}
+
+const ACTIVITY_ICONS: Record<ActivityName, string> = {
+  Search: '🔍',
+  Crime: '🦹',
+  Work: '💼',
+  Hunt: '🏹',
+  Fish: '🐟',
+  Dig: '⛏️',
+  Post: '💬',
+  Stream: '⏺️',
+  Explore: '🗺️',
+  Garden: '🌾'
+}
+
+const ACTIVITY_DESCRIPTIONS: Record<ActivityName, string> = {
+  Search: 'Discover hidden treasures',
+  Crime: 'Take risks for big rewards',
+  Work: 'Earn steady income',
+  Hunt: 'Track wild game',
+  Fish: 'Cast your line',
+  Dig: 'Unearth buried secrets',
+  Post: 'Share your thoughts',
+  Stream: 'Broadcast to the world',
+  Explore: 'Adventure awaits',
+  Garden: 'Cultivate your crops'
+}
+
+const isActivityName = (value: string | null): value is ActivityName =>
+  !!value && (ACTIVITY_LIST as readonly string[]).includes(value)
+
+type TimePhase = 'dawn' | 'day' | 'dusk' | 'night'
+
+interface TimeSegment {
+  phase: TimePhase
+  start: number
+  end: number
+  next: TimePhase
+}
+
+interface TimeBlendState {
+  current: TimePhase
+  next: TimePhase
+  ratio: number
+}
+
+const TIME_SEGMENTS: TimeSegment[] = [
+  { phase: 'dawn', start: 5, end: 11, next: 'day' },
+  { phase: 'day', start: 11, end: 17, next: 'dusk' },
+  { phase: 'dusk', start: 17, end: 21, next: 'night' },
+  { phase: 'night', start: 21, end: 29, next: 'dawn' }
+]
+
+const TIME_COLORS: Record<TimePhase, string> = {
+  dawn: 'rgba(255, 189, 105, 0.32)',
+  day: 'rgba(107, 77, 255, 0.2)',
+  dusk: 'rgba(255, 113, 198, 0.28)',
+  night: 'rgba(38, 59, 136, 0.38)'
+}
+
+const SECRET_CODE = 'codenameoperative'
+
+const computeTimeBlend = (): TimeBlendState => {
+  const now = new Date()
+  const hourFloat = now.getHours() + now.getMinutes() / 60
+  const segment = TIME_SEGMENTS.find(seg => hourFloat >= seg.start && hourFloat < seg.end) || TIME_SEGMENTS[TIME_SEGMENTS.length - 1]
+  const segmentLength = segment.end - segment.start
+  const progress = Math.min(1, Math.max(0, (hourFloat - segment.start) / segmentLength))
+  return {
+    current: segment.phase,
+    next: segment.next,
+    ratio: progress
+  }
+}
+
+const blendColors = (colorA: string, colorB: string, ratio: number) => {
+  const parse = (color: string) => {
+    const match = color.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([0-9.]+)\)/)
+    if (!match) return [0, 0, 0, 0] as const
+    return [Number(match[1]), Number(match[2]), Number(match[3]), Number(match[4])] as const
+  }
+
+  const [r1, g1, b1, a1] = parse(colorA)
+  const [r2, g2, b2, a2] = parse(colorB)
+  const mix = (v1: number, v2: number) => Math.round(v1 + (v2 - v1) * ratio)
+  const mixAlpha = (v1: number, v2: number) => Number((v1 + (v2 - v1) * ratio).toFixed(2))
+  return `rgba(${mix(r1, r2)}, ${mix(g1, g2)}, ${mix(b1, b2)}, ${mixAlpha(a1, a2)})`
+}
+
+function Game({ onBackToMenu }: { onBackToMenu?: () => void }) {
   const { state, actions } = useGame()
   const { session, isHost, isConnected, players, serverIp, setServerIp, createSession, joinSession, leaveSession, toggleSessionLock } = useMultiplayer()
   const [activeActivity, setActiveActivity] = useState<string | null>(null)
@@ -71,6 +247,152 @@ function Game() {
     isOnCooldown: false,
     timeLeft: 0
   })
+
+  const { notify } = useNotify()
+
+  const shellRef = useRef<HTMLDivElement | null>(null)
+  const pointerRef = useRef<HTMLDivElement | null>(null)
+  const pointerFrame = useRef<number | null>(null)
+  const pointerTimeout = useRef<number | null>(null)
+  const pointerTarget = useRef({ x: 0, y: 0 })
+  const secretBufferRef = useRef('')
+
+  const [timeBlend, setTimeBlend] = useState<TimeBlendState>(() => computeTimeBlend())
+  const [retroModeActive, setRetroModeActive] = useState(() => {
+    if (typeof window === 'undefined') return state.secrets.retroUnlocked
+    const stored = localStorage.getItem('retro-mode-enabled')
+    if (stored !== null) return stored === 'true'
+    return state.secrets.retroUnlocked
+  })
+  const [cheatCooldownMs, setCheatCooldownMs] = useState(0)
+
+  const performanceMode = state.settings.performanceMode
+
+  const currentActivity = useMemo<ActivityName | null>(() => (
+    isActivityName(activeActivity) ? activeActivity : null
+  ), [activeActivity])
+
+  const activeTheme = useMemo(() => (
+    currentActivity ? ACTIVITY_THEME[currentActivity] : ACTIVITY_THEME.default
+  ), [currentActivity])
+
+  const ambientStyle = useMemo(() => ({
+    '--ambient-primary': activeTheme.primary,
+    '--ambient-secondary': activeTheme.secondary,
+    '--ambient-pointer': activeTheme.pointer
+  }) as CSSProperties, [activeTheme])
+
+  const flairStyle = useMemo(() => ({
+    background: `radial-gradient(circle, ${activeTheme.primary} 0%, transparent 70%)`
+  }) as CSSProperties, [activeTheme])
+
+  const timeMixStyle = useMemo(() => {
+    const currentColor = TIME_COLORS[timeBlend.current]
+    const nextColor = TIME_COLORS[timeBlend.next]
+    const blended = blendColors(currentColor, nextColor, timeBlend.ratio)
+    return {
+      background: `radial-gradient(circle at 25% 20%, ${currentColor} 0%, transparent 65%), radial-gradient(circle at 75% 80%, ${nextColor} 0%, transparent 60%), linear-gradient(135deg, ${blended} 0%, transparent 70%)`
+    } as CSSProperties
+  }, [timeBlend])
+
+  const shellClasses = useMemo(() => [
+    'game-shell',
+    retroModeActive ? 'retro-mode' : '',
+    performanceMode ? 'performance-mode' : ''
+  ].filter(Boolean).join(' '), [retroModeActive, performanceMode])
+
+  const cooldownMap = useMemo(() => ({
+    Search: searchCooldown,
+    Crime: crimeCooldown,
+    Work: workCooldown,
+    Hunt: huntCooldown,
+    Fish: fishCooldown,
+    Dig: digCooldown,
+    Post: postCooldown,
+    Stream: streamCooldown,
+    Explore: exploreCooldown,
+    Garden: gardenCooldown
+  }), [searchCooldown, crimeCooldown, workCooldown, huntCooldown, fishCooldown, digCooldown, postCooldown, streamCooldown, exploreCooldown, gardenCooldown])
+
+  const startActivity = useCallback((activity: ActivityName) => {
+    const cooldown = cooldownMap[activity]
+    if (!cooldown || cooldown.isOnCooldown) return
+    setActiveActivity(activity)
+  }, [cooldownMap])
+
+  const animatePointer = useCallback(() => {
+    if (!pointerRef.current) return
+    const { x, y } = pointerTarget.current
+    pointerRef.current.style.transform = `translate(calc(${x}px - 50%), calc(${y}px - 50%))`
+    pointerRef.current.classList.add('active')
+    pointerFrame.current = requestAnimationFrame(animatePointer)
+  }, [])
+
+  const handlePointerMove = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (performanceMode) return
+    pointerTarget.current = { x: event.clientX, y: event.clientY }
+    if (pointerFrame.current === null) {
+      pointerFrame.current = requestAnimationFrame(animatePointer)
+    }
+    if (pointerTimeout.current) {
+      window.clearTimeout(pointerTimeout.current)
+    }
+    pointerTimeout.current = window.setTimeout(() => {
+      if (pointerRef.current) {
+        pointerRef.current.classList.remove('active')
+      }
+      if (pointerFrame.current) {
+        cancelAnimationFrame(pointerFrame.current)
+        pointerFrame.current = null
+      }
+    }, 1600)
+  }, [animatePointer, performanceMode])
+
+  useEffect(() => {
+    const blendState = computeTimeBlend()
+    setTimeBlend(blendState)
+  }, [])
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setTimeBlend(computeTimeBlend())
+    }, 60 * 1000)
+
+    return () => window.clearInterval(interval)
+  }, [])
+
+  const toggleRetroMode = useCallback((enable: boolean, silent = false) => {
+    setRetroModeActive(enable)
+    try {
+      localStorage.setItem('retro-mode-enabled', enable ? 'true' : 'false')
+    } catch (error) {
+      console.warn('Failed to persist retro mode state', error)
+    }
+    if (!silent) {
+      notify({
+        type: enable ? 'success' : 'info',
+        title: enable ? 'Retro Mode Enabled' : 'Retro Mode Disabled',
+        message: enable
+          ? 'Welcome to the codenameoperative timeline.'
+          : 'Returning to the modern shell.'
+      })
+    }
+    if (enable && !state.secrets.retroUnlocked) {
+      actions.markSecretFound('retro')
+    }
+  }, [actions, notify, state.secrets.retroUnlocked])
+
+  const handleCheat = useCallback(() => {
+    if (!state.secrets.cheatUnlocked) {
+      actions.markSecretFound('cheat')
+    } else {
+      notify({
+        type: 'info',
+        title: 'Cheat Already Used',
+        message: 'The forbidden protocol has already been activated.'
+      })
+    }
+  }, [actions, state.secrets.cheatUnlocked, notify])
 
   // Cooldown management
   useEffect(() => {
@@ -160,44 +482,38 @@ function Game() {
     return () => clearInterval(interval)
   }, [])
 
-  // Keyboard navigation
+  // Keyboard navigation and secrets
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      // ESC key to go back
-      if (event.key === 'Escape' && activeActivity) {
-        setActiveActivity(null)
+      if (event.key === 'Escape') {
+        if (activeActivity) {
+          setActiveActivity(null)
+        }
+        secretBufferRef.current = ''
         return
       }
 
-      // ENTER key to proceed (only when no activity is active)
-      if (event.key === 'Enter' && !activeActivity) {
-        // Find first available activity and select it
-        const availableActivities = ['Search', 'Crime', 'Work', 'Hunt', 'Fish', 'Dig', 'Post', 'Stream', 'Explore', 'Garden']
-        const firstAvailable = availableActivities.find(activity => {
-          switch (activity) {
-            case 'Search': return !searchCooldown.isOnCooldown
-            case 'Crime': return !crimeCooldown.isOnCooldown
-            case 'Work': return !workCooldown.isOnCooldown
-            case 'Hunt': return !huntCooldown.isOnCooldown
-            case 'Fish': return !fishCooldown.isOnCooldown
-            case 'Dig': return !digCooldown.isOnCooldown
-            case 'Post': return !postCooldown.isOnCooldown
-            case 'Stream': return !streamCooldown.isOnCooldown
-            case 'Explore': return !exploreCooldown.isOnCooldown
-            case 'Garden': return !gardenCooldown.isOnCooldown
-            default: return false
-          }
-        })
+      const shortcutActivity = ACTIVITY_SHORTCUTS[event.code]
+      if (shortcutActivity) {
+        startActivity(shortcutActivity)
+        return
+      }
 
-        if (firstAvailable) {
-          setActiveActivity(firstAvailable)
+      const keyLower = event.key.toLowerCase()
+      if (keyLower.length === 1) {
+        secretBufferRef.current = (secretBufferRef.current + keyLower).slice(-SECRET_CODE.length)
+        if (secretBufferRef.current === SECRET_CODE) {
+          toggleRetroMode(!retroModeActive)
+          secretBufferRef.current = ''
         }
+      } else {
+        secretBufferRef.current = ''
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [activeActivity, searchCooldown.isOnCooldown, crimeCooldown.isOnCooldown, workCooldown.isOnCooldown, huntCooldown.isOnCooldown, fishCooldown.isOnCooldown, digCooldown.isOnCooldown, postCooldown.isOnCooldown, streamCooldown.isOnCooldown, exploreCooldown.isOnCooldown, gardenCooldown.isOnCooldown])
+  }, [activeActivity, retroModeActive, startActivity, toggleRetroMode])
 
   // Automated grinding
   useEffect(() => {
@@ -358,20 +674,36 @@ function Game() {
   }
 
   return (
-    <div className="zorin-layout">
-      {/* Header */}
-      <Header />
+    <div
+      ref={shellRef}
+      className={shellClasses}
+      style={{ ...ambientStyle, ...timeMixStyle }}
+      onPointerMove={handlePointerMove}
+      role="main"
+      aria-label="Game interface"
+    >
+      <div className="ambient-field" aria-hidden="true">
+        <div ref={pointerRef} className="ambient-pointer" />
+        <div className="ambient-overlay" />
+        <div className="ambient-grain" />
+        <div className={`activity-backdrop ${currentActivity ? 'active' : ''}`} />
+        <div className={`activity-flair ${currentActivity ? 'active' : ''}`} style={flairStyle} />
+      </div>
+
+      <div className="shell-content">
+        {/* Header */}
+        <Header retroModeActive={retroModeActive} onCheat={handleCheat} />
 
       {/* Multiplayer Menu */}
       {showMultiplayerMenu && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center modal-overlay" onClick={() => setShowMultiplayerMenu(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-40 flex items-center justify-center modal-overlay backdrop-blur-sm" onClick={() => setShowMultiplayerMenu(false)}>
+          <div className="modal-content glass-strong border border-border/50 shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <div className="p-6">
               <h2 className="text-xl font-semibold text-white mb-4">LAN Multiplayer</h2>
 
               {session ? (
                 <div className="space-y-4">
-                  <div className="glass p-4 rounded-lg">
+                  <div className="glass p-4 rounded-lg backdrop-blur-sm border border-border/30">
                     <div className="text-sm text-secondary">
                       <p>Session ID: <code className="bg-tertiary px-2 py-1 rounded text-xs">{session.id}</code></p>
                       <p>Host IP: <code className="bg-tertiary px-2 py-1 rounded text-xs">{session.hostIp}</code></p>
@@ -458,9 +790,9 @@ function Game() {
             <p className="subtitle text-lg">Life is Full of Adventures...</p>
             <div className="mt-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 glass rounded-full">
-                <span className="text-sm text-secondary">Press</span>
-                <kbd className="px-2 py-1 bg-tertiary rounded text-xs font-mono">ENTER</kbd>
-                <span className="text-sm text-secondary">to start first available activity</span>
+                <span className="text-sm text-secondary">Use number keys</span>
+                <kbd className="px-2 py-1 bg-tertiary rounded text-xs font-mono">1-0</kbd>
+                <span className="text-sm text-secondary">for activities</span>
               </div>
             </div>
           </div>
@@ -496,81 +828,39 @@ function Game() {
                     {session ? 'Manage LAN session' : 'Start LAN multiplayer'}
                   </div>
                 </button>
-                {['Search','Crime','Work','Hunt','Fish','Dig','Post','Stream','Explore','Garden'].map((label) => {
-                const isActive = ['Search', 'Crime', 'Work', 'Hunt', 'Fish', 'Dig', 'Post', 'Stream', 'Explore', 'Garden'].includes(label)
-                const isSearchOnCooldown = label === 'Search' && searchCooldown.isOnCooldown
-                const isCrimeOnCooldown = label === 'Crime' && crimeCooldown.isOnCooldown
-                const isWorkOnCooldown = label === 'Work' && workCooldown.isOnCooldown
-                const isFishOnCooldown = label === 'Fish' && fishCooldown.isOnCooldown
-                const isHuntOnCooldown = label === 'Hunt' && huntCooldown.isOnCooldown
-                const isDigOnCooldown = label === 'Dig' && digCooldown.isOnCooldown
-                const isPostOnCooldown = label === 'Post' && postCooldown.isOnCooldown
-                const isStreamOnCooldown = label === 'Stream' && streamCooldown.isOnCooldown
-                const isExploreOnCooldown = label === 'Explore' && exploreCooldown.isOnCooldown
-                const isGardenOnCooldown = label === 'Garden' && gardenCooldown.isOnCooldown
-                const isOnCooldown = isSearchOnCooldown || isCrimeOnCooldown || isWorkOnCooldown || isHuntOnCooldown || isFishOnCooldown || isDigOnCooldown || isPostOnCooldown || isStreamOnCooldown || isExploreOnCooldown || isGardenOnCooldown
+                {ACTIVITY_LIST.map((activity) => {
+                  const isOnCooldown = cooldownMap[activity]?.isOnCooldown || false
+                  const timeLeft = cooldownMap[activity]?.timeLeft || 0
 
-                return (
-                  <button
-                    key={label}
-                    onClick={() => isActive && !isOnCooldown && setActiveActivity(label)}
-                    className={`activity-card ${isOnCooldown ? 'opacity-50' : ''}`}
-                    type="button"
-                    disabled={isOnCooldown}
-                  >
-                    {isOnCooldown && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-700/20 to-transparent animate-pulse rounded-lg"></div>
-                    )}
-                    <div className="relative z-10">
-                      <div className="activity-icon">
-                        {label === 'Search' && '🔍'}
-                        {label === 'Crime' && '🦹'}
-                        {label === 'Work' && '💼'}
-                        {label === 'Hunt' && '🏹'}
-                        {label === 'Fish' && '🐟'}
-                        {label === 'Dig' && '⛏️'}
-                        {label === 'Post' && '💬'}
-                        {label === 'Stream' && '⏺️'}
-                        {label === 'Explore' && '🗺️'}
-                        {label === 'Garden' && '🌾'}
+                  return (
+                    <button
+                      key={activity}
+                      onClick={() => !isOnCooldown && startActivity(activity)}
+                      className={`activity-card ${isOnCooldown ? 'opacity-50' : ''}`}
+                      disabled={isOnCooldown}
+                    >
+                      {isOnCooldown && (
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-700/20 to-transparent animate-pulse rounded-lg"></div>
+                      )}
+                      <div className="relative z-10">
+                        <div className="activity-icon">
+                          {ACTIVITY_ICONS[activity]}
+                        </div>
+                        <div className="activity-title">{activity}</div>
+                        <div className="activity-description">
+                          {isOnCooldown ? (
+                            <div className="flex items-center gap-1">
+                              <div className="loading-spinner w-3 h-3"></div>
+                              <span>{timeLeft}s</span>
+                            </div>
+                          ) : (
+                            ACTIVITY_DESCRIPTIONS[activity]
+                          )}
+                        </div>
                       </div>
-                      <div className="activity-title">{label}</div>
-                      <div className="activity-description">
-                        {isOnCooldown ? (
-                          <div className="flex items-center gap-1">
-                            <div className="loading-spinner w-3 h-3"></div>
-                            <span>
-                              {label === 'Search' ? searchCooldown.timeLeft :
-                               label === 'Crime' ? crimeCooldown.timeLeft :
-                               label === 'Work' ? workCooldown.timeLeft :
-                               label === 'Hunt' ? huntCooldown.timeLeft :
-                               label === 'Fish' ? fishCooldown.timeLeft :
-                               label === 'Dig' ? digCooldown.timeLeft :
-                               label === 'Post' ? postCooldown.timeLeft :
-                               label === 'Stream' ? streamCooldown.timeLeft :
-                               label === 'Explore' ? exploreCooldown.timeLeft :
-                               label === 'Garden' ? gardenCooldown.timeLeft : 0}s
-                            </span>
-                          </div>
-                        ) : isActive ? (
-                          label === 'Search' ? 'Discover hidden treasures' :
-                          label === 'Crime' ? 'Take risks for big rewards' :
-                          label === 'Work' ? 'Earn steady income' :
-                          label === 'Hunt' ? 'Track wild game' :
-                          label === 'Fish' ? 'Cast your line' :
-                          label === 'Dig' ? 'Unearth buried secrets' :
-                          label === 'Post' ? 'Share your thoughts' :
-                          label === 'Stream' ? 'Broadcast to the world' :
-                          label === 'Explore' ? 'Adventure awaits' :
-                          label === 'Garden' ? 'Cultivate your crops' : 'Click to play'
-                        ) : (
-                          'Coming soon'
-                        )}
-                      </div>
-                    </div>
-                  </button>
-                )
-              })}
+                    </button>
+                  )
+                })}
               </div>
             </div>
           )}
@@ -628,6 +918,10 @@ function Game() {
         gameType={pendingMiniGame?.type || ''}
         targetPlayerId={pendingMiniGame?.targetPlayerId}
       />
+
+      {/* Error Log Viewer */}
+      <ErrorLogViewer />
+      </div>
     </div>
   )
 }

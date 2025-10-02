@@ -5,7 +5,22 @@ import { achievements, type Achievement } from '../utils/achievements'
 import { safeUUID } from '../utils/safeUUID'
 import { invoke } from '@tauri-apps/api/core'
 
-interface GameState {
+const getInitialSecrets = (): { retroUnlocked: boolean; cheatUnlocked: boolean } => {
+  if (typeof window === 'undefined') {
+    return { retroUnlocked: false, cheatUnlocked: false }
+  }
+
+  try {
+    const retro = localStorage.getItem('secret-retro') === 'unlocked'
+    const cheat = localStorage.getItem('secret-cheat') === 'unlocked'
+    return { retroUnlocked: retro, cheatUnlocked: cheat }
+  } catch (error) {
+    console.warn('Failed to initialize secret state from storage', error)
+    return { retroUnlocked: false, cheatUnlocked: false }
+  }
+}
+
+export interface GameState {
   wallet: number
   bank: number
   stash: number
@@ -69,11 +84,14 @@ interface GameState {
   // Settings
   settings: {
     automatedGrinding: boolean
-    lightMode: boolean
     confirmSell: boolean
     confirmDeposit: boolean
-    soundEnabled: boolean
     animationSpeed: 'slow' | 'normal' | 'fast'
+    performanceMode: boolean
+  }
+  secrets: {
+    retroUnlocked: boolean
+    cheatUnlocked: boolean
   }
 }
 
@@ -110,6 +128,7 @@ interface GameActions {
   trackActivity: (activity: string) => void
   trackEarnings: (amount: number) => void
   trackSpending: (amount: number) => void
+  markSecretFound: (secret: 'retro' | 'cheat') => void
   // Garden actions
   plantInGarden: (plotId: string, plantId: string | null) => void
   waterPlant: (plotId: string) => void
@@ -194,8 +213,26 @@ const getActivityXP = (activity: string): number => {
 
 // Safe UUID generator for environments where crypto.randomUUID may be unavailable
 
-export const GameProvider = ({ children, initialUsername = '', initialPlayerId = '' }: { children: ReactNode, initialUsername?: string, initialPlayerId?: string }) => {
+export const GameProvider = ({ children, initialUsername = '', initialPlayerId = '', saveId }: { children: ReactNode, initialUsername?: string, initialPlayerId?: string, saveId?: string | null }) => {
   const [state, setState] = useState<GameState>(() => {
+    const initialSecrets = getInitialSecrets()
+
+    // Try to load save data if saveId is provided
+    if (saveId) {
+      try {
+        const saveData = localStorage.getItem(saveId)
+        if (saveData) {
+          const parsed = JSON.parse(saveData)
+          // Update last played time
+          parsed.lastPlayed = new Date().toISOString()
+          localStorage.setItem(saveId, JSON.stringify(parsed))
+          return parsed
+        }
+      } catch (error) {
+        console.warn('Failed to load save data:', error)
+      }
+    }
+
     // Check if items registry is ready
     const registryReady =
       !!items && Object.keys(items).length > 0 &&
@@ -248,12 +285,12 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
         },
         settings: {
           automatedGrinding: false,
-          lightMode: false,
           confirmSell: true,
           confirmDeposit: true,
-          soundEnabled: true,
-          animationSpeed: 'normal'
-        }
+          animationSpeed: 'normal',
+          performanceMode: false
+        },
+        secrets: initialSecrets
       }
     }
 
@@ -309,21 +346,22 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
       },
       settings: {
         automatedGrinding: false,
-        lightMode: false,
         confirmSell: true,
         confirmDeposit: true,
-        soundEnabled: true,
-        animationSpeed: 'normal'
-      }
+        animationSpeed: 'normal',
+        performanceMode: false
+      },
+      secrets: initialSecrets
     }
   })
 
   // Auto-save functionality
   useEffect(() => {
-    if (state.profile) {
+    if (state.profile && saveId) {
       const autoSave = async () => {
         try {
-          await invoke('save_game', { data: JSON.stringify(state) })
+          const saveData = { ...state, lastPlayed: new Date().toISOString() }
+          localStorage.setItem(saveId, JSON.stringify(saveData))
         } catch (error) {
           console.error('Auto-save failed:', error)
         }
@@ -332,7 +370,7 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
       const interval = setInterval(autoSave, 30000)
       return () => clearInterval(interval)
     }
-  }, [state.profile])
+  }, [state.profile, saveId])
 
   // Detect items registry readiness
   const registryReady =
@@ -634,10 +672,26 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
     },
     // Profile actions
     updateUsername: (username) => {
+      const trimmed = username.trim()
+      if (!trimmed) return
+
+      const newPlayerId = safeUUID()
       setState(prev => ({
         ...prev,
-        profile: { ...prev.profile, username }
+        profile: {
+          ...prev.profile,
+          username: trimmed,
+          playerId: newPlayerId
+        }
       }))
+
+      try {
+        localStorage.setItem('username', trimmed)
+        localStorage.setItem('playerId', newPlayerId)
+        localStorage.setItem('setup-complete', 'true')
+      } catch (error) {
+        console.warn('Failed to persist updated username/playerId', error)
+      }
     },
     updateDescription: (description) => {
       setState(prev => ({
@@ -683,6 +737,62 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
           totalSpent: prev.profile.totalSpent + amount
         }
       }))
+    },
+    markSecretFound: (secret) => {
+      let achievementId: string | null = null
+      let titleReward: string | null = null
+
+      if (secret === 'retro') {
+        achievementId = 'retro_rewind'
+        titleReward = 'Time Traveler'
+      } else if (secret === 'cheat') {
+        achievementId = 'glitch_hunter'
+        titleReward = 'Glitch Hunter'
+      }
+
+      setState(prev => {
+        const alreadyUnlocked = secret === 'retro' ? prev.secrets.retroUnlocked : prev.secrets.cheatUnlocked
+        if (alreadyUnlocked) return prev
+
+        const updatedSecrets = {
+          ...prev.secrets,
+          retroUnlocked: secret === 'retro' ? true : prev.secrets.retroUnlocked,
+          cheatUnlocked: secret === 'cheat' ? true : prev.secrets.cheatUnlocked
+        }
+
+        const activityKey = secret === 'retro' ? 'secrets_retro' : 'secrets_cheat'
+        const updatedActivityUsage = {
+          ...prev.profile.activityUsage,
+          [activityKey]: (prev.profile.activityUsage[activityKey] || 0) + 1
+        }
+
+        const updatedProfile = {
+          ...prev.profile,
+          activityUsage: updatedActivityUsage,
+          unlockedAchievements: achievementId && !prev.profile.unlockedAchievements.includes(achievementId)
+            ? [...prev.profile.unlockedAchievements, achievementId]
+            : prev.profile.unlockedAchievements,
+          availableTitles: titleReward && !prev.profile.availableTitles.includes(titleReward)
+            ? [...prev.profile.availableTitles, titleReward]
+            : prev.profile.availableTitles
+        }
+
+        try {
+          localStorage.setItem(`secret-${secret}`, 'unlocked')
+        } catch (error) {
+          console.warn('Failed to persist secret unlock state', error)
+        }
+
+        return {
+          ...prev,
+          secrets: updatedSecrets,
+          profile: updatedProfile
+        }
+      })
+
+      setTimeout(() => {
+        actions.checkAchievements()
+      }, 0)
     },
     // Garden actions
     plantInGarden: (plotId, plantId) => {

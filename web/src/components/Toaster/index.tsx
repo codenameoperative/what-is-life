@@ -8,13 +8,13 @@ export default function Toaster() {
         <div
           key={t.id}
           className={
-            'group rounded-xl border backdrop-blur px-4 py-3 shadow-soft transition-all ' +
-            'bg-neutral-900/70 border-neutral-800 text-neutral-200 hover:bg-neutral-900 ' +
+            'group rounded-xl border backdrop-blur-xl px-4 py-3 shadow-soft transition-all ' +
+            'glass-strong border-border/50 text-primary hover:glass ' +
             (t.type === 'success'
-              ? 'ring-1 ring-green-600/30'
+              ? 'ring-1 ring-accent/30'
               : t.type === 'error'
               ? 'ring-1 ring-red-600/30'
-              : 'ring-1 ring-blue-600/30')
+              : 'ring-1 ring-primary/30')
           }
           role="status"
           aria-live="polite"

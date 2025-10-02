@@ -30,15 +30,15 @@ export default function SettingsModal({ open, onClose }: Props) {
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center modal-overlay" onClick={handleCancel}>
+    <div className="fixed inset-0 z-50 flex items-start justify-center modal-overlay backdrop-blur-sm" onClick={handleCancel}>
       {/* Container */}
-      <div className="relative mt-16 w-[min(92vw,600px)] modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="relative mt-16 w-[min(92vw,600px)] modal-content glass-strong border border-border/50 shadow-2xl" onClick={(e) => e.stopPropagation()}>
         {/* Header */}
-        <div className="p-6 border-b border-border flex items-center justify-between glass-strong">
+        <div className="p-6 border-b border-border/30 flex items-center justify-between backdrop-blur-xl">
           <h2 className="text-xl font-semibold text-primary">Settings</h2>
           <button
             onClick={handleCancel}
-            className="p-2 text-muted hover:text-primary hover:bg-tertiary rounded-lg transition-all duration-200 hover:scale-105"
+            className="p-2 text-muted hover:text-primary hover:bg-tertiary/50 rounded-lg transition-all duration-200 hover:scale-105"
             aria-label="Close"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,18 +94,18 @@ export default function SettingsModal({ open, onClose }: Props) {
 
               <label className="flex items-center justify-between glass p-4 rounded-lg hover:glass-strong transition-all duration-200">
                 <div>
-                  <div className="text-sm font-medium text-primary">Confirm Deposits</div>
-                  <div className="text-xs text-muted">Show confirmation dialog when depositing money</div>
+                  <div className="text-sm font-medium text-primary">Performance Mode</div>
+                  <div className="text-xs text-muted">Disable ambient animations for low-end devices</div>
                 </div>
                 <button
-                  onClick={() => setTempSettings(prev => ({ ...prev, confirmDeposit: !prev.confirmDeposit }))}
+                  onClick={() => setTempSettings(prev => ({ ...prev, performanceMode: !prev.performanceMode }))}
                   className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-300 ${
-                    tempSettings.confirmDeposit ? 'bg-success' : 'bg-tertiary'
+                    tempSettings.performanceMode ? 'bg-orange-500' : 'bg-tertiary'
                   }`}
                 >
                   <span
                     className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-lg transition-transform duration-300 ${
-                      tempSettings.confirmDeposit ? 'translate-x-6' : 'translate-x-1'
+                      tempSettings.performanceMode ? 'translate-x-6' : 'translate-x-1'
                     }`}
                   />
                 </button>
@@ -113,51 +113,6 @@ export default function SettingsModal({ open, onClose }: Props) {
             </div>
           </div>
 
-          {/* Audio & Visual Settings */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium text-primary">Audio & Visual</h3>
-
-            <div className="space-y-4">
-              <label className="flex items-center justify-between glass p-4 rounded-lg hover:glass-strong transition-all duration-200">
-                <div>
-                  <div className="text-sm font-medium text-primary">Sound Effects</div>
-                  <div className="text-xs text-muted">Enable sound effects and notifications</div>
-                </div>
-                <button
-                  onClick={() => setTempSettings(prev => ({ ...prev, soundEnabled: !prev.soundEnabled }))}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-300 ${
-                    tempSettings.soundEnabled ? 'bg-gradient-to-r from-accent to-primary' : 'bg-tertiary'
-                  }`}
-                >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-lg transition-transform duration-300 ${
-                      tempSettings.soundEnabled ? 'translate-x-6' : 'translate-x-1'
-                    }`}
-                  />
-                </button>
-              </label>
-
-              <label className="flex items-center justify-between glass p-4 rounded-lg hover:glass-strong transition-all duration-200">
-                <div>
-                  <div className="text-sm font-medium text-primary">Light Mode</div>
-                  <div className="text-xs text-muted">Use light theme (coming soon)</div>
-                </div>
-                <button
-                  onClick={() => setTempSettings(prev => ({ ...prev, lightMode: !prev.lightMode }))}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-300 ${
-                    tempSettings.lightMode ? 'bg-warning' : 'bg-tertiary'
-                  }`}
-                  disabled
-                >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-lg transition-transform duration-300 ${
-                      tempSettings.lightMode ? 'translate-x-6' : 'translate-x-1'
-                    }`}
-                  />
-                </button>
-              </label>
-            </div>
-          </div>
 
           {/* Animation Settings */}
           <div className="space-y-4">
@@ -184,7 +139,7 @@ export default function SettingsModal({ open, onClose }: Props) {
         </div>
 
         {/* Footer */}
-        <div className="p-6 border-t border-border flex items-center justify-end gap-3 glass-strong">
+        <div className="p-6 border-t border-border/30 flex items-center justify-end gap-3 backdrop-blur-xl">
           <button
             onClick={handleCancel}
             className="px-4 py-2 text-sm rounded-lg btn-secondary"

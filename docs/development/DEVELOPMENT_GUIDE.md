@@ -21,7 +21,8 @@ git clone https://github.com/codenameoperative/what-is-life.git
 cd what-is-life
 
 # Install dependencies
-npm install
+npm ci
+npm ci --prefix web
 
 # Start development
 npm run tauri:dev
@@ -90,7 +91,8 @@ what-is-life/
 ### **Local Development**
 ```bash
 # Install dependencies
-npm install
+npm ci
+npm ci --prefix web
 
 # Start development server
 npm run tauri:dev

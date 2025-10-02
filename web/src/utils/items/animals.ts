@@ -8,7 +8,7 @@ export const animalsItems: Record<string, Item> = {
     name: 'Rabbit',
     tier: 'common',
     category: 'animals',
-    description: 'A small, quick rabbit',
+    description: 'don\'t let bugs bunny see you holding that',
     value: 50,
     usable: false,
     source: 'Hunted',

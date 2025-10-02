@@ -1,4 +1,4 @@
-# Android SDK Setup Instructions
+# Android SDK Setup Instructions for those looking to make their own builds (made for linux but you can search up to find your specific platform)
 
 ## Install Android Studio on Linux:
 ```bash
