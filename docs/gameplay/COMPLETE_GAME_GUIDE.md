@@ -1,21 +1,35 @@
-# 🎮 What is Life - Game Guide
+# 🎮 What is Life - Complete Game Guide & Documentation
 
-## Welcome to What is Life!
+## 🌟 Welcome to What is Life!
 
-**What is Life?** is a modern idle/incremental life simulation game where you experience various life activities, build wealth, level up, and connect with friends through local multiplayer.
+**What is Life?** is a comprehensive idle/incremental life simulation game featuring advanced progression systems, multiplayer capabilities, and cross-platform support. This guide covers everything from basic gameplay to advanced strategies and admin features.
 
 ---
 
-## 🎯 **Getting Started**
+## 📋 Table of Contents
+
+- [🚀 Quick Start](#-quick-start)
+- [💰 Core Systems](#-core-systems)
+- [🎮 Activities Guide](#-activities-guide)
+- [🏗️ Job System](#️-job-system)
+- [⚔️ Combat & Mini-Games](#️-combat--mini-games)
+- [🌐 Multiplayer](#-multiplayer)
+- [🛠️ Items & Crafting](#️-items--crafting)
+- [🏆 Achievements & Progression](#-achievements--progression)
+- [⚙️ Settings & Controls](#️-settings--controls)
+- [⌨️ Keyboard Shortcuts](#️-keyboard-shortcuts)
+- [👑 Admin Commands](#-admin-commands)
+- [💡 Tips & Tricks](#-tips--tricks)
+- [🔧 Troubleshooting](#-troubleshooting)
+
+---
+
+## 🚀 Quick Start
 
 ### **First Launch**
-1. **Launch the Application**
-   - Download and install from [GitHub Releases](../../releases)
-   - Run the executable for your platform
-
-2. **Create Your Character**
-   - Enter a unique username
-   - Your player ID will be auto-generated
+1. **Launch the Application** - Run the executable for your platform
+2. **Create Your Character** - Enter a unique username (your Player ID is auto-generated)
+3. **Complete Setup** - Follow the first-time setup wizard
 
 ### **Initial Goals**
 - **Earn your first 100 WTC** through Search or Work activities
@@ -25,101 +39,79 @@
 
 ---
 
-## 💰 **Core Mechanics**
+## 💰 Core Systems
 
 ### **Currency System**
-- **💰 Wallet**: Primary spending money
-- **🏦 Bank**: Interest-earning savings (coming 2026 but basic bank functionality works)
-- **📦 Stash**: Hidden emergency funds
+- **💰 Wallet**: Primary spending money (immediate access)
+- **🏦 Bank**: Secure savings with interest (safer storage)
+- **📦 Stash**: Hidden emergency funds (maximum security)
 
-### **Level Progression**
-- Earn XP from all activities (5-35 XP each)
-- Unlock rewards and titles at milestones
-- Higher levels = greater rewards but higher death penalties
+### **Level Progression (1-50)**
+- **XP Rewards**: 5-35 XP per activity completion
+- **Level Benefits**: Increased rewards, new titles, special unlocks
+- **Death Penalties**: Scale with level (30% + 5% per level, max 100%)
 
-### **Item System**
-- **8 Tiers**: useless → common → uncommon → rare → epic → legendary → mythical → wdyft
-- **7 Categories**: weapons, tools, clothing, collectables, animals, fish, ores
-- **Requirements**: Some activities need specific items to unlock
+### **Item Tiers**
+```
+useless → common → uncommon → rare → epic → legendary → mythical → wdyft
+```
 
 ---
 
-## 🎮 **Activities Guide**
+## 🎮 Activities Guide
 
-### **1. 🔍 Search** (No Requirements)
-- **Description**: Explore and discover hidden items
+### **🔍 Search** (No Requirements)
 - **Cooldown**: 5 seconds
 - **Rewards**: Items only (all tiers possible)
-- **Strategy**: Great for early game item farming
+- **Best For**: Early game item farming
 
-### **2. 🦹 Crime** (No Requirements)
-- **Description**: Risk high-reward activities with jail time
+### **🦹 Crime** (No Requirements)
 - **Cooldown**: Variable (10-60 seconds jail time)
 - **Rewards**: 💰 50-200 WTC
-- **Risk**: 30% failure rate with penalties
-- **Strategy**: Balance risk vs reward carefully
+- **Risk**: 30% failure rate
+- **Strategy**: Balance risk vs reward
 
-### **3. 💼 Work** (Requires: Job)
-- **Description**: Steady income with job progression
+### **💼 Work** (Requires: Job)
 - **Cooldown**: 30 seconds
 - **Rewards**: 💰 10-50 WTC
-- **Strategy**: Reliable income source, combine with automation
+- **Features**: Job progression system, steady income
 
-### **4. 🏹 Hunt** (Requires: Hunting Rifle)
-- **Description**: Track animals in different locations
+### **🏹 Hunt** (Requires: Hunting Rifle)
 - **Cooldown**: 5 seconds
 - **Locations**: Forest, Cave, Backyard
 - **Rewards**: Animals, items, treasure chests (💰 40k-80k)
-- **Strategy**: High-value activity once unlocked
 
-### **5. 🎣 Fish** (Requires: Fishing Rod)
-- **Description**: Cast lines in various water locations
+### **🎣 Fish** (Requires: Fishing Rod)
 - **Cooldown**: 5 seconds
 - **Locations**: River, Sea, Ocean
 - **Rewards**: Fish, items, pirate stashes (💰 40k-90k)
-- **Strategy**: Excellent gold farming activity
 
-### **6. ⛏️ Dig** (Requires: Shovel or Pickaxe)
-- **Description**: Unearth treasures and minerals
+### **⛏️ Dig** (Requires: Shovel/Pickaxe)
 - **Cooldown**: 5 seconds
-- **Locations**: Forest, Cave, Backyard
-- **Rewards**: 14 types of ores, buried treasure (💰 40k-80k)
-- **Strategy**: Good for resource gathering
+- **Rewards**: 14 ore types, buried treasure (💰 40k-80k)
 
-### **7. 📱 Post** (Requires: Phone/Laptop/PC Setup)
-- **Description**: Create and share content across platforms
+### **📱 Post** (Requires: Phone/Laptop/PC)
 - **Cooldown**: 10 seconds
-- **Platforms**: YouTube, Twitter, Reddit, Discord, WhatsApp, Instagram, Facebook
-- **Rewards**: WTC, items, viral success potential
-- **Strategy**: Choose platforms wisely for best results
+- **Platforms**: YouTube, Twitter, Reddit, etc.
+- **Rewards**: WTC, items, viral success
 
-### **8. 🎥 Stream** (Requires: Streaming Setup)
-- **Description**: Live broadcast with audience interaction
+### **🎥 Stream** (Requires: Streaming Setup)
 - **Cooldown**: 10 seconds
 - **Types**: Gaming, Vlog, Blog, Music, Art, Chat
 - **Duration**: 5-60 minutes (affects rewards)
-- **Rewards**: WTC based on duration + viral potential
-- **Strategy**: Longer streams = higher rewards
 
-### **9. 🗺️ Explore** (No Requirements - Revival Bill Recommended)
-- **Description**: Adventure to dangerous locations
-- **Cooldown**: 30-60 seconds (location dependent)
+### **🗺️ Explore** (No Requirements)
+- **Cooldown**: 30-60 seconds
 - **Locations**: Forest, Mountain, Ruins, Beach, Swamp
-- **Rewards**: WTC, items
-- **Death Risk**: 0.3%-3% chance (higher levels = bigger losses)
-- **Strategy**: Use Revival Bill to prevent total loss
+- **Death Risk**: 0.3%-3% (use Revival Bills!)
 
-### **10. 🌾 Garden** (No Requirements)
-- **Description**: Cultivate plants in 4 garden plots
-- **Cooldown**: Variable (2-5 seconds per action)
-- **Plants**: 10 varieties (carrots, tomatoes, potatoes, herbs, flowers, magical plants)
-- **Features**: Persistent growth, watering bonuses, pest protection
-- **Tools**: Scarecrow (reduces pest attacks by 80%)
-- **Strategy**: Passive income with proper management
+### **🌾 Garden** (No Requirements)
+- **Features**: 4 plots, 10 plant varieties, persistent growth
+- **Tools**: Scarecrow reduces pest attacks by 80%
 
 ---
 
-## 🏗️ **Job System**
+## 🏗️ Job System
 
 ### **Available Jobs by Tier**
 
@@ -158,7 +150,7 @@
 
 ---
 
-## ⚔️ **Combat & Mini-Games**
+## ⚔️ Combat & Mini-Games
 
 ### **Mini-Game Types**
 - **Russian Roulette**: High-stakes betting (50/50 survival)
@@ -172,38 +164,27 @@
 
 ---
 
-## 🌐 **Multiplayer Features**
+## 🌐 Multiplayer
 
-### **LAN Party Mode**
-1. **Host a Session**
-   - Click "Multiplayer" button
-   - Enter your IP address
-   - Click "Create Session"
+### **LAN Setup**
+1. **Host**: Click Multiplayer → Create Session → Share IP
+2. **Join**: Enter host IP and session ID
+3. **Play**: Engage in mini-games and social activities
 
-2. **Join a Session**
-   - Get host's IP address
-   - Enter IP and session ID
-   - Click "Join Session"
-
-3. **Mini-Games**
-   - **Russian Roulette**: High-stakes betting game
-   - **Fight**: Combat between players
-   - **Race**: Speed-based competition
-
-### **Connection Requirements**
-- Both players on same local network
-- Firewall allows connections on game port
-- Stable network connection
+### **Multiplayer Features**
+- **Real-time messaging** (encrypted)
+- **Session management**
+- **Cross-platform compatibility**
 
 ---
 
-## 🛠️ **Items & Crafting**
+## 🛠️ Items & Crafting
 
 ### **Item Categories**
 - **Weapons**: Combat and hunting tools
 - **Tools**: Activity and job equipment
 - **Clothing**: Appearance and stat modifiers
-- **Collectables**: Rare and valuable items
+- **Collectibles**: Rare and valuable items
 - **Animals**: Companions and resources
 - **Fish**: Aquatic creatures and treasures
 - **Ores**: Mining resources and materials
@@ -215,7 +196,7 @@
 
 ---
 
-## 🏆 **Achievements & Progression**
+## 🏆 Achievements & Progression
 
 ### **Achievement Categories**
 - **Activity Masters**: Complete activity milestones
@@ -225,29 +206,30 @@
 - **Level Climbers**: Reach level milestones
 
 ### **Special Titles**
-- The Explorer, Master Angler, Green Thumb
-- Death penalties scale with level (30% + 5% per level, max 100%)
+- **The Explorer**: Adventure specialist
+- **Master Angler**: Fishing expert
+- **Green Thumb**: Gardening master
+- **Death Defier**: Survival specialist
 
 ---
 
-## ⚙️ **Settings & Controls**
+## ⚙️ Settings & Controls
 
-### **Gameplay Settings**
-- **Automated Grinding**: Automatically perform available activities
-- **Confirm Selling**: Require confirmation for item sales
-- **Confirm Deposits**: Require confirmation for bank deposits
+### **Game Settings**
+- **Auto-Grinding**: Continuous activity performance
+- **Confirmation Prompts**: Sell/deposit confirmations
+- **Animation Speed**: UI responsiveness
+- **Performance Mode**: Reduced visual effects
 
-### **Audio & Visual**
-- **Animation Speed**: Control UI animation timing
-
-### **Automation Features**
-- **Grinding Mode**: Continuous activity performance
-- **Background Processing**: Continue while app is minimized
-- **Smart Selection**: Prioritize highest-value activities
+### **Audio Controls**
+- **Master Volume**: Overall game audio
+- **SFX Volume**: Sound effects
+- **Music Volume**: Background music
+- **Mute Options**: Quick toggle controls
 
 ---
 
-## ⌨️ **Keyboard Shortcuts**
+## ⌨️ Keyboard Shortcuts
 
 | Shortcut | Action |
 |----------|--------|
@@ -270,21 +252,9 @@
 | **H** | Show help/tooltips |
 | **/** | Open admin commands (admins only) |
 
-### **Activity Shortcuts**
-- **1**: Search
-- **2**: Crime
-- **3**: Work
-- **4**: Hunt
-- **5**: Fish
-- **6**: Dig
-- **7**: Post
-- **8**: Stream
-- **9**: Explore
-- **0**: Garden
-
 ---
 
-## 👑 **Admin Commands**
+## 👑 Admin Commands
 
 ### **Admin Access**
 Only players with specific Player IDs can access admin commands:
@@ -316,7 +286,7 @@ actions.adminSetLevel(25)
 
 ---
 
-## 💡 **Pro Tips & Strategies**
+## 💡 Tips & Tricks
 
 ### **Beginner Strategies** 🐣
 - **Always carry Revival Bills** - Death penalties scale with level
@@ -356,33 +326,33 @@ actions.adminSetLevel(25)
 
 ---
 
-## 📋 **Complete Items Database**
+## 📋 Complete Items Database
 
-See **[COMPLETE_GAME_GUIDE.md](../COMPLETE_GAME_GUIDE.md)** and **[ITEMS_DATABASE.md](../../ITEMS_DATABASE.md)** for the complete list of all items, their stats, requirements, and sources.
+See **[ITEMS_DATABASE.md](ITEMS_DATABASE.md)** for the complete list of all items, their stats, requirements, and sources.
 
 ---
 
-## 🔧 **Troubleshooting**
+## 🔧 Troubleshooting
 
 ### **Common Issues**
-- **Activities not available**: Check cooldown timers
-- **Multiplayer connection failed**: Verify IP address and firewall
-- **Performance issues**: Close other applications
-- **Save file corrupted**: Check file permissions
+- **Performance**: Close background apps, enable performance mode
+- **Connection**: Check firewall settings for multiplayer
+- **Save Files**: Verify file permissions in game directory
+- **Updates**: Check GitHub releases for latest version
 
 ### **System Requirements**
-- **RAM**: 2GB minimum, 4GB recommended
-- **Storage**: 500MB free space
-- **Network**: Stable connection for multiplayer (optional)
+- **RAM**: 4GB minimum, 8GB recommended
+- **Storage**: 1GB free space
+- **Network**: Stable connection (for multiplayer)
+- **OS**: Linux, Windows, macOS, Android
 
----
-
-## 📞 **Support & Community**
-
+### **Getting Help**
 - **Bug Reports**: [GitHub Issues](../../issues)
-- **Feature Requests**: [GitHub Discussions](../../discussions)
-- **Documentation**: [Full Build Guide](../build/BUILD_README.md)
+- **Discussions**: [GitHub Discussions](../../discussions)
+- **Documentation**: [Full Documentation](../../docs/)
 
 ---
 
-**🎮 Enjoy your journey through What is Life! - CodeNameoperative**
+**🎮 Enjoy your journey through What is Life!**
+
+*Built with ❤️ by CodeNameOperative*

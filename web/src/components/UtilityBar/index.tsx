@@ -6,6 +6,8 @@ import InventoryModal from '../InventoryModal'
 import ShopModal from '../ShopModal'
 import JobModal from '../JobModal'
 import CraftModal from '../CraftModal'
+import AdminCommandsModal from '../AdminCommandsModal'
+import { useGame } from '../../contexts/GameContext'
 
 interface UtilityBarProps {
   onOpenMiniGames?: () => void
@@ -14,6 +16,7 @@ interface UtilityBarProps {
 const items = ['ItemSearch', 'Deposit/Withdraw', 'Stash', 'Inventory', 'Shop', 'Job', 'Craft', 'Mini Games'] as const
 
 export default function UtilityBar({ onOpenMiniGames }: UtilityBarProps) {
+  const { state } = useGame()
   const [showSearch, setShowSearch] = useState(false)
   const [showBank, setShowBank] = useState(false)
   const [showStash, setShowStash] = useState(false)
@@ -21,6 +24,11 @@ export default function UtilityBar({ onOpenMiniGames }: UtilityBarProps) {
   const [showShop, setShowShop] = useState(false)
   const [showJob, setShowJob] = useState(false)
   const [showCraft, setShowCraft] = useState(false)
+  const [showAdminCommands, setShowAdminCommands] = useState(false)
+
+  // Admin player IDs
+  const adminPlayerIds = ['ADMIN123', 'DEV456', 'TEST789']
+  const isAdmin = adminPlayerIds.includes(state.profile.playerId)
 
   const handleUtilityClick = (label: string) => {
     if (label === 'Deposit/Withdraw') {
@@ -37,9 +45,27 @@ export default function UtilityBar({ onOpenMiniGames }: UtilityBarProps) {
       setShowJob(true)
     } else if (label === 'Craft') {
       setShowCraft(true)
+    } else if (label === 'Commands') {
+      setShowAdminCommands(true)
     } else if (label === 'Mini Games' && onOpenMiniGames) {
       onOpenMiniGames()
     }
+  }
+
+  // Build utility items list, adding Commands for admins
+  const utilityItems = [
+    'ItemSearch',
+    'Deposit/Withdraw',
+    'Stash',
+    'Inventory',
+    'Shop',
+    'Job',
+    'Craft',
+    'Mini Games'
+  ]
+
+  if (isAdmin) {
+    utilityItems.splice(utilityItems.indexOf('Craft'), 0, 'Commands')
   }
 
   return (
@@ -47,12 +73,14 @@ export default function UtilityBar({ onOpenMiniGames }: UtilityBarProps) {
       <div className="w-full max-w-4xl">
         <div className="flex justify-center">
           <ul className="flex flex-wrap justify-center items-center gap-2 glass border border-border/30 rounded-xl p-3 backdrop-blur-xl">
-            {items.map((label) => (
+            {utilityItems.map((label) => (
               <li key={label}>
                 <button
                   type="button"
                   onClick={() => handleUtilityClick(label)}
-                  className="px-3 py-1.5 text-xs sm:text-sm rounded-lg glass hover:glass-strong border border-border text-primary hover:text-accent transition-all duration-200 hover:scale-105 cursor-pointer select-none whitespace-nowrap"
+                  className={`px-3 py-1.5 text-xs sm:text-sm rounded-lg glass hover:glass-strong border border-border text-primary hover:text-accent transition-all duration-200 hover:scale-105 cursor-pointer select-none whitespace-nowrap ${
+                    label === 'Commands' ? 'bg-yellow-500/20 border-yellow-500/50 text-yellow-400' : ''
+                  }`}
                   aria-label={`${label}`}
                 >
                   {label}
@@ -69,6 +97,7 @@ export default function UtilityBar({ onOpenMiniGames }: UtilityBarProps) {
       <ShopModal open={showShop} onClose={() => setShowShop(false)} />
       <JobModal open={showJob} onClose={() => setShowJob(false)} />
       <CraftModal open={showCraft} onClose={() => setShowCraft(false)} />
+      <AdminCommandsModal open={showAdminCommands} onClose={() => setShowAdminCommands(false)} />
     </div>
   )
 }

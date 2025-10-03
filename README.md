@@ -16,6 +16,7 @@ A modern idle/incremental life simulation game built with React, TypeScript, Rus
 - 🌐 **LAN Multiplayer** for local network gaming
 - 📱 **Cross-Platform** support (Linux, Windows, macOS, Android)
 - 🎨 **Modern UI** inspired by Discord, Neal.fun, ChatGPT, and Zorin OS
+- 👑 **Admin Commands** for testing and development (restricted access)
 
 ---
 
@@ -278,7 +279,9 @@ npm run tauri:build
 ## 📚 **Documentation**
 
 ### **🎮 Game Guides**
-- **[Game Guide](docs/gameplay/GAME_GUIDE.md)** - Complete gameplay instructions
+- **[Complete Game Guide](docs/gameplay/COMPLETE_GAME_GUIDE.md)** - Complete gameplay instructions and strategies
+- **[Game Guide](docs/gameplay/GAME_GUIDE.md)** - Core gameplay instructions
+- **[Items Database](ITEMS_DATABASE.md)** - Complete item statistics and information
 - **[System Requirements](docs/SYSTEM_REQUIREMENTS.md)** - Hardware/software requirements
 
 ### **🚀 Development**
