@@ -32,7 +32,7 @@
 3. **Complete Setup** - Follow the first-time setup wizard
 
 ### **Initial Goals**
-- **Earn your first 100 WTC** through Search or Work activities
+- **Earn your first 1000 WTC** through Search or Work activities
 - **Buy essential gear** (Hunting Rifle, Fishing Rod, Shovel)
 - **Reach Level 5** to unlock advanced activities
 - **Set up your garden** for passive income
@@ -340,7 +340,7 @@ See **[ITEMS_DATABASE.md](ITEMS_DATABASE.md)** for the complete list of all item
 - **Save Files**: Verify file permissions in game directory
 - **Updates**: Check GitHub releases for latest version
 
-### **System Requirements**
+### **System Requirements(not offical, based on estimates)**
 - **RAM**: 4GB minimum, 8GB recommended
 - **Storage**: 1GB free space
 - **Network**: Stable connection (for multiplayer)

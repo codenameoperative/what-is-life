@@ -1,9 +1,8 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use tauri::Manager;
-use std::path::PathBuf;
 use std::fs;
+use serde_json::{json, Value};
 
 #[command]
 fn save_game(app_handle: AppHandle, data: String, player_id: String) -> Result<(), String> {
@@ -209,10 +208,58 @@ fn get_ban_reason(app_handle: AppHandle, player_id: String) -> Result<String, St
 }
 
 #[command]
-async fn check_for_updates() -> Result<String, String> {
-    // For now, return current version - in a real implementation,
-    // this would check against a remote server
-    Ok(env!("CARGO_PKG_VERSION").to_string())
+async fn check_github_updates() -> Result<String, String> {
+    // GitHub API endpoint for latest release
+    let github_api_url = "https://api.github.com/repos/codenameoperative/what-is-life/releases/latest";
+
+    // Create HTTP client
+    let client = reqwest::Client::new();
+
+    // Make the request
+    let response = client
+        .get(github_api_url)
+        .header("User-Agent", "WhatIsLife-Updater/1.0")
+        .send()
+        .await
+        .map_err(|e| format!("Failed to check for updates: {}", e))?;
+
+    if response.status().is_success() {
+        let release_data: Value = response
+            .json()
+            .await
+            .map_err(|e| format!("Failed to parse release data: {}", e))?;
+
+        let latest_version = release_data["tag_name"]
+            .as_str()
+            .unwrap_or("v0.0.0")
+            .trim_start_matches('v');
+
+        let current_version = env!("CARGO_PKG_VERSION");
+
+        if latest_version != current_version {
+            let changelog_url = release_data["html_url"]
+                .as_str()
+                .unwrap_or("");
+
+            let update_info = json!({
+                "has_update": true,
+                "current_version": current_version,
+                "latest_version": latest_version,
+                "changelog_url": changelog_url,
+                "download_url": release_data["assets"][0]["browser_download_url"].as_str().unwrap_or("")
+            });
+
+            Ok(update_info.to_string())
+        } else {
+            Ok(json!({
+                "has_update": false,
+                "current_version": current_version,
+                "latest_version": current_version
+            }).to_string())
+        }
+    } else {
+        Err(format!("GitHub API request failed: {}", response.status()))
+    }
 }
 
 #[command]
@@ -238,9 +285,9 @@ async fn download_update(app_handle: AppHandle, version: String) -> Result<Strin
 #[command]
 async fn install_update(app_handle: AppHandle, update_path: String) -> Result<bool, String> {
     // In a real implementation, this would:
-    // 1. Backup current save data
+    // 1. Backup current save data to a safe location
     // 2. Extract and install the update
-    // 3. Restore save data
+    // 3. Restore save data from backup
     // 4. Restart the application
 
     let app_dir = app_handle
@@ -248,13 +295,28 @@ async fn install_update(app_handle: AppHandle, update_path: String) -> Result<bo
         .app_data_dir()
         .ok_or("Failed to get app data directory")?;
 
+    // Create backup directory
+    let backup_dir = app_dir.join("backup");
+    fs::create_dir_all(&backup_dir).map_err(|e| format!("Failed to create backup directory: {}", e))?;
+
     // Backup save data
     let saves_dir = app_dir.join("saves");
-    let backup_dir = app_dir.join("backup");
+    let backup_saves_dir = backup_dir.join("saves");
+
     if saves_dir.exists() {
-        fs::create_dir_all(&backup_dir).map_err(|e| format!("Failed to create backup directory: {}", e))?;
-        // In a real implementation, copy all save files
-        // For now, we'll just mark that backup was attempted
+        // Copy entire saves directory to backup
+        copy_dir_recursive(&saves_dir, &backup_saves_dir)
+            .map_err(|e| format!("Failed to backup saves: {}", e))?;
+
+        println!("Save data backed up to: {:?}", backup_saves_dir);
+    }
+
+    // Backup other important data (settings, etc.)
+    let config_dir = app_dir.join("config");
+    if config_dir.exists() {
+        let backup_config_dir = backup_dir.join("config");
+        copy_dir_recursive(&config_dir, &backup_config_dir)
+            .map_err(|e| format!("Failed to backup config: {}", e))?;
     }
 
     // Simulate installation (in real implementation, this would extract and replace files)
@@ -263,6 +325,28 @@ async fn install_update(app_handle: AppHandle, update_path: String) -> Result<bo
     // In a real implementation, this would restart the app
     // For now, we'll just return success
     Ok(true)
+}
+
+fn copy_dir_recursive(src: &PathBuf, dst: &PathBuf) -> Result<(), std::io::Error> {
+    if !src.exists() {
+        return Ok(());
+    }
+
+    fs::create_dir_all(dst)?;
+
+    for entry in fs::read_dir(src)? {
+        let entry = entry?;
+        let src_path = entry.path();
+        let dst_path = dst.join(entry.file_name());
+
+        if src_path.is_dir() {
+            copy_dir_recursive(&src_path, &dst_path)?;
+        } else {
+            fs::copy(&src_path, &dst_path)?;
+        }
+    }
+
+    Ok(())
 }
 
 #[command]
@@ -278,7 +362,7 @@ fn get_current_version() -> Result<String, String> {
         is_player_banned,
         get_ban_reason,
         get_local_ip,
-        check_for_updates,
+        check_github_updates,
         download_update,
         install_update,
         get_current_version

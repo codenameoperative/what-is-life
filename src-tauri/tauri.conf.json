@@ -1,8 +1,8 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "build": {
-    "beforeBuildCommand": "npm run --prefix web build",
-    "beforeDevCommand": "npm run --prefix web dev",
+    "beforeBuildCommand": "npm run --prefix ../web build",
+    "beforeDevCommand": "",
     "devPath": "http://localhost:5173",
     "distDir": "../web/dist"
   },
@@ -58,7 +58,7 @@
       },
       "resources": [],
       "shortDescription": "Life has its highs and lows",
-      "targets": ["app", "appimage", "deb", "rpm"],
+      "targets": ["app", "appimage", "deb", "rpm", "msi"],
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",

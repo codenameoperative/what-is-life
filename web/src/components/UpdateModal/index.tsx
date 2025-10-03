@@ -9,6 +9,7 @@ type Props = {
 export default function UpdateModal({ open, onClose }: Props) {
   const [currentVersion, setCurrentVersion] = useState('')
   const [latestVersion, setLatestVersion] = useState('')
+  const [changelogUrl, setChangelogUrl] = useState('')
   const [isChecking, setIsChecking] = useState(false)
   const [isDownloading, setIsDownloading] = useState(false)
   const [isInstalling, setIsInstalling] = useState(false)
@@ -26,14 +27,15 @@ export default function UpdateModal({ open, onClose }: Props) {
     setUpdateStatus('Checking for updates...')
 
     try {
-      const current = await invoke<string>('get_current_version')
-      const latest = await invoke<string>('check_for_updates')
+      const updateData = await invoke<string>('check_github_updates')
+      const updateInfo = JSON.parse(updateData)
 
-      setCurrentVersion(current)
-      setLatestVersion(latest)
+      setCurrentVersion(updateInfo.current_version)
+      setLatestVersion(updateInfo.latest_version)
+      setChangelogUrl(updateInfo.changelog_url || '')
 
-      if (current !== latest) {
-        setUpdateStatus(`Update available: ${current} → ${latest}`)
+      if (updateInfo.has_update) {
+        setUpdateStatus(`Update available: ${updateInfo.current_version} → ${updateInfo.latest_version}`)
       } else {
         setUpdateStatus('You have the latest version')
       }
@@ -45,21 +47,9 @@ export default function UpdateModal({ open, onClose }: Props) {
     }
   }
 
-  const downloadUpdate = async () => {
-    if (currentVersion === latestVersion) return
-
-    setIsDownloading(true)
-    setUpdateStatus('Downloading update...')
-
-    try {
-      const path = await invoke<string>('download_update', { version: latestVersion })
-      setDownloadPath(path)
-      setUpdateStatus('Download complete')
-    } catch (error) {
-      setUpdateStatus('Download failed')
-      console.error('Download failed:', error)
-    } finally {
-      setIsDownloading(false)
+  const openChangelog = () => {
+    if (changelogUrl) {
+      window.open(changelogUrl, '_blank')
     }
   }
 
@@ -138,13 +128,21 @@ export default function UpdateModal({ open, onClose }: Props) {
             <div className="glass p-4 rounded-lg border border-green-500/30">
               <h3 className="text-lg font-medium text-green-400 mb-3">Update Available</h3>
               <div className="space-y-3">
-                <button
-                  onClick={downloadUpdate}
-                  disabled={isDownloading || isInstalling}
-                  className="w-full btn-primary"
-                >
-                  {isDownloading ? 'Downloading...' : 'Download Update'}
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={openChangelog}
+                    className="flex-1 btn-secondary"
+                  >
+                    📋 View Changelog
+                  </button>
+                  <button
+                    onClick={downloadUpdate}
+                    disabled={isDownloading || isInstalling}
+                    className="flex-1 btn-primary"
+                  >
+                    {isDownloading ? 'Downloading...' : '⬇️ Download'}
+                  </button>
+                </div>
 
                 {downloadPath && (
                   <button
@@ -152,7 +150,7 @@ export default function UpdateModal({ open, onClose }: Props) {
                     disabled={isInstalling}
                     className="w-full btn-secondary"
                   >
-                    {isInstalling ? 'Installing...' : 'Install Update'}
+                    {isInstalling ? 'Installing...' : '🔧 Install Update'}
                   </button>
                 )}
               </div>
