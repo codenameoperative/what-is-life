@@ -4,6 +4,8 @@ import { useNotify } from '../../contexts/NotifyContext'
 import { gameRNG } from '../../utils/rng'
 
 interface TicTacToeProps {
+  difficulty?: 'easy' | 'medium' | 'hard'
+
   open: boolean
   onClose: () => void
   opponentName?: string

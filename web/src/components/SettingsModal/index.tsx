@@ -56,25 +56,6 @@ export default function SettingsModal({ open, onClose }: Props) {
             <div className="space-y-4">
               <label className="flex items-center justify-between glass p-4 rounded-lg hover:glass-strong transition-all duration-200">
                 <div>
-                  <div className="text-sm font-medium text-primary">Automated Grinding</div>
-                  <div className="text-xs text-muted">Automatically perform activities when available</div>
-                </div>
-                <button
-                  onClick={() => setTempSettings(prev => ({ ...prev, automatedGrinding: !prev.automatedGrinding }))}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-300 ${
-                    tempSettings.automatedGrinding ? 'bg-gradient-to-r from-primary to-accent' : 'bg-tertiary'
-                  }`}
-                >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-lg transition-transform duration-300 ${
-                      tempSettings.automatedGrinding ? 'translate-x-6' : 'translate-x-1'
-                    }`}
-                  />
-                </button>
-              </label>
-
-              <label className="flex items-center justify-between glass p-4 rounded-lg hover:glass-strong transition-all duration-200">
-                <div>
                   <div className="text-sm font-medium text-primary">Confirm Selling</div>
                   <div className="text-xs text-muted">Show confirmation dialog when selling items</div>
                 </div>

@@ -13,9 +13,6 @@ import StreamActivity from '../activities/Stream'
 import ExploreActivity from '../activities/Explore'
 import GardenActivity from '../activities/Garden'
 import Toaster from './Toaster/index'
-import RussianRoulette from './MiniGames/RussianRoulette'
-import Fight from './MiniGames/Fight'
-import Race from './MiniGames/Race'
 import { ErrorLogViewer } from './ErrorLogViewer'
 import LANPartyModal from './LANPartyModal'
 import UsernameModal from './UsernameModal/index'
@@ -204,9 +201,6 @@ function Game({ onBackToMenu }: { onBackToMenu?: () => void }) {
   const [showUsernameModal, setShowUsernameModal] = useState(false)
   const [showMultiplayerMenu, setShowMultiplayerMenu] = useState(false)
   const [sessionIdInput, setSessionIdInput] = useState('')
-  const [activeMiniGame, setActiveMiniGame] = useState<{ type: string, targetPlayerId?: string } | null>(null)
-  const [showLANModal, setShowLANModal] = useState(false)
-  const [pendingMiniGame, setPendingMiniGame] = useState<{ type: string, targetPlayerId?: string } | null>(null)
   const [searchCooldown, setSearchCooldown] = useState<{isOnCooldown: boolean, timeLeft: number}>({
     isOnCooldown: false,
     timeLeft: 0
@@ -515,33 +509,6 @@ function Game({ onBackToMenu }: { onBackToMenu?: () => void }) {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [activeActivity, retroModeActive, startActivity, toggleRetroMode])
 
-  // Automated grinding
-  useEffect(() => {
-    if (!state.settings.automatedGrinding || activeActivity) return
-
-    const interval = setInterval(() => {
-      // Find the first available activity that's not on cooldown
-      const availableActivities = [
-        { name: 'Search', cooldown: searchCooldown },
-        { name: 'Crime', cooldown: crimeCooldown },
-        { name: 'Work', cooldown: workCooldown },
-        { name: 'Hunt', cooldown: huntCooldown },
-        { name: 'Fish', cooldown: fishCooldown },
-        { name: 'Dig', cooldown: digCooldown },
-        { name: 'Post', cooldown: postCooldown },
-        { name: 'Stream', cooldown: streamCooldown },
-        { name: 'Explore', cooldown: exploreCooldown },
-        { name: 'Garden', cooldown: gardenCooldown }
-      ]
-
-      const nextActivity = availableActivities.find(activity => !activity.cooldown.isOnCooldown)
-      if (nextActivity) {
-        setActiveActivity(nextActivity.name)
-      }
-    }, 1000) // Check every second
-
-    return () => clearInterval(interval)
-  }, [state.settings.automatedGrinding, activeActivity, searchCooldown.isOnCooldown, crimeCooldown.isOnCooldown, workCooldown.isOnCooldown, huntCooldown.isOnCooldown, fishCooldown.isOnCooldown, digCooldown.isOnCooldown, postCooldown.isOnCooldown, streamCooldown.isOnCooldown, exploreCooldown.isOnCooldown, gardenCooldown.isOnCooldown])
 
   const renderActivity = () => {
     switch (activeActivity) {
@@ -646,32 +613,6 @@ function Game({ onBackToMenu }: { onBackToMenu?: () => void }) {
     setShowUsernameModal(isFirstTime)
   }, [state.profile.username])
 
-  // Handle mini-game triggering
-  const handleMiniGameTrigger = (gameType: string, targetPlayerId?: string) => {
-    if (!isConnected) {
-      // Show LAN modal first
-      setPendingMiniGame({ type: gameType, targetPlayerId })
-      setShowLANModal(true)
-    } else {
-      // Start mini-game directly
-      setActiveMiniGame({ type: gameType, targetPlayerId })
-    }
-  }
-
-  // Handle LAN modal completion
-  const handleLANModalComplete = () => {
-    setShowLANModal(false)
-    if (pendingMiniGame && isConnected) {
-      setActiveMiniGame(pendingMiniGame)
-      setPendingMiniGame(null)
-    }
-  }
-
-  // Handle LAN modal cancel
-  const handleLANModalCancel = () => {
-    setShowLANModal(false)
-    setPendingMiniGame(null)
-  }
 
   return (
     <div
@@ -872,54 +813,12 @@ function Game({ onBackToMenu }: { onBackToMenu?: () => void }) {
       {/* Notifications */}
       <Toaster />
 
-      {/* Mini-Games */}
-      {activeMiniGame?.type === 'russian_roulette' && activeMiniGame.targetPlayerId && (
-        <RussianRoulette
-          targetPlayerId={activeMiniGame.targetPlayerId}
-          onComplete={(result) => {
-            setActiveMiniGame(null)
-            // Handle mini-game results
-            if (result.winner) {
-              // Process winnings/losses
-            }
-          }}
-        />
-      )}
-      {activeMiniGame?.type === 'fight' && activeMiniGame.targetPlayerId && (
-        <Fight
-          targetPlayerId={activeMiniGame.targetPlayerId}
-          onComplete={(result) => {
-            setActiveMiniGame(null)
-            // Handle mini-game results
-          }}
-        />
-      )}
-      {activeMiniGame?.type === 'race' && activeMiniGame.targetPlayerId && (
-        <Race
-          targetPlayerId={activeMiniGame.targetPlayerId}
-          onComplete={(result) => {
-            setActiveMiniGame(null)
-            // Handle mini-game results
-          }}
-        />
-      )}
-
       {/* Username Modal */}
       <UsernameModal
         open={showUsernameModal}
         onComplete={() => setShowUsernameModal(false)}
       />
 
-      {/* LAN Party Modal */}
-      <LANPartyModal
-        open={showLANModal}
-        onClose={handleLANModalCancel}
-        onComplete={handleLANModalComplete}
-        gameType={pendingMiniGame?.type || ''}
-        targetPlayerId={pendingMiniGame?.targetPlayerId}
-      />
-
-      {/* Error Log Viewer */}
       <ErrorLogViewer />
       </div>
     </div>

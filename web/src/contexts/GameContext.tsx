@@ -83,7 +83,6 @@ export interface GameState {
   }
   // Settings
   settings: {
-    automatedGrinding: boolean
     confirmSell: boolean
     confirmDeposit: boolean
     animationSpeed: 'slow' | 'normal' | 'fast'
@@ -284,7 +283,6 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
           totalTimePlayed: 0
         },
         settings: {
-          automatedGrinding: false,
           confirmSell: true,
           confirmDeposit: true,
           animationSpeed: 'normal',
@@ -345,7 +343,6 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
         totalTimePlayed: 0
       },
       settings: {
-        automatedGrinding: false,
         confirmSell: true,
         confirmDeposit: true,
         animationSpeed: 'normal',

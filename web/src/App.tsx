@@ -38,25 +38,23 @@ function App() {
   useEffect(() => {
     // Keyboard shortcuts
     const handleKeyDown = (event: KeyboardEvent) => {
-      // Ctrl+Q for fullscreen toggle
-      if (event.ctrlKey && event.key === 'q') {
+      // Ctrl+Q opens exit confirmation
+      if (event.ctrlKey && event.key.toLowerCase() === 'q') {
         event.preventDefault()
-        toggleFullscreen()
+        setShowExitConfirm(true)
+        return
       }
 
       // F11 for fullscreen
       if (event.key === 'F11') {
         event.preventDefault()
         toggleFullscreen()
+        return
       }
 
-      // ESC to exit fullscreen or show exit confirmation
-      if (event.key === 'Escape') {
-        if (isFullscreen) {
-          exitFullscreen()
-        } else {
-          setShowExitConfirm(true)
-        }
+      // Escape only exits fullscreen when active
+      if (event.key === 'Escape' && isFullscreen) {
+        exitFullscreen()
       }
     }
 
@@ -232,8 +230,7 @@ function App() {
     </ErrorBoundary>
   )
 
-  // Note: ErrorLogViewer is accessible via button in the UI
-  // It's not returned here as it's a modal component
+ 
 }
 
 export default App

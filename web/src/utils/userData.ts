@@ -18,7 +18,6 @@ interface InitialUserData {
     totalTimePlayed: number
   }
   settings: {
-    automatedGrinding: boolean
     confirmSell: boolean
     confirmDeposit: boolean
     animationSpeed: 'slow' | 'normal' | 'fast'
@@ -68,7 +67,6 @@ export const createInitialUserData = (username: string): InitialUserData => {
       totalTimePlayed: 0
     },
     settings: {
-      automatedGrinding: false,
       confirmSell: true,
       confirmDeposit: true,
       animationSpeed: 'normal',

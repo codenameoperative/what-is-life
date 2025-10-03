@@ -20,6 +20,7 @@ export interface FightState {
 }
 
 interface FightProps {
+  isCPU?: boolean
   targetPlayerId?: string
   onComplete: (result: any) => void
 }
