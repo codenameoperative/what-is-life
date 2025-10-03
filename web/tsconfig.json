@@ -12,7 +12,10 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["vite/client"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
