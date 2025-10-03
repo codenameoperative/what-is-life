@@ -1,24 +1,6 @@
-import { useState, useEffect, useMemo, useRef, useCallback, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react'
-import Header from './Header'
-import UtilityBar from './UtilityBar'
-import LANPartyModal from './LANPartyModal'
-import UsernameModal from './UsernameModal/index'
-import Footer from './Footer'
-import CrimeActivity from '../activities/Crime'
-import WorkActivity from '../activities/Work'
-import SearchActivity from '../activities/Search'
-import HuntActivity from '../activities/Hunt'
-import FishActivity from '../activities/Fish'
-import DigActivity from '../activities/Dig'
-import PostActivity from '../activities/Post'
-import StreamActivity from '../activities/Stream'
-import ExploreActivity from '../activities/Explore'
-import GardenActivity from '../activities/Garden'
-import Toaster from './Toaster/index'
-import { ErrorLogViewer } from './ErrorLogViewer'
-import MiniGamesSelector from './MiniGamesSelector'
-import MiniGames, { type MiniGameType } from './MiniGames'
-import UpdateModal from './UpdateModal'
+import { useGame } from '../../contexts/GameContext'
+import { useMultiplayer } from '../../contexts/MultiplayerContext'
+import { useNotify } from '../../contexts/NotifyContext'
 
 const ACTIVITY_LIST = ['Search', 'Crime', 'Work', 'Hunt', 'Fish', 'Dig', 'Post', 'Stream', 'Explore', 'Garden'] as const
 type ActivityName = typeof ACTIVITY_LIST[number]
@@ -203,6 +185,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
   const [showMultiplayerMenu, setShowMultiplayerMenu] = useState(false)
   const [sessionIdInput, setSessionIdInput] = useState('')
   const [showMiniGamesSelector, setShowMiniGamesSelector] = useState(false)
+  const [showUpdateModal, setShowUpdateModal] = useState(false)
   const [activeMiniGame, setActiveMiniGame] = useState<MiniGameType | null>(null)
   const [searchCooldown, setSearchCooldown] = useState<{isOnCooldown: boolean, timeLeft: number}>({
     isOnCooldown: false,
