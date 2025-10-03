@@ -893,3 +893,5 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
     </div>
   )
 }
+
+export default Game
