@@ -58,7 +58,7 @@
       },
       "resources": [],
       "shortDescription": "Life has its highs and lows",
-      "targets": ["msi"],
+      "targets": ["deb", "msi"],
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
