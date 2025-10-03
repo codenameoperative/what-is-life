@@ -2,6 +2,26 @@ import React, { useState, useEffect, useMemo, useRef, useCallback, type CSSPrope
 import { useGame } from '../../contexts/GameContext'
 import { useMultiplayer } from '../../contexts/MultiplayerContext'
 import { useNotify } from '../../contexts/NotifyContext'
+import Header from './Header'
+import UtilityBar from './UtilityBar'
+import LANPartyModal from './LANPartyModal'
+import UsernameModal from './UsernameModal/index'
+import Footer from './Footer'
+import CrimeActivity from '../activities/Crime'
+import WorkActivity from '../activities/Work'
+import SearchActivity from '../activities/Search'
+import HuntActivity from '../activities/Hunt'
+import FishActivity from '../activities/Fish'
+import DigActivity from '../activities/Dig'
+import PostActivity from '../activities/Post'
+import StreamActivity from '../activities/Stream'
+import ExploreActivity from '../activities/Explore'
+import GardenActivity from '../activities/Garden'
+import Toaster from './Toaster/index'
+import { ErrorLogViewer } from './ErrorLogViewer'
+import MiniGamesSelector from './MiniGamesSelector'
+import MiniGames, { type MiniGameType } from './MiniGames'
+import UpdateModal from './UpdateModal'
 
 const ACTIVITY_LIST = ['Search', 'Crime', 'Work', 'Hunt', 'Fish', 'Dig', 'Post', 'Stream', 'Explore', 'Garden'] as const
 type ActivityName = typeof ACTIVITY_LIST[number]
@@ -400,7 +420,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         } else if (prev.isOnCooldown && prev.timeLeft <= 0) {
           return { isOnCooldown: false, timeLeft: 0 }
         }
-        return prev // Return unchanged state if no conditions are met
+        return prev
       })
       setCrimeCooldown(prev => {
         if (prev.isOnCooldown && prev.timeLeft > 0) {
@@ -408,7 +428,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         } else if (prev.isOnCooldown && prev.timeLeft <= 0) {
           return { isOnCooldown: false, timeLeft: 0 }
         }
-        return prev // Return unchanged state if no conditions are met
+        return prev
       })
       setWorkCooldown(prev => {
         if (prev.isOnCooldown && prev.timeLeft > 0) {
@@ -416,7 +436,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         } else if (prev.isOnCooldown && prev.timeLeft <= 0) {
           return { isOnCooldown: false, timeLeft: 0 }
         }
-        return prev // Return unchanged state if no conditions are met
+        return prev
       })
       setHuntCooldown(prev => {
         if (prev.isOnCooldown && prev.timeLeft > 0) {
@@ -424,7 +444,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         } else if (prev.isOnCooldown && prev.timeLeft <= 0) {
           return { isOnCooldown: false, timeLeft: 0 }
         }
-        return prev // Return unchanged state if no conditions are met
+        return prev
       })
       setFishCooldown(prev => {
         if (prev.isOnCooldown && prev.timeLeft > 0) {
@@ -432,7 +452,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         } else if (prev.isOnCooldown && prev.timeLeft <= 0) {
           return { isOnCooldown: false, timeLeft: 0 }
         }
-        return prev // Return unchanged state if no conditions are met
+        return prev
       })
       setDigCooldown(prev => {
         if (prev.isOnCooldown && prev.timeLeft > 0) {
@@ -440,7 +460,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         } else if (prev.isOnCooldown && prev.timeLeft <= 0) {
           return { isOnCooldown: false, timeLeft: 0 }
         }
-        return prev // Return unchanged state if no conditions are met
+        return prev
       })
       setPostCooldown(prev => {
         if (prev.isOnCooldown && prev.timeLeft > 0) {
@@ -448,7 +468,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         } else if (prev.isOnCooldown && prev.timeLeft <= 0) {
           return { isOnCooldown: false, timeLeft: 0 }
         }
-        return prev // Return unchanged state if no conditions are met
+        return prev
       })
       setStreamCooldown(prev => {
         if (prev.isOnCooldown && prev.timeLeft > 0) {
@@ -456,7 +476,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         } else if (prev.isOnCooldown && prev.timeLeft <= 0) {
           return { isOnCooldown: false, timeLeft: 0 }
         }
-        return prev // Return unchanged state if no conditions are met
+        return prev
       })
       setExploreCooldown(prev => {
         if (prev.isOnCooldown && prev.timeLeft > 0) {
@@ -464,7 +484,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         } else if (prev.isOnCooldown && prev.timeLeft <= 0) {
           return { isOnCooldown: false, timeLeft: 0 }
         }
-        return prev // Return unchanged state if no conditions are met
+        return prev
       })
       setGardenCooldown(prev => {
         if (prev.isOnCooldown && prev.timeLeft > 0) {
@@ -472,7 +492,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         } else if (prev.isOnCooldown && prev.timeLeft <= 0) {
           return { isOnCooldown: false, timeLeft: 0 }
         }
-        return prev // Return unchanged state if no conditions are met
+        return prev
       })
     }, 1000)
 
@@ -518,13 +538,13 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
           return
         }
 
-        // Open update modal (Ctrl+U)
-        if (event.ctrlKey && event.key === 'u') {
-          setShowUpdateModal(true)
-          secretBufferRef.current = ''
-          return
-        }
+        secretBufferRef.current = ''
+        return
+      }
 
+      // Open update modal (Ctrl+U)
+      if (event.ctrlKey && event.key.toLowerCase() === 'u') {
+        setShowUpdateModal(true)
         secretBufferRef.current = ''
         return
       }
@@ -549,8 +569,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [activeActivity, showMultiplayerMenu, showUsernameModal, retroModeActive, startActivity, toggleRetroMode])
-
+  }, [activeActivity, showMultiplayerMenu, showUsernameModal, activeMiniGame, retroModeActive, startActivity, toggleRetroMode])
 
   const renderActivity = () => {
     switch (activeActivity) {
@@ -558,7 +577,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         return <CrimeActivity
           isOnCooldown={crimeCooldown.isOnCooldown}
           cooldownTime={crimeCooldown.timeLeft}
-          onCooldownChange={(isOnCooldown, timeLeft) =>
+          onCooldownChange={(isOnCooldown: boolean, timeLeft: number) =>
             setCrimeCooldown({ isOnCooldown, timeLeft })
           }
           onCrimeComplete={() => setActiveActivity(null)}
@@ -567,7 +586,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         return <WorkActivity
           isOnCooldown={workCooldown.isOnCooldown}
           cooldownTime={workCooldown.timeLeft}
-          onCooldownChange={(isOnCooldown, timeLeft) =>
+          onCooldownChange={(isOnCooldown: boolean, timeLeft: number) =>
             setWorkCooldown({ isOnCooldown, timeLeft })
           }
           onWorkComplete={() => setActiveActivity(null)}
@@ -576,7 +595,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         return <SearchActivity
           isOnCooldown={searchCooldown.isOnCooldown}
           cooldownTime={searchCooldown.timeLeft}
-          onCooldownChange={(isOnCooldown, timeLeft) =>
+          onCooldownChange={(isOnCooldown: boolean, timeLeft: number) =>
             setSearchCooldown({ isOnCooldown, timeLeft })
           }
           onSearchComplete={() => setActiveActivity(null)}
@@ -585,7 +604,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         return <HuntActivity
           isOnCooldown={huntCooldown.isOnCooldown}
           cooldownTime={huntCooldown.timeLeft}
-          onCooldownChange={(isOnCooldown, timeLeft) =>
+          onCooldownChange={(isOnCooldown: boolean, timeLeft: number) =>
             setHuntCooldown({ isOnCooldown, timeLeft })
           }
           onHuntComplete={() => setActiveActivity(null)}
@@ -594,7 +613,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         return <FishActivity
           isOnCooldown={fishCooldown.isOnCooldown}
           cooldownTime={fishCooldown.timeLeft}
-          onCooldownChange={(isOnCooldown, timeLeft) =>
+          onCooldownChange={(isOnCooldown: boolean, timeLeft: number) =>
             setFishCooldown({ isOnCooldown, timeLeft })
           }
           onFishComplete={() => setActiveActivity(null)}
@@ -603,7 +622,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         return <DigActivity
           isOnCooldown={digCooldown.isOnCooldown}
           cooldownTime={digCooldown.timeLeft}
-          onCooldownChange={(isOnCooldown, timeLeft) =>
+          onCooldownChange={(isOnCooldown: boolean, timeLeft: number) =>
             setDigCooldown({ isOnCooldown, timeLeft })
           }
           onDigComplete={() => setActiveActivity(null)}
@@ -612,7 +631,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         return <PostActivity
           isOnCooldown={postCooldown.isOnCooldown}
           cooldownTime={postCooldown.timeLeft}
-          onCooldownChange={(isOnCooldown, timeLeft) =>
+          onCooldownChange={(isOnCooldown: boolean, timeLeft: number) =>
             setPostCooldown({ isOnCooldown, timeLeft })
           }
           onPostComplete={() => setActiveActivity(null)}
@@ -621,7 +640,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         return <StreamActivity
           isOnCooldown={streamCooldown.isOnCooldown}
           cooldownTime={streamCooldown.timeLeft}
-          onCooldownChange={(isOnCooldown, timeLeft) =>
+          onCooldownChange={(isOnCooldown: boolean, timeLeft: number) =>
             setStreamCooldown({ isOnCooldown, timeLeft })
           }
           onStreamComplete={() => setActiveActivity(null)}
@@ -630,7 +649,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         return <ExploreActivity
           isOnCooldown={exploreCooldown.isOnCooldown}
           cooldownTime={exploreCooldown.timeLeft}
-          onCooldownChange={(isOnCooldown, timeLeft) =>
+          onCooldownChange={(isOnCooldown: boolean, timeLeft: number) =>
             setExploreCooldown({ isOnCooldown, timeLeft })
           }
           onExploreComplete={() => setActiveActivity(null)}
@@ -639,7 +658,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         return <GardenActivity
           isOnCooldown={gardenCooldown.isOnCooldown}
           cooldownTime={gardenCooldown.timeLeft}
-          onCooldownChange={(isOnCooldown, timeLeft) =>
+          onCooldownChange={(isOnCooldown: boolean, timeLeft: number) =>
             setGardenCooldown({ isOnCooldown, timeLeft })
           }
           onGardenComplete={() => setActiveActivity(null)}
@@ -654,7 +673,6 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
     const isFirstTime = !state.profile.username || state.profile.username === 'Player'
     setShowUsernameModal(isFirstTime)
   }, [state.profile.username])
-
 
   return (
     <div
@@ -677,214 +695,214 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         {/* Header */}
         <Header retroModeActive={retroModeActive} onCheat={handleCheat} onLoad={onLoad} />
 
-      {/* Multiplayer Menu */}
-      {showMultiplayerMenu && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center modal-overlay backdrop-blur-sm" onClick={() => setShowMultiplayerMenu(false)}>
-          <div className="modal-content glass-strong border border-border/50 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <div className="p-6">
-              <h2 className="text-xl font-semibold text-white mb-4">LAN Multiplayer</h2>
+        {/* Multiplayer Menu */}
+        {showMultiplayerMenu && (
+          <div className="fixed inset-0 z-40 flex items-center justify-center modal-overlay backdrop-blur-sm" onClick={() => setShowMultiplayerMenu(false)}>
+            <div className="modal-content glass-strong border border-border/50 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+              <div className="p-6">
+                <h2 className="text-xl font-semibold text-white mb-4">LAN Multiplayer</h2>
 
-              {session ? (
-                <div className="space-y-4">
-                  <div className="glass p-4 rounded-lg backdrop-blur-sm border border-border/30">
-                    <div className="text-sm text-secondary">
-                      <p>Session ID: <code className="bg-tertiary px-2 py-1 rounded text-xs">{session.id}</code></p>
-                      <p>Host IP: <code className="bg-tertiary px-2 py-1 rounded text-xs">{session.hostIp}</code></p>
-                      <p>Players: {players.length}/{session.maxPlayers}</p>
+                {session ? (
+                  <div className="space-y-4">
+                    <div className="glass p-4 rounded-lg backdrop-blur-sm border border-border/30">
+                      <div className="text-sm text-secondary">
+                        <p>Session ID: <code className="bg-tertiary px-2 py-1 rounded text-xs">{session.id}</code></p>
+                        <p>Host IP: <code className="bg-tertiary px-2 py-1 rounded text-xs">{session.hostIp}</code></p>
+                        <p>Players: {players.length}/{session.maxPlayers}</p>
+                      </div>
+                    </div>
+
+                    {isHost && (
+                      <button
+                        onClick={toggleSessionLock}
+                        className={`w-full px-4 py-2 text-sm font-medium rounded-lg ${
+                          session.isLocked
+                            ? 'bg-red-600 hover:bg-red-700 text-white'
+                            : 'bg-green-600 hover:bg-green-700 text-white'
+                        }`}
+                      >
+                        {session.isLocked ? 'Unlock Session' : 'Lock Session'}
+                      </button>
+                    )}
+
+                    <button
+                      onClick={leaveSession}
+                      className="w-full px-4 py-2 text-sm bg-secondary hover:bg-tertiary text-white font-medium rounded-lg"
+                    >
+                      Leave Session
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-primary mb-2">Server IP Address</label>
+                      <input
+                        type="text"
+                        placeholder="192.168.1.100"
+                        value={serverIp}
+                        onChange={(e) => setServerIp(e.target.value)}
+                        className="input-modern mb-3"
+                      />
+                      <p className="text-xs text-muted">Enter the host's IP address to join their session</p>
+                    </div>
+
+                    <button
+                      onClick={createSession}
+                      className="btn-primary w-full"
+                    >
+                      Create Session
+                    </button>
+
+                    <div className="border-t border-border pt-4">
+                      <input
+                        type="text"
+                        placeholder="Enter Session ID"
+                        value={sessionIdInput}
+                        onChange={(e) => setSessionIdInput(e.target.value)}
+                        className="input-modern mb-3"
+                      />
+                      <button
+                        onClick={() => joinSession(sessionIdInput, state.profile.playerId, serverIp)}
+                        disabled={!sessionIdInput.trim() || !serverIp.trim()}
+                        className="btn-secondary w-full"
+                      >
+                        Join Session
+                      </button>
                     </div>
                   </div>
+                )}
 
-                  {isHost && (
-                    <button
-                      onClick={toggleSessionLock}
-                      className={`w-full px-4 py-2 text-sm font-medium rounded-lg ${
-                        session.isLocked
-                          ? 'bg-red-600 hover:bg-red-700 text-white'
-                          : 'bg-green-600 hover:bg-green-700 text-white'
-                      }`}
-                    >
-                      {session.isLocked ? 'Unlock Session' : 'Lock Session'}
-                    </button>
-                  )}
-
-                  <button
-                    onClick={leaveSession}
-                    className="w-full px-4 py-2 text-sm bg-secondary hover:bg-tertiary text-white font-medium rounded-lg"
-                  >
-                    Leave Session
-                  </button>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-primary mb-2">Server IP Address</label>
-                    <input
-                      type="text"
-                      placeholder="192.168.1.100"
-                      value={serverIp}
-                      onChange={(e) => setServerIp(e.target.value)}
-                      className="input-modern mb-3"
-                    />
-                    <p className="text-xs text-muted">Enter the host's IP address to join their session</p>
-                  </div>
-
-                  <button
-                    onClick={createSession}
-                    className="btn-primary w-full"
-                  >
-                    Create Session
-                  </button>
-
-                  <div className="border-t border-border pt-4">
-                    <input
-                      type="text"
-                      placeholder="Enter Session ID"
-                      value={sessionIdInput}
-                      onChange={(e) => setSessionIdInput(e.target.value)}
-                      className="input-modern mb-3"
-                    />
-                    <button
-                      onClick={() => joinSession(sessionIdInput, state.profile.playerId, serverIp)}
-                      disabled={!sessionIdInput.trim() || !serverIp.trim()}
-                      className="btn-secondary w-full"
-                    >
-                      Join Session
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              <button
-                onClick={() => setShowMultiplayerMenu(false)}
-                className="btn-secondary w-full mt-4"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Hero Section */}
-      <main className={`flex-1 ${showUsernameModal ? 'hidden' : ''}`}>
-        <section className="container-max pt-12 pb-8 text-center">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="title mb-4">What is Life?</h1>
-            <p className="subtitle text-lg">Life is Full of Adventures...</p>
-            <div className="mt-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 glass rounded-full">
-                <span className="text-sm text-secondary">Use number keys</span>
-                <kbd className="px-2 py-1 bg-tertiary rounded text-xs font-mono">1-0</kbd>
-                <span className="text-sm text-secondary">for activities</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Utility Bar */}
-        <section className="container-max mb-8">
-          <UtilityBar onOpenMiniGames={handleOpenMiniGames} />
-        </section>
-
-        {/* Main Actions */}
-        <section className="container-max pb-12">
-          {activeActivity ? (
-            <div className="max-w-2xl mx-auto">
-              <button
-                onClick={() => setActiveActivity(null)}
-                className="mb-6 px-4 py-2 text-sm btn-secondary"
-              >
-                ← Back to Activities (ESC)
-              </button>
-              {renderActivity()}
-            </div>
-          ) : (
-            <div>
-              <div className="activity-grid">
                 <button
-                  onClick={() => setShowMultiplayerMenu(true)}
-                  className="activity-card"
+                  onClick={() => setShowMultiplayerMenu(false)}
+                  className="btn-secondary w-full mt-4"
                 >
-                  <div className="activity-icon">🌐</div>
-                  <div className="activity-title">Multiplayer</div>
-                  <div className="activity-description">
-                    {session ? 'Manage LAN session' : 'Start LAN multiplayer'}
-                  </div>
+                  Close
                 </button>
-                {ACTIVITY_LIST.map((activity) => {
-                  const isOnCooldown = cooldownMap[activity]?.isOnCooldown || false
-                  const timeLeft = cooldownMap[activity]?.timeLeft || 0
-
-                  return (
-                    <button
-                      key={activity}
-                      onClick={() => !isOnCooldown && startActivity(activity)}
-                      className={`activity-card ${isOnCooldown ? 'opacity-50' : ''}`}
-                      disabled={isOnCooldown}
-                    >
-                      {isOnCooldown && (
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-700/20 to-transparent animate-pulse rounded-lg"></div>
-                      )}
-                      <div className="relative z-10">
-                        <div className="activity-icon">
-                          {ACTIVITY_ICONS[activity]}
-                        </div>
-                        <div className="activity-title">{activity}</div>
-                        <div className="activity-description">
-                          {isOnCooldown ? (
-                            <div className="flex items-center gap-1">
-                              <div className="loading-spinner w-3 h-3"></div>
-                              <span>{timeLeft}s</span>
-                            </div>
-                          ) : (
-                            ACTIVITY_DESCRIPTIONS[activity]
-                          )}
-                        </div>
-                      </div>
-                    </button>
-                  )
-                })}
               </div>
             </div>
-          )}
-        </section>
-      </main>
+          </div>
+        )}
 
-      {/* Footer */}
-      <Footer />
-      {/* Notifications */}
-      <Toaster />
+        {/* Hero Section */}
+        <main className={`flex-1 ${showUsernameModal ? 'hidden' : ''}`}>
+          <section className="container-max pt-12 pb-8 text-center">
+            <div className="max-w-4xl mx-auto">
+              <h1 className="title mb-4">What is Life?</h1>
+              <p className="subtitle text-lg">Life is Full of Adventures...</p>
+              <div className="mt-8">
+                <div className="inline-flex items-center gap-2 px-4 py-2 glass rounded-full">
+                  <span className="text-sm text-secondary">Use number keys</span>
+                  <kbd className="px-2 py-1 bg-tertiary rounded text-xs font-mono">1-0</kbd>
+                  <span className="text-sm text-secondary">for activities</span>
+                </div>
+              </div>
+            </div>
+          </section>
 
-      {/* Mini Games Selector */}
-      {showMiniGamesSelector && (
-        <MiniGamesSelector
-          onSelectGame={handleSelectMiniGame}
-          onClose={() => setShowMiniGamesSelector(false)}
+          {/* Utility Bar */}
+          <section className="container-max mb-8">
+            <UtilityBar onOpenMiniGames={handleOpenMiniGames} />
+          </section>
+
+          {/* Main Actions */}
+          <section className="container-max pb-12">
+            {activeActivity ? (
+              <div className="max-w-2xl mx-auto">
+                <button
+                  onClick={() => setActiveActivity(null)}
+                  className="mb-6 px-4 py-2 text-sm btn-secondary"
+                >
+                  ← Back to Activities (ESC)
+                </button>
+                {renderActivity()}
+              </div>
+            ) : (
+              <div>
+                <div className="activity-grid">
+                  <button
+                    onClick={() => setShowMultiplayerMenu(true)}
+                    className="activity-card"
+                  >
+                    <div className="activity-icon">🌐</div>
+                    <div className="activity-title">Multiplayer</div>
+                    <div className="activity-description">
+                      {session ? 'Manage LAN session' : 'Start LAN multiplayer'}
+                    </div>
+                  </button>
+                  {ACTIVITY_LIST.map((activity) => {
+                    const isOnCooldown = cooldownMap[activity]?.isOnCooldown || false
+                    const timeLeft = cooldownMap[activity]?.timeLeft || 0
+
+                    return (
+                      <button
+                        key={activity}
+                        onClick={() => !isOnCooldown && startActivity(activity)}
+                        className={`activity-card ${isOnCooldown ? 'opacity-50' : ''}`}
+                        disabled={isOnCooldown}
+                      >
+                        {isOnCooldown && (
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-700/20 to-transparent animate-pulse rounded-lg"></div>
+                        )}
+                        <div className="relative z-10">
+                          <div className="activity-icon">
+                            {ACTIVITY_ICONS[activity]}
+                          </div>
+                          <div className="activity-title">{activity}</div>
+                          <div className="activity-description">
+                            {isOnCooldown ? (
+                              <div className="flex items-center gap-1">
+                                <div className="loading-spinner w-3 h-3"></div>
+                                <span>{timeLeft}s</span>
+                              </div>
+                            ) : (
+                              ACTIVITY_DESCRIPTIONS[activity]
+                            )}
+                          </div>
+                        </div>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+          </section>
+        </main>
+
+        {/* Footer */}
+        <Footer />
+        {/* Notifications */}
+        <Toaster />
+
+        {/* Mini Games Selector */}
+        {showMiniGamesSelector && (
+          <MiniGamesSelector
+            onSelectGame={handleSelectMiniGame}
+            onClose={() => setShowMiniGamesSelector(false)}
+          />
+        )}
+
+        {/* Active Mini Game */}
+        {activeMiniGame && (
+          <MiniGames
+            gameType={activeMiniGame}
+            targetPlayerId={undefined} // Can be set later for multiplayer games
+            onComplete={handleMiniGameComplete}
+          />
+        )}
+
+        {/* Update Modal */}
+        <UpdateModal
+          open={showUpdateModal}
+          onClose={() => setShowUpdateModal(false)}
         />
-      )}
 
-      {/* Active Mini Game */}
-      {activeMiniGame && (
-        <MiniGames
-          gameType={activeMiniGame}
-          targetPlayerId={undefined} // Can be set later for multiplayer games
-          onComplete={handleMiniGameComplete}
+        {/* Username Modal */}
+        <UsernameModal
+          open={showUsernameModal}
+          onComplete={() => setShowUsernameModal(false)}
         />
-      )}
 
-      {/* Update Modal */}
-      <UpdateModal
-        open={showUpdateModal}
-        onClose={() => setShowUpdateModal(false)}
-      />
-
-      {/* Username Modal */}
-      <UsernameModal
-        open={showUsernameModal}
-        onComplete={() => setShowUsernameModal(false)}
-      />
-
-      <ErrorLogViewer />
+        <ErrorLogViewer />
       </div>
     </div>
   )
