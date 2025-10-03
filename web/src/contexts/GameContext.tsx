@@ -108,7 +108,7 @@ interface GameActions {
   setSeed: (seed: number) => void
   toggleRNGMode: () => void
   // Inventory actions
-  addItem: (itemId: string) => void
+  addItem: (itemId: string, quantity?: number) => void
   removeItem: (itemId: string) => void
   equipItem: (slot: string, itemId: string) => void
   useItem: (itemId: string) => { broken: boolean; remaining: number }
@@ -158,6 +158,12 @@ interface GameActions {
   banPlayer: (playerId: string, reason: string) => Promise<boolean>
   isPlayerBanned: (playerId: string) => Promise<boolean>
   getBanReason: (playerId: string) => Promise<string>
+  // Admin commands
+  adminGrantItem: (itemId: string, quantity?: number) => boolean
+  adminGrantMoney: (amount: number) => boolean
+  adminSetLevel: (level: number) => boolean
+  adminUnlockAllAchievements: () => boolean
+  adminResetCooldowns: () => boolean
 }
 
 const GameContext = createContext<{
@@ -471,7 +477,7 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
       }))
     },
     // Inventory actions
-    addItem: (itemId, quantity = 1) => {
+    addItem: (itemId: string, quantity?: number) => {
       const def = items[itemId]
       if (!def) return
 
@@ -483,13 +489,13 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
           // Item is stackable and already exists, increase quantity
           inv[existingIndex] = {
             ...inv[existingIndex],
-            quantity: (inv[existingIndex].quantity || 1) + quantity
+            quantity: (inv[existingIndex].quantity || 1) + (quantity || 1)
           }
         } else {
           // Item is not stackable or doesn't exist, add new entry
           inv.push({
             id: itemId,
-            quantity: isStackable(def) ? quantity : undefined
+            quantity: isStackable(def) ? (quantity || 1) : undefined
           })
         }
 
