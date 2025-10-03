@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useMemo, useRef, useCallback, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react'
 import { useGame } from '../../contexts/GameContext'
 import { useMultiplayer } from '../../contexts/MultiplayerContext'
 import { useNotify } from '../../contexts/NotifyContext'
