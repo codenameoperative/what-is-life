@@ -19,6 +19,7 @@ rusqlite = { version = "0.31", features = ["bundled"] }
 tauri = { version = "1.8.1", features = [ "fs-write-file", "fs-rename-file", "fs-create-dir", "fs-copy-file", "fs-remove-dir", "fs-exists", "fs-read-dir", "fs-read-file", "fs-remove-file", "updater"] }
 tauri-plugin-updater = "1.5"
 reqwest = { version = "0.11", features = ["json"] }
+chrono = { version = "0.4", features = ["serde"] }
 serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "1.37", features = ["macros", "rt-multi-thread", "sync"] }
 tokio-tungstenite = "0.21"

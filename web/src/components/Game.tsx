@@ -203,7 +203,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
   const [showMultiplayerMenu, setShowMultiplayerMenu] = useState(false)
   const [sessionIdInput, setSessionIdInput] = useState('')
   const [showMiniGamesSelector, setShowMiniGamesSelector] = useState(false)
-  const [showUpdateModal, setShowUpdateModal] = useState(false)
+  const [activeMiniGame, setActiveMiniGame] = useState<MiniGameType | null>(null)
   const [searchCooldown, setSearchCooldown] = useState<{isOnCooldown: boolean, timeLeft: number}>({
     isOnCooldown: false,
     timeLeft: 0

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { invoke } from '@tauri-apps/api/core'
 
 type Props = {
@@ -16,13 +16,7 @@ export default function UpdateModal({ open, onClose }: Props) {
   const [updateStatus, setUpdateStatus] = useState('')
   const [downloadPath, setDownloadPath] = useState('')
 
-  useEffect(() => {
-    if (open) {
-      checkForUpdates()
-    }
-  }, [open])
-
-  const checkForUpdates = async () => {
+  const checkForUpdates = useCallback(async () => {
     setIsChecking(true)
     setUpdateStatus('Checking for updates...')
 
@@ -37,7 +31,7 @@ export default function UpdateModal({ open, onClose }: Props) {
       if (updateInfo.has_update) {
         setUpdateStatus(`Update available: ${updateInfo.current_version} → ${updateInfo.latest_version}`)
       } else {
-        setUpdateStatus('You have the latest version')
+        setUpdateStatus('You are up to date')
       }
     } catch (error) {
       setUpdateStatus('Failed to check for updates')
@@ -45,9 +39,15 @@ export default function UpdateModal({ open, onClose }: Props) {
     } finally {
       setIsChecking(false)
     }
-  }
+  }, [])
 
-  const downloadUpdate = async () => {
+  const openChangelog = useCallback(() => {
+    if (changelogUrl) {
+      window.open(changelogUrl, '_blank')
+    }
+  }, [changelogUrl])
+
+  const downloadUpdate = useCallback(async () => {
     if (currentVersion === latestVersion) return
 
     setIsDownloading(true)
@@ -56,16 +56,16 @@ export default function UpdateModal({ open, onClose }: Props) {
     try {
       const path = await invoke<string>('download_update', { version: latestVersion })
       setDownloadPath(path)
-      setUpdateStatus('Download complete')
+      setUpdateStatus('Download complete - ready for installation')
     } catch (error) {
-      setUpdateStatus('Download failed')
+      setUpdateStatus(`Download failed: ${error}`)
       console.error('Download failed:', error)
     } finally {
       setIsDownloading(false)
     }
-  }
+  }, [currentVersion, latestVersion])
 
-  const installUpdate = async () => {
+  const installUpdate = useCallback(async () => {
     if (!downloadPath) return
 
     setIsInstalling(true)
@@ -89,7 +89,13 @@ export default function UpdateModal({ open, onClose }: Props) {
     } finally {
       setIsInstalling(false)
     }
-  }
+  }, [downloadPath])
+
+  useEffect(() => {
+    if (open) {
+      checkForUpdates()
+    }
+  }, [open, checkForUpdates])
 
   if (!open) return null
 

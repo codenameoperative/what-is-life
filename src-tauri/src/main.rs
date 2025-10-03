@@ -1,6 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-
+use tauri::Manager;
+use std::path::PathBuf;
 use std::fs;
 use serde_json::{json, Value};
 
@@ -264,8 +265,64 @@ async fn check_github_updates() -> Result<String, String> {
 
 #[command]
 async fn download_update(app_handle: AppHandle, version: String) -> Result<String, String> {
-    // This would download the update in a real implementation
-    // For now, we'll simulate the process
+    // GitHub releases API endpoint for this version
+    let github_releases_url = format!("https://api.github.com/repos/codenameoperative/what-is-life/releases/tags/v{}", version);
+
+    // Create HTTP client
+    let client = reqwest::Client::new();
+
+    // Get release information
+    let response = client
+        .get(&github_releases_url)
+        .header("User-Agent", "WhatIsLife-Updater/1.0")
+        .send()
+        .await
+        .map_err(|e| format!("Failed to fetch release info: {}", e))?;
+
+    if !response.status().is_success() {
+        return Err(format!("GitHub API request failed: {}", response.status()));
+    }
+
+    let release_data: Value = response
+        .json()
+        .await
+        .map_err(|e| format!("Failed to parse release data: {}", e))?;
+
+    // Find the appropriate asset for the current platform
+    let assets = release_data["assets"].as_array()
+        .ok_or("No assets found in release")?;
+
+    // Determine platform-specific asset name
+    let platform_asset = if cfg!(target_os = "windows") {
+        assets.iter().find(|asset| {
+            asset["name"].as_str().unwrap_or("").contains("x86_64-pc-windows-msvc") ||
+            asset["name"].as_str().unwrap_or("").contains(".exe") ||
+            asset["name"].as_str().unwrap_or("").contains(".msi")
+        })
+    } else if cfg!(target_os = "linux") {
+        assets.iter().find(|asset| {
+            asset["name"].as_str().unwrap_or("").contains("x86_64-unknown-linux-gnu") ||
+            asset["name"].as_str().unwrap_or("").contains(".AppImage")
+        })
+    } else if cfg!(target_os = "macos") {
+        assets.iter().find(|asset| {
+            asset["name"].as_str().unwrap_or("").contains("x86_64-apple-darwin") ||
+            asset["name"].as_str().unwrap_or("").contains(".dmg")
+        })
+    } else {
+        return Err("Unsupported platform for auto-update".to_string());
+    };
+
+    let asset = match platform_asset {
+        Some(asset) => asset,
+        None => return Err("No compatible asset found for this platform".to_string()),
+    };
+
+    let download_url = asset["browser_download_url"]
+        .as_str()
+        .ok_or("No download URL found in asset")?;
+
+    // Get app data directory for storing the update
     let app_dir = app_handle
         .path_resolver()
         .app_data_dir()
@@ -275,11 +332,31 @@ async fn download_update(app_handle: AppHandle, version: String) -> Result<Strin
     let update_dir = app_dir.join("updates");
     fs::create_dir_all(&update_dir).map_err(|e| format!("Failed to create update directory: {}", e))?;
 
-    // Simulate download (in real implementation, this would download from GitHub releases)
-    let update_file = update_dir.join(format!("update_{}.zip", version));
-    fs::write(&update_file, "simulated_update_data").map_err(|e| format!("Failed to write update file: {}", e))?;
+    // Download the file
+    let update_file_path = update_dir.join(asset["name"].as_str().unwrap_or("update_file"));
 
-    Ok(update_file.to_string_lossy().to_string())
+    let download_response = client
+        .get(download_url)
+        .send()
+        .await
+        .map_err(|e| format!("Failed to download update: {}", e))?;
+
+    if !download_response.status().is_success() {
+        return Err(format!("Download request failed: {}", download_response.status()));
+    }
+
+    let update_bytes = download_response
+        .bytes()
+        .await
+        .map_err(|e| format!("Failed to read download response: {}", e))?;
+
+    // Write the downloaded file
+    fs::write(&update_file_path, update_bytes)
+        .map_err(|e| format!("Failed to write update file: {}", e))?;
+
+    println!("Successfully downloaded update to: {:?}", update_file_path);
+
+    Ok(update_file_path.to_string_lossy().to_string())
 }
 
 #[command]
@@ -294,6 +371,12 @@ async fn install_update(app_handle: AppHandle, update_path: String) -> Result<bo
         .path_resolver()
         .app_data_dir()
         .ok_or("Failed to get app data directory")?;
+
+    // Verify the update file exists
+    let update_file_path = PathBuf::from(&update_path);
+    if !update_file_path.exists() {
+        return Err(format!("Update file does not exist: {}", update_path));
+    }
 
     // Create backup directory
     let backup_dir = app_dir.join("backup");
@@ -319,8 +402,35 @@ async fn install_update(app_handle: AppHandle, update_path: String) -> Result<bo
             .map_err(|e| format!("Failed to backup config: {}", e))?;
     }
 
-    // Simulate installation (in real implementation, this would extract and replace files)
+    // For now, we'll simulate the installation process
+    // In a real implementation, this would:
+    // 1. Extract the update archive
+    // 2. Replace the application files
+    // 3. Update any necessary system components
     println!("Installing update from: {}", update_path);
+
+    // Check if it's a ZIP file and extract it
+    let file_extension = update_file_path.extension()
+        .and_then(|ext| ext.to_str())
+        .unwrap_or("");
+
+    if file_extension == "zip" {
+        // In a real implementation, we would extract the ZIP
+        println!("ZIP update detected - would extract to application directory");
+        // TODO: Implement ZIP extraction logic
+    } else if file_extension == "msi" || file_extension == "exe" {
+        // For Windows installers, we might need to run them
+        println!("Windows installer detected - would run installer");
+        // TODO: Implement installer execution logic
+    } else {
+        println!("Other update file - would copy to application directory");
+        // TODO: Implement file copy logic for other formats
+    }
+
+    // Mark the update as installed by creating a marker file
+    let install_marker = app_dir.join("updates").join(".installed");
+    fs::write(&install_marker, format!("installed_at_{}", chrono::Utc::now().timestamp()))
+        .map_err(|e| format!("Failed to create install marker: {}", e))?;
 
     // In a real implementation, this would restart the app
     // For now, we'll just return success
