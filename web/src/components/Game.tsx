@@ -269,6 +269,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
   const pointerFrame = useRef<number | null>(null)
   const pointerTimeout = useRef<number | null>(null)
   const pointerTarget = useRef({ x: 0, y: 0 })
+  const shellRef = useRef<HTMLDivElement | null>(null)
   const secretBufferRef = useRef('')
 
   const [timeBlend, setTimeBlend] = useState<TimeBlendState>(() => computeTimeBlend())
