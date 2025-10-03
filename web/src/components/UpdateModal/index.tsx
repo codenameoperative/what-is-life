@@ -47,9 +47,21 @@ export default function UpdateModal({ open, onClose }: Props) {
     }
   }
 
-  const openChangelog = () => {
-    if (changelogUrl) {
-      window.open(changelogUrl, '_blank')
+  const downloadUpdate = async () => {
+    if (currentVersion === latestVersion) return
+
+    setIsDownloading(true)
+    setUpdateStatus('Downloading update...')
+
+    try {
+      const path = await invoke<string>('download_update', { version: latestVersion })
+      setDownloadPath(path)
+      setUpdateStatus('Download complete')
+    } catch (error) {
+      setUpdateStatus('Download failed')
+      console.error('Download failed:', error)
+    } finally {
+      setIsDownloading(false)
     }
   }
 
@@ -121,6 +133,13 @@ export default function UpdateModal({ open, onClose }: Props) {
           <div className="glass p-4 rounded-lg">
             <div className="text-sm text-muted mb-2">Status:</div>
             <div className="text-primary font-medium">{updateStatus}</div>
+            <button
+              onClick={checkForUpdates}
+              disabled={isChecking}
+              className="mt-2 px-3 py-1 text-xs btn-secondary"
+            >
+              {isChecking ? 'Checking...' : '🔄 Check Again'}
+            </button>
           </div>
 
           {/* Update Actions */}
