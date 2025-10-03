@@ -3,6 +3,7 @@ import { useGame } from '../../contexts/GameContext'
 import { useMultiplayer } from '../../contexts/MultiplayerContext'
 import Fight from './Fight'
 import Race from './Race'
+import RussianRoulette from './RussianRoulette'
 
 export type MiniGameType = 'steal' | 'russian_roulette' | 'gamble' | 'fight' | 'race'
 
@@ -100,6 +101,26 @@ export default function MiniGames({ gameType, targetPlayerId, onComplete }: Mini
     onComplete(result)
   }, [gameState, localGameState, broadcastActivity, onComplete])
 
+  // Handle Russian Roulette
+  const handleRussianRoulette = useCallback(() => {
+    if (!gameState) return
+
+    // Simple Russian Roulette logic
+    const chamber = Math.floor(Math.random() * 6)
+    const bulletChamber = Math.floor(Math.random() * 6)
+    const isBullet = chamber === bulletChamber
+
+    const result = {
+      survived: !isBullet,
+      chamber,
+      bulletChamber,
+      death: isBullet
+    }
+
+    broadcastActivity('RUSSIAN_ROULETTE', result)
+    onComplete(result)
+  }, [gameState, broadcastActivity, onComplete])
+
   // Generate a simple deck for gambling
   const generateDeck = () => {
     const suits = ['♠', '♥', '♦', '♣']
@@ -111,12 +132,34 @@ export default function MiniGames({ gameType, targetPlayerId, onComplete }: Mini
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
-      <div className="w-full max-w-md mx-4 bg-neutral-900 border border-neutral-700 rounded-lg p-6">
+      <div className="w-full max-w-4xl mx-4 bg-neutral-900 border border-neutral-700 rounded-lg p-6">
         <h2 className="text-xl font-semibold text-white mb-4 capitalize">
           {gameType.replace('_', ' ')} Mini-Game
         </h2>
 
-        {/* Game-specific UI */}
+        {/* Render specific mini game UIs */}
+        {gameType === 'fight' && (
+          <Fight
+            targetPlayerId={targetPlayerId}
+            onComplete={onComplete}
+          />
+        )}
+
+        {gameType === 'race' && (
+          <Race
+            targetPlayerId={targetPlayerId}
+            onComplete={onComplete}
+          />
+        )}
+
+        {gameType === 'russian_roulette' && (
+          <RussianRoulette
+            targetPlayerId={targetPlayerId}
+            onComplete={onComplete}
+          />
+        )}
+
+        {/* Legacy simple games */}
         {gameType === 'steal' && (
           <div className="space-y-4">
             <p className="text-neutral-300">
@@ -145,6 +188,32 @@ export default function MiniGames({ gameType, targetPlayerId, onComplete }: Mini
               className="w-full px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-lg"
             >
               Place Bet
+            </button>
+          </div>
+        )}
+
+        {gameType === 'russian_roulette' && (
+          <div className="space-y-4">
+            <p className="text-neutral-300">
+              Russian Roulette - {localGameState.currentChamber}/6 chambers loaded
+            </p>
+            <div className="flex gap-2">
+              {Array.from({ length: 6 }, (_, i) => (
+                <div
+                  key={i}
+                  className={`w-8 h-8 rounded-full border-2 ${
+                    i === localGameState.currentChamber
+                      ? 'border-red-500 bg-red-900'
+                      : 'border-neutral-600 bg-neutral-800'
+                  }`}
+                />
+              ))}
+            </div>
+            <button
+              onClick={handleRussianRoulette}
+              className="w-full px-4 py-2 bg-red-800 hover:bg-red-700 text-white font-medium rounded-lg"
+            >
+              Pull Trigger
             </button>
           </div>
         )}

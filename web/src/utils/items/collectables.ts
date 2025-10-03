@@ -23,7 +23,14 @@ export const collectablesItems: Record<string, Item> = {
     value: 10,
     usable: false,
     source: 'Found',
-    breakChance: 0
+    breakChance: 0,
+    craftable: true,
+    recipe: {
+      requiredItems: {
+        'glass_shard': 3,
+        'plastic_cap': 1
+      }
+    }
   },
   crumpled_paper: {
     id: 'crumpled_paper',
@@ -34,7 +41,13 @@ export const collectablesItems: Record<string, Item> = {
     value: 1,
     usable: false,
     source: 'Found',
-    breakChance: 0
+    breakChance: 0,
+    craftable: true,
+    recipe: {
+      requiredItems: {
+        'old_newspaper': 2
+      }
+    }
   },
   rusty_nail: {
     id: 'rusty_nail',
@@ -45,7 +58,14 @@ export const collectablesItems: Record<string, Item> = {
     value: 2,
     usable: false,
     source: 'Found',
-    breakChance: 0
+    breakChance: 0,
+    craftable: true,
+    recipe: {
+      requiredItems: {
+        'scrap_metal': 1,
+        'rust_remover': 1
+      }
+    }
   },
   old_gum: {
     id: 'old_gum',
@@ -1287,6 +1307,85 @@ export const collectablesItems: Record<string, Item> = {
     value: 0,
     usable: false,
     source: 'WDYFT',
+    breakChance: 0
+  },
+
+  // Additional Common Collectables
+  rubber_duck: {
+    id: 'rubber_duck',
+    name: 'Rubber Duck',
+    tier: 'common',
+    category: 'collectables',
+    description: 'A squeaky bath toy.',
+    value: 15,
+    usable: false,
+    source: 'Found',
+    breakChance: 0
+  },
+  keychain: {
+    id: 'keychain',
+    name: 'Keychain',
+    tier: 'common',
+    category: 'collectables',
+    description: 'A small metal keychain.',
+    value: 8,
+    usable: false,
+    source: 'Found',
+    breakChance: 0
+  },
+  matchbox: {
+    id: 'matchbox',
+    name: 'Matchbox',
+    tier: 'common',
+    category: 'collectables',
+    description: 'A small box of matches.',
+    value: 5,
+    usable: false,
+    source: 'Found',
+    breakChance: 0
+  },
+  pencil_stub: {
+    id: 'pencil_stub',
+    name: 'Pencil Stub',
+    tier: 'common',
+    category: 'collectables',
+    description: 'A very short pencil.',
+    value: 3,
+    usable: false,
+    source: 'Found',
+    breakChance: 0
+  },
+  safety_pin: {
+    id: 'safety_pin',
+    name: 'Safety Pin',
+    tier: 'common',
+    category: 'collectables',
+    description: 'A small safety pin.',
+    value: 2,
+    usable: false,
+    source: 'Found',
+    breakChance: 0
+  },
+  thumbtack: {
+    id: 'thumbtack',
+    name: 'Thumbtack',
+    tier: 'common',
+    category: 'collectables',
+    description: 'A small thumbtack.',
+    value: 1,
+    usable: false,
+    source: 'Found',
+    breakChance: 0
+  },
+  eraser: {
+    id: 'eraser',
+    name: 'Eraser',
+    tier: 'common',
+    category: 'collectables',
+    description: 'A pink pencil eraser.',
+    value: 3,
+    usable: false,
+    source: 'Found',
     breakChance: 0
   }
 }

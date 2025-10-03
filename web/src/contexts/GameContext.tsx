@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useRef, type ReactNode, useEffect 
 import { items, type Item, type OwnedItem, isStackable, getDefaultQuantity } from '../utils/items'
 import { jobs, type JobDefinition } from '../utils/jobs'
 import { achievements, type Achievement } from '../utils/achievements'
-import { safeUUID } from '../utils/safeUUID'
+import { safeUUID, generatePlayerId } from '../utils/safeUUID'
 import { invoke } from '@tauri-apps/api/core'
 
 const getInitialSecrets = (): { retroUnlocked: boolean; cheatUnlocked: boolean } => {
@@ -270,7 +270,7 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
         profile: {
           username: initialUsername || 'Player',
           description: 'Just started my journey...',
-          playerId: initialPlayerId || safeUUID(),
+          playerId: initialPlayerId || generatePlayerId(),
           totalEarnings: 0,
           totalSpent: 0,
           activityUsage: {},
@@ -330,7 +330,7 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
       profile: {
         username: initialUsername || 'Player',
         description: 'Just started my journey...',
-        playerId: initialPlayerId || safeUUID(),
+        playerId: initialPlayerId || generatePlayerId(),
         totalEarnings: 0,
         totalSpent: 0,
         activityUsage: {},
@@ -672,7 +672,7 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
       const trimmed = username.trim()
       if (!trimmed) return
 
-      const newPlayerId = safeUUID()
+      const newPlayerId = generatePlayerId()
       setState(prev => ({
         ...prev,
         profile: {

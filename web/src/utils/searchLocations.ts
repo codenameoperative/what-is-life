@@ -47,7 +47,146 @@ export const searchLocations: Record<string, SearchLocation> = {
     specialEffect: 'Higher chance for tools and mechanical items',
     rarity: 'common'
   },
-
+  volcanic_caves: {
+    id: 'volcanic_caves',
+    name: 'Volcanic Caves',
+    description: 'Deep underground caves heated by geothermal activity, filled with rare minerals and dangerous lava flows.',
+    wtcReward: { min: 50, max: 200 },
+    itemDropChances: {
+      useless: 0.1,
+      common: 0.15,
+      uncommon: 0.2,
+      rare: 0.25,
+      epic: 0.15,
+      ultra_rare: 0.1,
+      ultra_epic: 0.03,
+      legendary: 0.015,
+      mythical: 0.005,
+      wdyft: 0.001
+    },
+    specialEffect: 'High chance for ores and fire-related items. Risk of lava damage.',
+    rarity: 'epic'
+  },
+  underwater_ruins: {
+    id: 'underwater_ruins',
+    name: 'Underwater Ruins',
+    description: 'Ancient submerged structures holding lost treasures and mysterious artifacts from a forgotten civilization.',
+    wtcReward: { min: 75, max: 300 },
+    itemDropChances: {
+      useless: 0.05,
+      common: 0.1,
+      uncommon: 0.15,
+      rare: 0.25,
+      epic: 0.2,
+      ultra_rare: 0.15,
+      ultra_epic: 0.06,
+      legendary: 0.03,
+      mythical: 0.01,
+      wdyft: 0.002
+    },
+    specialEffect: 'Excellent for finding ancient artifacts and water-themed items.',
+    rarity: 'epic'
+  },
+  alien_crash_site: {
+    id: 'alien_crash_site',
+    name: 'Alien Crash Site',
+    description: 'The wreckage of an extraterrestrial spacecraft, containing advanced technology and mysterious materials.',
+    wtcReward: { min: 100, max: 500 },
+    itemDropChances: {
+      useless: 0.02,
+      common: 0.05,
+      uncommon: 0.1,
+      rare: 0.15,
+      epic: 0.25,
+      ultra_rare: 0.2,
+      ultra_epic: 0.12,
+      legendary: 0.08,
+      mythical: 0.025,
+      wdyft: 0.01
+    },
+    specialEffect: 'Contains advanced technology and unknown materials from other worlds.',
+    rarity: 'epic'
+  },
+  time_lost_temple: {
+    id: 'time_lost_temple',
+    name: 'Time-Lost Temple',
+    description: 'An ancient temple that exists outside of normal time, containing artifacts from various eras.',
+    wtcReward: { min: 200, max: 1000 },
+    itemDropChances: {
+      useless: 0.01,
+      common: 0.02,
+      uncommon: 0.05,
+      rare: 0.1,
+      epic: 0.2,
+      ultra_rare: 0.25,
+      ultra_epic: 0.15,
+      legendary: 0.12,
+      mythical: 0.08,
+      wdyft: 0.02
+    },
+    specialEffect: 'Contains items from different time periods. High risk of temporal anomalies.',
+    rarity: 'epic'
+  },
+  dream_realm: {
+    id: 'dream_realm',
+    name: 'Dream Realm',
+    description: 'A surreal dimension accessible only through dreams, filled with subconscious manifestations and ethereal treasures.',
+    wtcReward: { min: 150, max: 800 },
+    itemDropChances: {
+      useless: 0.03,
+      common: 0.08,
+      uncommon: 0.12,
+      rare: 0.18,
+      epic: 0.22,
+      ultra_rare: 0.18,
+      ultra_epic: 0.1,
+      legendary: 0.06,
+      mythical: 0.025,
+      wdyft: 0.005
+    },
+    specialEffect: 'Contains dream-like items and psychic artifacts. Reality may blur during exploration.',
+    rarity: 'epic'
+  },
+  quantum_labyrinth: {
+    id: 'quantum_labyrinth',
+    name: 'Quantum Labyrinth',
+    description: 'A maze of quantum uncertainty where paths shift and probabilities become reality.',
+    wtcReward: { min: 300, max: 1500 },
+    itemDropChances: {
+      useless: 0.005,
+      common: 0.01,
+      uncommon: 0.03,
+      rare: 0.08,
+      epic: 0.15,
+      ultra_rare: 0.25,
+      ultra_epic: 0.2,
+      legendary: 0.15,
+      mythical: 0.12,
+      wdyft: 0.05
+    },
+    specialEffect: 'Quantum effects may cause items to exist in multiple states. High chance for scientific discoveries.',
+    rarity: 'epic'
+  },
+  void_nexus: {
+    id: 'void_nexus',
+    name: 'Void Nexus',
+    description: 'A point where reality meets nothingness, containing fragments of existence and anti-existence.',
+    wtcReward: { min: 500, max: 2500 },
+    itemDropChances: {
+      useless: 0.001,
+      common: 0.005,
+      uncommon: 0.02,
+      rare: 0.05,
+      epic: 0.1,
+      ultra_rare: 0.2,
+      ultra_epic: 0.25,
+      legendary: 0.2,
+      mythical: 0.15,
+      wdyft: 0.1
+    },
+    specialEffect: 'Contains items that defy physics and reality. Risk of existential crisis.',
+    rarity: 'epic'
+  },
   forgotten_cemetery: {
     id: 'forgotten_cemetery',
     name: 'Forgotten Cemetery',

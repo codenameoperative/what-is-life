@@ -878,6 +878,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
       {activeMiniGame && (
         <MiniGames
           gameType={activeMiniGame}
+          targetPlayerId={undefined} // Can be set later for multiplayer games
           onComplete={handleMiniGameComplete}
         />
       )}

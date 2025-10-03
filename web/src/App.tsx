@@ -28,6 +28,7 @@ function App() {
       setShowSaveSelector(true)
     } else {
       setIsFirstTime(true)
+      setShowSaveSelector(false) // Don't show save selector on first time
     }
 
     // Loading complete after a short delay
@@ -164,7 +165,16 @@ function App() {
     )
   }
 
-  // Show save selector
+  // Show first time setup for new users
+  if (isFirstTime) {
+    return (
+      <div className={`${isFullscreen ? 'fullscreen-mode' : ''}`}>
+        <FirstTimeSetup onComplete={handleSetupComplete} />
+      </div>
+    )
+  }
+
+  // Show save selector for returning users
   if (showSaveSelector) {
     return (
       <div className={`${isFullscreen ? 'fullscreen-mode' : ''}`}>
@@ -177,26 +187,13 @@ function App() {
     )
   }
 
-  // Show first time setup for new saves
-  if (isFirstTime && !currentSaveId) {
-    return (
-      <div className={`${isFullscreen ? 'fullscreen-mode' : ''}`}>
-        <FirstTimeSetup onComplete={handleSetupComplete} />
-      </div>
-    )
-  }
-
   return (
     <ErrorBoundary>
       <div className={`${isFullscreen ? 'fullscreen-mode' : ''}`}>
       <NotifyProvider>
         <GameProvider initialUsername={username} initialPlayerId={playerId} saveId={currentSaveId}>
           <MultiplayerProvider>
-            {isFirstTime ? (
-              <FirstTimeSetup onComplete={handleSetupComplete} />
-            ) : (
-              <Game onBackToMenu={handleBackToSaveSelector} onLoad={() => setShowSaveSelector(true)} />
-            )}
+            <Game onBackToMenu={handleBackToSaveSelector} onLoad={() => setShowSaveSelector(true)} />
           </MultiplayerProvider>
         </GameProvider>
       </NotifyProvider>

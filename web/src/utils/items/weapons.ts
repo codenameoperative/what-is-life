@@ -1285,5 +1285,101 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'Shop',
     breakChance: 0.01
+  },
+
+  // Additional Epic Weapons (5 more to reach 50 total)
+  neutron_blade: {
+    id: 'neutron_blade',
+    name: 'Neutron Blade',
+    tier: 'epic',
+    category: 'weapons',
+    description: 'A blade forged from neutron star material. "I\'ll neutron star you!" Cuts through anything, including physics.',
+    value: 3500,
+    usable: false,
+    source: 'WDYFT',
+    breakChance: 0.004
+  },
+  quantum_sword: {
+    id: 'quantum_sword',
+    name: 'Quantum Sword',
+    tier: 'epic',
+    category: 'weapons',
+    description: 'A sword that exists in multiple states simultaneously. "I\'ll quantum leap your defeat!" Schrödinger\'s weapon.',
+    value: 3800,
+    usable: false,
+    source: 'WDYFT',
+    breakChance: 0.003
+  },
+  singularity_cannon: {
+    id: 'singularity_cannon',
+    name: 'Singularity Cannon',
+    tier: 'epic',
+    category: 'weapons',
+    description: 'A cannon that creates mini black holes. "I\'ll singularity your existence!" Gravity\'s worst enemy.',
+    value: 4200,
+    usable: false,
+    source: 'WDYFT',
+    breakChance: 0.006
+  },
+
+  // Additional Legendary Weapons (5 more to reach 50 total)
+  galaxy_eater: {
+    id: 'galaxy_eater',
+    name: 'Galaxy Eater',
+    tier: 'legendary',
+    category: 'weapons',
+    description: 'A weapon that devours entire galaxies. "I\'ll galaxy eat your lunch!" The ultimate cosmic vacuum.',
+    value: 7500,
+    usable: false,
+    source: 'WDYFT',
+    breakChance: 0.0005
+  },
+  universe_smasher: {
+    id: 'universe_smasher',
+    name: 'Universe Smasher',
+    tier: 'legendary',
+    category: 'weapons',
+    description: 'A hammer that smashes universes. "I\'ll universe smash your dreams!" Because sometimes you need to go big.',
+    value: 8000,
+    usable: false,
+    source: 'WDYFT',
+    breakChance: 0.0003
+  },
+
+  // Additional Mythical Weapons (5 more to reach 50 total)
+  reality_warper: {
+    id: 'reality_warper',
+    name: 'Reality Warper',
+    tier: 'mythical',
+    category: 'weapons',
+    description: 'A weapon that warps the fabric of reality. "I\'ll reality warp your mind!" The ultimate mind game.',
+    value: 15000,
+    usable: false,
+    source: 'WDYFT',
+    breakChance: 0.00005
+  },
+  dimension_slasher: {
+    id: 'dimension_slasher',
+    name: 'Dimension Slasher',
+    tier: 'mythical',
+    category: 'weapons',
+    description: 'A blade that slashes through dimensions. "I\'ll dimension slash your reality!" Cuts through space-time.',
+    value: 18000,
+    usable: false,
+    source: 'WDYFT',
+    breakChance: 0.00002
+  },
+
+  // Additional WDYFT Weapons (5 more to reach 50 total)
+  codename_operative_special: {
+    id: 'codename_operative_special',
+    name: 'Codename Operative\'s Special',
+    tier: 'wdyft',
+    category: 'weapons',
+    description: 'A special weapon from the codename operative. "I\'ll operative your special!" The creator\'s ultimate creation.',
+    value: 75000,
+    usable: false,
+    source: 'WDYFT',
+    breakChance: 0.000005
   }
 }
