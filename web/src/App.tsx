@@ -195,7 +195,7 @@ function App() {
             {isFirstTime ? (
               <FirstTimeSetup onComplete={handleSetupComplete} />
             ) : (
-              <Game onBackToMenu={handleBackToSaveSelector} />
+              <Game onBackToMenu={handleBackToSaveSelector} onLoad={() => setShowSaveSelector(true)} />
             )}
           </MultiplayerProvider>
         </GameProvider>

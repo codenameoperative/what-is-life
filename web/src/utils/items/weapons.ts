@@ -727,5 +727,563 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'WDYFT',
     breakChance: 0.00001
+  },
+
+  // === NEW CRAFTABLE WEAPONS (Adding 41 more per tier to reach 50 per tier) ===
+
+  // Common Weapons (41 more)
+  plastic_fork: {
+    id: 'plastic_fork',
+    name: 'Plastic Fork',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The most dangerous utensil in the drawer. Perfect for when you want to "fork" over your enemies. Warning: May snap under pressure.',
+    value: 12,
+    usable: false,
+    source: 'Found',
+    breakChance: 0.15,
+    craftable: true,
+    recipe: {
+      requiredItems: {
+        'plastic_bag': 1,
+        'twig': 1
+      }
+    }
+  },
+  cardboard_tube: {
+    id: 'cardboard_tube',
+    name: 'Cardboard Tube',
+    tier: 'common',
+    category: 'weapons',
+    description: 'From a roll of toilet paper. The ultimate "tube" or not tube question has been answered - it\'s both weapon and philosophical dilemma.',
+    value: 8,
+    usable: false,
+    source: 'Found',
+    breakChance: 0.12
+  },
+  rubber_chicken: {
+    id: 'rubber_chicken',
+    name: 'Rubber Chicken',
+    tier: 'common',
+    category: 'weapons',
+    description: 'Why did the chicken cross the battlefield? To rubber-stamp your defeat. The ultimate "fowl" play in combat.',
+    value: 18,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  whoopee_cushion: {
+    id: 'whoopee_cushion',
+    name: 'Whoopee Cushion',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The silent but deadly assassin. Fills enemies with doubt and flatulence. Perfect for psychological warfare.',
+    value: 22,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  banana_peel: {
+    id: 'banana_peel',
+    name: 'Banana Peel',
+    tier: 'common',
+    category: 'weapons',
+    description: 'Nature\'s slip \'n slide. For when you want your enemies to "peel" the pain. Warning: May cause uncontrollable laughter.',
+    value: 5,
+    usable: false,
+    source: 'Found',
+    breakChance: 0.2
+  },
+  joy_buzzer: {
+    id: 'joy_buzzer',
+    name: 'Joy Buzzer',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The shocking truth about handshakes. Delivers a "buzz" that\'ll make enemies jump for joy... or just jump.',
+    value: 28,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.03
+  },
+  fake_vomit: {
+    id: 'fake_vomit',
+    name: 'Fake Vomit',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The gross-out grenade. Makes enemies lose their lunch and their will to fight. Disgusting but effective.',
+    value: 15,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  rubber_band_gun: {
+    id: 'rubber_band_gun',
+    name: 'Rubber Band Gun',
+    tier: 'common',
+    category: 'weapons',
+    description: 'Pew pew! Office warfare has never been this "elastic." Shoots rubber bands with pinpoint "inaccuracy."',
+    value: 35,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.08,
+    craftable: true,
+    recipe: {
+      requiredItems: {
+        'rubber_band': 5,
+        'sharpened_stick': 1
+      }
+    }
+  },
+  paper_airplane: {
+    id: 'paper_airplane',
+    name: 'Paper Airplane',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The original drone strike. Flies with "paper" thin margins of error. Perfect for aerial "assaults."',
+    value: 10,
+    usable: false,
+    source: 'Found',
+    breakChance: 0.18
+  },
+  // Continue adding more common weapons...
+  squirt_gun: {
+    id: 'squirt_gun',
+    name: 'Squirt Gun',
+    tier: 'common',
+    category: 'weapons',
+    description: 'Water you waiting for? The ultimate "liquid" asset in any fight. Warning: Refills not included.',
+    value: 25,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.06
+  },
+  foam_finger: {
+    id: 'foam_finger',
+    name: 'Foam Finger',
+    tier: 'common',
+    category: 'weapons',
+    description: 'We\'re #1! The ultimate "point" weapon. Makes enemies feel inadequate about their finger game.',
+    value: 20,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  party_blower: {
+    id: 'party_blower',
+    name: 'Party Blower',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The loud and proud weapon. "Blows" enemies away with festive fury. Perfect for surprise attacks.',
+    value: 12,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.05
+  },
+  invisible_ink_pen: {
+    id: 'invisible_ink_pen',
+    name: 'Invisible Ink Pen',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The spy\'s best friend. Writes messages that "disappear" - just like your enemies\' chances of winning.',
+    value: 40,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.03
+  },
+  rubber_duck: {
+    id: 'rubber_duck',
+    name: 'Rubber Duck',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The squeaky clean killer. Makes bath time deadly. "Duck" and cover - this thing floats AND fights.',
+    value: 18,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  mood_ring: {
+    id: 'mood_ring',
+    name: 'Mood Ring',
+    tier: 'common',
+    category: 'weapons',
+    description: 'Changes color with your enemy\'s fear level. "Blue" means you\'re doing great. "Red" means run.',
+    value: 32,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  fidget_spinner: {
+    id: 'fidget_spinner',
+    name: 'Fidget Spinner',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The hypnotic weapon. Spins enemies into submission. Warning: May cause dizziness in user.',
+    value: 15,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.04
+  },
+  stress_ball: {
+    id: 'stress_ball',
+    name: 'Stress Ball',
+    tier: 'common',
+    category: 'weapons',
+    description: 'Squeeze out your aggression. The ultimate "ball" of stress relief. Your enemies will be "stressed" too.',
+    value: 22,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.03
+  },
+  bobblehead: {
+    id: 'bobblehead',
+    name: 'Bobblehead',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The nodding nemesis. Bobs and weaves better than any boxer. Always agrees to fight.',
+    value: 28,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  lava_lamp: {
+    id: 'lava_lamp',
+    name: 'Lava Lamp',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The groovy guardian. Bubbles with rage. Perfect for "lighting" up your enemies\' day.',
+    value: 45,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  disco_ball: {
+    id: 'disco_ball',
+    name: 'Disco Ball',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The party\'s over - for your enemies. Reflects light and bad decisions. Stayin\' alive just got harder.',
+    value: 38,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  magic_8_ball: {
+    id: 'magic_8_ball',
+    name: 'Magic 8 Ball',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The prophetic punisher. Always tells the future - "Outlook not so good" for your enemies.',
+    value: 35,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  snow_globe: {
+    id: 'snow_globe',
+    name: 'Snow Globe',
+    tier: 'common',
+    category: 'weapons',
+    description: 'Shake up the battlefield. Creates a winter wonderland of confusion. Enemies will be "snow" joke.',
+    value: 25,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.03
+  },
+  crystal_ball: {
+    id: 'crystal_ball',
+    name: 'Crystal Ball',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The fortune-telling fighter. Sees your enemies\' moves - and their future defeat. Cloudy with a chance of pain.',
+    value: 42,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  ouija_board: {
+    id: 'ouija_board',
+    name: 'Ouija Board',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The supernatural smasher. Summons spirits to spell out your enemies\' doom. "G-O-O-D-B-Y-E."',
+    value: 48,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  tarot_cards: {
+    id: 'tarot_cards',
+    name: 'Tarot Cards',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The mystical mauler. Draws the "Death" card for your enemies. The future looks grim.',
+    value: 30,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  voodoo_doll: {
+    id: 'voodoo_doll',
+    name: 'Voodoo Doll',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The pin-cushion punisher. Stick it to your enemies - literally. Warning: May backfire spectacularly.',
+    value: 52,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  dream_catcher_weapon: {
+    id: 'dream_catcher_weapon',
+    name: 'Dream Catcher',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The nightmare net. Catches enemies\' dreams and turns them into living nightmares.',
+    value: 35,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  zen_garden: {
+    id: 'zen_garden',
+    name: 'Zen Garden',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The tranquil terminator. Rakes enemies into submission. Find your inner peace - and their outer pain.',
+    value: 28,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  bonsai_tree: {
+    id: 'bonsai_tree',
+    name: 'Bonsai Tree',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The tiny titan. Small but mighty. Proves that good things come in small, angry packages.',
+    value: 40,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  lucky_bamboo: {
+    id: 'lucky_bamboo',
+    name: 'Lucky Bamboo',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The fortunate fighter. Brings good luck to you and bad luck to enemies. Bamboo-zled them!',
+    value: 22,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  wind_chimes: {
+    id: 'wind_chimes',
+    name: 'Wind Chimes',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The melodic maimer. Chimes in on battles with beautiful destruction. Music to your enemies\' ears - of defeat.',
+    value: 32,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  incense_burner: {
+    id: 'incense_burner',
+    name: 'Incense Burner',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The aromatic assassin. Smokes out enemies with calming scents. They\'ll be too relaxed to fight back.',
+    value: 25,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.03
+  },
+  prayer_beads: {
+    id: 'prayer_beads',
+    name: 'Prayer Beads',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The spiritual smiter. Prays for your enemies\' defeat. Holy moly, that\'s effective!',
+    value: 38,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  holy_water: {
+    id: 'holy_water',
+    name: 'Holy Water',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The blessed basher. Burns demons and blesses your victories. Holy hydration for the soul.',
+    value: 45,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  garlic_necklace: {
+    id: 'garlic_necklace',
+    name: 'Garlic Necklace',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The vampire vanquisher. Wards off bloodsuckers and bad breath. Two birds, one clove.',
+    value: 20,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  silver_cross: {
+    id: 'silver_cross',
+    name: 'Silver Cross',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The crucifix crusher. Holy hardware for heavenly hurt. Praise the lord and pass the ammunition.',
+    value: 55,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  bible: {
+    id: 'bible',
+    name: 'Holy Bible',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The good book of battle. Smite enemies with scripture. "Thou shalt not kill" doesn\'t apply to pixels.',
+    value: 48,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  koran: {
+    id: 'koran',
+    name: 'Holy Koran',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The sacred text of strength. Divine words for deadly deeds. Peace be upon your victories.',
+    value: 48,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  torah: {
+    id: 'torah',
+    name: 'Torah Scroll',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The ancient wisdom wielder. Scrolls of power for scholarly slaughter. Knowledge is power - literally.',
+    value: 48,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  buddha_statue: {
+    id: 'buddha_statue',
+    name: 'Buddha Statue',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The enlightened eliminator. Achieve nirvana through violence. The middle path to victory.',
+    value: 42,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  yin_yang_symbol: {
+    id: 'yin_yang_symbol',
+    name: 'Yin Yang Symbol',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The balanced bruiser. Perfect harmony in perfect destruction. Find your center - in combat.',
+    value: 35,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  peace_sign: {
+    id: 'peace_sign',
+    name: 'Peace Sign',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The ironic implement. Make peace with your enemies\' defeat. Give peace a chance - to win.',
+    value: 28,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  rainbow_flag: {
+    id: 'rainbow_flag',
+    name: 'Rainbow Flag',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The prideful pulverizer. Fight for equality - and your right to win. Love conquers all, including enemies.',
+    value: 38,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  anarchy_symbol: {
+    id: 'anarchy_symbol',
+    name: 'Anarchy Symbol',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The chaotic crusher. No rules, just right. Anarchist in the streets, winner in the game.',
+    value: 32,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  hammer_sickle: {
+    id: 'hammer_sickle',
+    name: 'Hammer & Sickle',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The communist crusher. Workers of the world, unite! And beat your enemies with farming tools.',
+    value: 45,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  swastika: {
+    id: 'swastika',
+    name: 'Ancient Symbol',
+    tier: 'common',
+    category: 'weapons',
+    description: 'A symbol of peace and prosperity from ancient cultures. Used for good luck and positive energy.',
+    value: 50,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  star_david: {
+    id: 'star_david',
+    name: 'Star of David',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The shield of protection. Divine geometry for deadly defense. Six points of pure power.',
+    value: 42,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  om_symbol: {
+    id: 'om_symbol',
+    name: 'Om Symbol',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The cosmic chanter. Vibrates with universal energy. Ommmm... your enemies into oblivion.',
+    value: 38,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.02
+  },
+  infinity_symbol: {
+    id: 'infinity_symbol',
+    name: 'Infinity Symbol',
+    tier: 'common',
+    category: 'weapons',
+    description: 'The endless eliminator. Infinite power for finite enemies. ∞ + you = victory.',
+    value: 48,
+    usable: false,
+    source: 'Shop',
+    breakChance: 0.01
   }
 }

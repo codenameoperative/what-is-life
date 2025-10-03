@@ -1,6 +1,8 @@
 import { useState, useEffect, useMemo, useRef, useCallback, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react'
 import Header from './Header'
 import UtilityBar from './UtilityBar'
+import LANPartyModal from './LANPartyModal'
+import UsernameModal from './UsernameModal/index'
 import Footer from './Footer'
 import CrimeActivity from '../activities/Crime'
 import WorkActivity from '../activities/Work'
@@ -14,8 +16,8 @@ import ExploreActivity from '../activities/Explore'
 import GardenActivity from '../activities/Garden'
 import Toaster from './Toaster/index'
 import { ErrorLogViewer } from './ErrorLogViewer'
-import LANPartyModal from './LANPartyModal'
-import UsernameModal from './UsernameModal/index'
+import MiniGamesSelector from './MiniGamesSelector'
+import MiniGames, { type MiniGameType } from './MiniGames'
 import { useGame } from '../contexts/GameContext'
 import { useMultiplayer } from '../contexts/MultiplayerContext'
 import { useNotify } from '../contexts/NotifyContext'
@@ -194,13 +196,16 @@ const blendColors = (colorA: string, colorB: string, ratio: number) => {
   return `rgba(${mix(r1, r2)}, ${mix(g1, g2)}, ${mix(b1, b2)}, ${mixAlpha(a1, a2)})`
 }
 
-function Game({ onBackToMenu }: { onBackToMenu?: () => void }) {
+function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: () => void }) {
   const { state, actions } = useGame()
   const { session, isHost, isConnected, players, serverIp, setServerIp, createSession, joinSession, leaveSession, toggleSessionLock } = useMultiplayer()
+  const { notify } = useNotify()
   const [activeActivity, setActiveActivity] = useState<string | null>(null)
   const [showUsernameModal, setShowUsernameModal] = useState(false)
   const [showMultiplayerMenu, setShowMultiplayerMenu] = useState(false)
   const [sessionIdInput, setSessionIdInput] = useState('')
+  const [showMiniGamesSelector, setShowMiniGamesSelector] = useState(false)
+  const [activeMiniGame, setActiveMiniGame] = useState<MiniGameType | null>(null)
   const [searchCooldown, setSearchCooldown] = useState<{isOnCooldown: boolean, timeLeft: number}>({
     isOnCooldown: false,
     timeLeft: 0
@@ -242,9 +247,24 @@ function Game({ onBackToMenu }: { onBackToMenu?: () => void }) {
     timeLeft: 0
   })
 
-  const { notify } = useNotify()
+  const handleOpenMiniGames = () => {
+    setShowMiniGamesSelector(true)
+  }
 
-  const shellRef = useRef<HTMLDivElement | null>(null)
+  const handleSelectMiniGame = (gameType: MiniGameType) => {
+    setShowMiniGamesSelector(false)
+    setActiveMiniGame(gameType)
+  }
+
+  const handleMiniGameComplete = (result: any) => {
+    setActiveMiniGame(null)
+    // Handle mini game results here
+    console.log('Mini game completed:', result)
+  }
+
+  const handleCloseMiniGame = () => {
+    setActiveMiniGame(null)
+  }
   const pointerRef = useRef<HTMLDivElement | null>(null)
   const pointerFrame = useRef<number | null>(null)
   const pointerTimeout = useRef<number | null>(null)
@@ -480,9 +500,41 @@ function Game({ onBackToMenu }: { onBackToMenu?: () => void }) {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
+        // Close active mini game first (highest priority)
+        if (activeMiniGame) {
+          setActiveMiniGame(null)
+          secretBufferRef.current = ''
+          return
+        }
+
+        // Close mini games selector
+        if (showMiniGamesSelector) {
+          setShowMiniGamesSelector(false)
+          secretBufferRef.current = ''
+          return
+        }
+
+        // Close active activity first (highest priority)
         if (activeActivity) {
           setActiveActivity(null)
+          secretBufferRef.current = ''
+          return
         }
+
+        // Close multiplayer menu
+        if (showMultiplayerMenu) {
+          setShowMultiplayerMenu(false)
+          secretBufferRef.current = ''
+          return
+        }
+
+        // Close username modal
+        if (showUsernameModal) {
+          setShowUsernameModal(false)
+          secretBufferRef.current = ''
+          return
+        }
+
         secretBufferRef.current = ''
         return
       }
@@ -507,7 +559,7 @@ function Game({ onBackToMenu }: { onBackToMenu?: () => void }) {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [activeActivity, retroModeActive, startActivity, toggleRetroMode])
+  }, [activeActivity, showMultiplayerMenu, showUsernameModal, retroModeActive, startActivity, toggleRetroMode])
 
 
   const renderActivity = () => {
@@ -633,7 +685,7 @@ function Game({ onBackToMenu }: { onBackToMenu?: () => void }) {
 
       <div className="shell-content">
         {/* Header */}
-        <Header retroModeActive={retroModeActive} onCheat={handleCheat} />
+        <Header retroModeActive={retroModeActive} onCheat={handleCheat} onLoad={onLoad} />
 
       {/* Multiplayer Menu */}
       {showMultiplayerMenu && (
@@ -741,7 +793,7 @@ function Game({ onBackToMenu }: { onBackToMenu?: () => void }) {
 
         {/* Utility Bar */}
         <section className="container-max mb-8">
-          <UtilityBar />
+          <UtilityBar onOpenMiniGames={handleOpenMiniGames} />
         </section>
 
         {/* Main Actions */}
@@ -813,6 +865,22 @@ function Game({ onBackToMenu }: { onBackToMenu?: () => void }) {
       {/* Notifications */}
       <Toaster />
 
+      {/* Mini Games Selector */}
+      {showMiniGamesSelector && (
+        <MiniGamesSelector
+          onSelectGame={handleSelectMiniGame}
+          onClose={() => setShowMiniGamesSelector(false)}
+        />
+      )}
+
+      {/* Active Mini Game */}
+      {activeMiniGame && (
+        <MiniGames
+          gameType={activeMiniGame}
+          onComplete={handleMiniGameComplete}
+        />
+      )}
+
       {/* Username Modal */}
       <UsernameModal
         open={showUsernameModal}
@@ -824,5 +892,3 @@ function Game({ onBackToMenu }: { onBackToMenu?: () => void }) {
     </div>
   )
 }
-
-export default Game

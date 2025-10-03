@@ -1,14 +1,28 @@
 import { useGame } from '../../contexts/GameContext'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ProfileButton from '../ProfileButton'
 import SettingsModal from '../SettingsModal'
 import { invoke } from '@tauri-apps/api/core'
 
-export default function Header({ retroModeActive, onCheat }: { retroModeActive?: boolean; onCheat?: () => void }) {
+export default function Header({ retroModeActive, onCheat, onLoad }: { retroModeActive?: boolean; onCheat?: () => void; onLoad?: () => void }) {
   const { state, actions } = useGame()
   const [showStashOnly, setShowStashOnly] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const toggleCounters = () => setShowStashOnly(v => !v)
+
+  // ESC key handler for settings modal
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && showSettings) {
+        setShowSettings(false)
+      }
+    }
+
+    if (showSettings) {
+      document.addEventListener('keydown', handleKeyDown)
+      return () => document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [showSettings])
 
   const handleSave = async () => {
     try {
@@ -18,11 +32,12 @@ export default function Header({ retroModeActive, onCheat }: { retroModeActive?:
     }
   }
 
-  const handleLoad = async () => {
-    try {
-      await actions.loadGameData()
-    } catch (error) {
-      console.error('Load failed:', error)
+  const handleLoad = () => {
+    if (onLoad) {
+      onLoad()
+    } else {
+      // Fallback to old behavior
+      actions.loadGameData()
     }
   }
 

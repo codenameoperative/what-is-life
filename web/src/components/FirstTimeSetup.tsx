@@ -17,6 +17,19 @@ export default function FirstTimeSetup({ onComplete }: FirstTimeSetupProps) {
     return () => clearTimeout(timer)
   }, [])
 
+  // ESC key handler - go back to save selector
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        // Go back to save selector (which will show the save manager again)
+        window.location.reload() // Simple way to restart the app flow
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
   const handleNext = () => {
     if (step === 'welcome') {
       setStep('username')

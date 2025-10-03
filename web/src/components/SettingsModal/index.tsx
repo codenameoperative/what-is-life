@@ -17,6 +17,20 @@ export default function SettingsModal({ open, onClose }: Props) {
     }
   }, [open, state.settings])
 
+  // ESC key handler
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && open) {
+        handleCancel()
+      }
+    }
+
+    if (open) {
+      document.addEventListener('keydown', handleKeyDown)
+      return () => document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [open])
+
   const handleSave = () => {
     actions.updateSettings(tempSettings)
     onClose()
@@ -115,6 +129,37 @@ export default function SettingsModal({ open, onClose }: Props) {
                   <option value="fast">Fast</option>
                 </select>
               </label>
+            </div>
+          </div>
+
+          {/* Save Management */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-red-400">Save Management</h3>
+
+            <div className="space-y-4">
+              <div className="glass p-4 rounded-lg border border-red-500/30">
+                <div className="text-sm font-medium text-red-400 mb-2">Delete Current Save</div>
+                <div className="text-xs text-muted mb-3">
+                  Permanently delete your current save data. This action cannot be undone.
+                </div>
+                <button
+                  onClick={() => {
+                    if (confirm('Are you sure you want to delete your current save? This action cannot be undone.')) {
+                      // Clear all game data from localStorage
+                      Object.keys(localStorage).forEach(key => {
+                        if (key.startsWith('game_save_') || key.startsWith('save-slot-')) {
+                          localStorage.removeItem(key)
+                        }
+                      })
+                      // Reset game state
+                      window.location.reload()
+                    }
+                  }}
+                  className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors"
+                >
+                  Delete Save
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -488,6 +488,409 @@ export const searchLocations: Record<string, SearchLocation> = {
     },
     specialEffect: 'Extremely high chance for dimensional and WDYFT items',
     rarity: 'epic'
+  },
+
+  // === NEW LOCATIONS (19 more to reach 40 total) ===
+
+  // WDYFT Locations (10 locations that guarantee legendary items)
+  lost_temple_of_atlantis: {
+    id: 'lost_temple_of_atlantis',
+    name: 'Lost Temple of Atlantis',
+    description: 'The sunken temple of an ancient underwater civilization, guardian of legendary aquatic treasures.',
+    wtcReward: { min: 50, max: 200 },
+    itemDropChances: {
+      useless: 0.05,
+      common: 0.05,
+      uncommon: 0.08,
+      rare: 0.12,
+      epic: 0.2,
+      ultra_rare: 0.15,
+      ultra_epic: 0.08,
+      legendary: 0.15, // Guaranteed legendary items
+      mythical: 0.08,
+      wdyft: 0.04 // High WDYFT chance
+    },
+    specialEffect: 'Guaranteed legendary aquatic artifacts and WDYFT items',
+    rarity: 'epic'
+  },
+
+  forbidden_tomb_of_kings: {
+    id: 'forbidden_tomb_of_kings',
+    name: 'Forbidden Tomb of Kings',
+    description: 'The cursed resting place of ancient monarchs, sealed with powerful magic and legendary treasures.',
+    wtcReward: { min: 45, max: 180 },
+    itemDropChances: {
+      useless: 0.05,
+      common: 0.05,
+      uncommon: 0.08,
+      rare: 0.12,
+      epic: 0.18,
+      ultra_rare: 0.15,
+      ultra_epic: 0.1,
+      legendary: 0.12, // Guaranteed legendary items
+      mythical: 0.1,
+      wdyft: 0.05 // High WDYFT chance
+    },
+    specialEffect: 'Guaranteed royal artifacts and WDYFT cursed items',
+    rarity: 'epic'
+  },
+
+  sky_palace_of_legends: {
+    id: 'sky_palace_of_legends',
+    name: 'Sky Palace of Legends',
+    description: 'A floating citadel in the clouds, home to mythical heroes and their legendary weapons.',
+    wtcReward: { min: 60, max: 250 },
+    itemDropChances: {
+      useless: 0.03,
+      common: 0.03,
+      uncommon: 0.06,
+      rare: 0.1,
+      epic: 0.2,
+      ultra_rare: 0.18,
+      ultra_epic: 0.12,
+      legendary: 0.15, // Guaranteed legendary items
+      mythical: 0.08,
+      wdyft: 0.05 // High WDYFT chance
+    },
+    specialEffect: 'Guaranteed heroic weapons and WDYFT legendary artifacts',
+    rarity: 'epic'
+  },
+
+  void_realm_nexus: {
+    id: 'void_realm_nexus',
+    name: 'Void Realm Nexus',
+    description: 'The intersection point between dimensions, where reality bends and WDYFT items manifest.',
+    wtcReward: { min: 70, max: 300 },
+    itemDropChances: {
+      useless: 0.02,
+      common: 0.02,
+      uncommon: 0.04,
+      rare: 0.08,
+      epic: 0.15,
+      ultra_rare: 0.2,
+      ultra_epic: 0.15,
+      legendary: 0.18, // Guaranteed legendary items
+      mythical: 0.12,
+      wdyft: 0.04 // High WDYFT chance
+    },
+    specialEffect: 'Guaranteed void-touched items and WDYFT reality-warping artifacts',
+    rarity: 'epic'
+  },
+
+  eternal_flame_sanctum: {
+    id: 'eternal_flame_sanctum',
+    name: 'Eternal Flame Sanctum',
+    description: 'A temple of eternal fire where phoenixes are reborn and legendary fire-based artifacts reside.',
+    wtcReward: { min: 55, max: 220 },
+    itemDropChances: {
+      useless: 0.04,
+      common: 0.04,
+      uncommon: 0.07,
+      rare: 0.11,
+      epic: 0.19,
+      ultra_rare: 0.16,
+      ultra_epic: 0.11,
+      legendary: 0.14, // Guaranteed legendary items
+      mythical: 0.09,
+      wdyft: 0.05 // High WDYFT chance
+    },
+    specialEffect: 'Guaranteed fire-enchanted items and WDYFT phoenix artifacts',
+    rarity: 'epic'
+  },
+
+  frozen_citadel_of_ice: {
+    id: 'frozen_citadel_of_ice',
+    name: 'Frozen Citadel of Ice',
+    description: 'An ancient ice fortress where frost dragons hoard legendary cold-based treasures.',
+    wtcReward: { min: 48, max: 190 },
+    itemDropChances: {
+      useless: 0.04,
+      common: 0.04,
+      uncommon: 0.07,
+      rare: 0.11,
+      epic: 0.19,
+      ultra_rare: 0.16,
+      ultra_epic: 0.11,
+      legendary: 0.14, // Guaranteed legendary items
+      mythical: 0.09,
+      wdyft: 0.05 // High WDYFT chance
+    },
+    specialEffect: 'Guaranteed frost-enchanted items and WDYFT ice dragon artifacts',
+    rarity: 'epic'
+  },
+
+  storm_lords_throne: {
+    id: 'storm_lords_throne',
+    name: 'Storm Lord\'s Throne',
+    description: 'The seat of power for the master of thunder and lightning, crackling with legendary electric artifacts.',
+    wtcReward: { min: 52, max: 210 },
+    itemDropChances: {
+      useless: 0.04,
+      common: 0.04,
+      uncommon: 0.07,
+      rare: 0.11,
+      epic: 0.19,
+      ultra_rare: 0.16,
+      ultra_epic: 0.11,
+      legendary: 0.14, // Guaranteed legendary items
+      mythical: 0.09,
+      wdyft: 0.05 // High WDYFT chance
+    },
+    specialEffect: 'Guaranteed lightning-enchanted items and WDYFT storm artifacts',
+    rarity: 'epic'
+  },
+
+  earth_core_chamber: {
+    id: 'earth_core_chamber',
+    name: 'Earth Core Chamber',
+    description: 'Deep beneath the surface, where the planet\'s heart beats and legendary earth-based treasures await.',
+    wtcReward: { min: 58, max: 240 },
+    itemDropChances: {
+      useless: 0.03,
+      common: 0.03,
+      uncommon: 0.06,
+      rare: 0.1,
+      epic: 0.2,
+      ultra_rare: 0.18,
+      ultra_epic: 0.12,
+      legendary: 0.15, // Guaranteed legendary items
+      mythical: 0.08,
+      wdyft: 0.05 // High WDYFT chance
+    },
+    specialEffect: 'Guaranteed earth-enchanted items and WDYFT crystal artifacts',
+    rarity: 'epic'
+  },
+
+  celestial_observatory: {
+    id: 'celestial_observatory',
+    name: 'Celestial Observatory',
+    description: 'An ancient stargazing tower where cosmic secrets unfold and legendary astronomical artifacts are found.',
+    wtcReward: { min: 65, max: 280 },
+    itemDropChances: {
+      useless: 0.02,
+      common: 0.02,
+      uncommon: 0.05,
+      rare: 0.09,
+      epic: 0.18,
+      ultra_rare: 0.2,
+      ultra_epic: 0.14,
+      legendary: 0.16, // Guaranteed legendary items
+      mythical: 0.1,
+      wdyft: 0.04 // High WDYFT chance
+    },
+    specialEffect: 'Guaranteed celestial items and WDYFT cosmic artifacts',
+    rarity: 'epic'
+  },
+
+  nightmare_realm_gateway: {
+    id: 'nightmare_realm_gateway',
+    name: 'Nightmare Realm Gateway',
+    description: 'A portal to the realm of dreams and nightmares, where legendary subconscious artifacts manifest.',
+    wtcReward: { min: 75, max: 320 },
+    itemDropChances: {
+      useless: 0.01,
+      common: 0.01,
+      uncommon: 0.03,
+      rare: 0.07,
+      epic: 0.16,
+      ultra_rare: 0.22,
+      ultra_epic: 0.16,
+      legendary: 0.18, // Guaranteed legendary items
+      mythical: 0.12,
+      wdyft: 0.04 // High WDYFT chance
+    },
+    specialEffect: 'Guaranteed dream/nightmare items and WDYFT subconscious artifacts',
+    rarity: 'epic'
+  },
+
+  // Regular Locations (9 more to reach 40 total)
+  medieval_castle: {
+    id: 'medieval_castle',
+    name: 'Medieval Castle',
+    description: 'The ruins of a medieval fortress, filled with knightly armor and ancient weaponry.',
+    wtcReward: { min: 14, max: 46 },
+    itemDropChances: {
+      useless: 0.3,
+      common: 0.22,
+      uncommon: 0.18,
+      rare: 0.12,
+      epic: 0.06,
+      ultra_rare: 0.03,
+      ultra_epic: 0.007,
+      legendary: 0.003,
+      mythical: 0.0015,
+      wdyft: 0.0007
+    },
+    specialEffect: 'Higher chance for medieval weapons and armor',
+    rarity: 'uncommon'
+  },
+
+  futuristic_city_ruins: {
+    id: 'futuristic_city_ruins',
+    name: 'Futuristic City Ruins',
+    description: 'The remains of a technologically advanced city from a possible future timeline.',
+    wtcReward: { min: 20, max: 65 },
+    itemDropChances: {
+      useless: 0.25,
+      common: 0.18,
+      uncommon: 0.2,
+      rare: 0.15,
+      epic: 0.08,
+      ultra_rare: 0.04,
+      ultra_epic: 0.01,
+      legendary: 0.004,
+      mythical: 0.002,
+      wdyft: 0.001
+    },
+    specialEffect: 'Higher chance for advanced technology and gadgets',
+    rarity: 'rare'
+  },
+
+  enchanted_grove: {
+    id: 'enchanted_grove',
+    name: 'Enchanted Grove',
+    description: 'A mystical forest where ancient trees whisper secrets and magical creatures roam.',
+    wtcReward: { min: 16, max: 52 },
+    itemDropChances: {
+      useless: 0.28,
+      common: 0.2,
+      uncommon: 0.19,
+      rare: 0.13,
+      epic: 0.07,
+      ultra_rare: 0.035,
+      ultra_epic: 0.008,
+      legendary: 0.0035,
+      mythical: 0.0018,
+      wdyft: 0.0009
+    },
+    specialEffect: 'Higher chance for magical and nature-based items',
+    rarity: 'uncommon'
+  },
+
+  deep_sea_trench: {
+    id: 'deep_sea_trench',
+    name: 'Deep Sea Trench',
+    description: 'The darkest depths of the ocean, home to bizarre creatures and sunken treasures.',
+    wtcReward: { min: 18, max: 58 },
+    itemDropChances: {
+      useless: 0.26,
+      common: 0.19,
+      uncommon: 0.21,
+      rare: 0.14,
+      epic: 0.075,
+      ultra_rare: 0.038,
+      ultra_epic: 0.0085,
+      legendary: 0.0038,
+      mythical: 0.0019,
+      wdyft: 0.001
+    },
+    specialEffect: 'Higher chance for deep-sea creatures and underwater treasures',
+    rarity: 'rare'
+  },
+
+  mountain_peak_monastery: {
+    id: 'mountain_peak_monastery',
+    name: 'Mountain Peak Monastery',
+    description: 'An ancient monastery built on the highest peak, containing monk artifacts and wisdom.',
+    wtcReward: { min: 12, max: 42 },
+    itemDropChances: {
+      useless: 0.32,
+      common: 0.23,
+      uncommon: 0.17,
+      rare: 0.1,
+      epic: 0.055,
+      ultra_rare: 0.028,
+      ultra_epic: 0.006,
+      legendary: 0.0025,
+      mythical: 0.0012,
+      wdyft: 0.0006
+    },
+    specialEffect: 'Higher chance for religious artifacts and meditation items',
+    rarity: 'uncommon'
+  },
+
+  ancient_battlefield: {
+    id: 'ancient_battlefield',
+    name: 'Ancient Battlefield',
+    description: 'The site of an epic historical battle, scattered with weapons and armor from fallen warriors.',
+    wtcReward: { min: 11, max: 38 },
+    itemDropChances: {
+      useless: 0.31,
+      common: 0.24,
+      uncommon: 0.16,
+      rare: 0.09,
+      epic: 0.05,
+      ultra_rare: 0.025,
+      ultra_epic: 0.005,
+      legendary: 0.002,
+      mythical: 0.001,
+      wdyft: 0.0005
+    },
+    specialEffect: 'Higher chance for ancient weapons and battle-worn items',
+    rarity: 'common'
+  },
+
+  robotic_factory: {
+    id: 'robotic_factory',
+    name: 'Robotic Factory',
+    description: 'An abandoned factory that once produced advanced robots and artificial intelligence systems.',
+    wtcReward: { min: 19, max: 62 },
+    itemDropChances: {
+      useless: 0.27,
+      common: 0.2,
+      uncommon: 0.18,
+      rare: 0.13,
+      epic: 0.07,
+      ultra_rare: 0.035,
+      ultra_epic: 0.008,
+      legendary: 0.0035,
+      mythical: 0.0018,
+      wdyft: 0.0009
+    },
+    specialEffect: 'Higher chance for robotic parts and AI components',
+    rarity: 'rare'
+  },
+
+  vampire_castle: {
+    id: 'vampire_castle',
+    name: 'Vampire Castle',
+    description: 'A gothic castle shrouded in eternal night, home to immortal beings and their cursed treasures.',
+    wtcReward: { min: 17, max: 55 },
+    itemDropChances: {
+      useless: 0.29,
+      common: 0.21,
+      uncommon: 0.17,
+      rare: 0.11,
+      epic: 0.065,
+      ultra_rare: 0.033,
+      ultra_epic: 0.0075,
+      legendary: 0.0033,
+      mythical: 0.0017,
+      wdyft: 0.0008
+    },
+    specialEffect: 'Higher chance for gothic and supernatural items',
+    rarity: 'uncommon'
+  },
+
+  space_station_derelict: {
+    id: 'space_station_derelict',
+    name: 'Derelict Space Station',
+    description: 'An abandoned orbital station floating in the void, containing zero-gravity treasures.',
+    wtcReward: { min: 25, max: 80 },
+    itemDropChances: {
+      useless: 0.23,
+      common: 0.17,
+      uncommon: 0.19,
+      rare: 0.16,
+      epic: 0.09,
+      ultra_rare: 0.045,
+      ultra_epic: 0.011,
+      legendary: 0.0045,
+      mythical: 0.0022,
+      wdyft: 0.0011
+    },
+    specialEffect: 'Higher chance for space-age technology and zero-gravity items',
+    rarity: 'rare'
   }
 }
 

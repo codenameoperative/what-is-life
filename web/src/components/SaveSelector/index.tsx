@@ -22,6 +22,24 @@ export default function SaveSelector({ onSelectSave, onCreateSave, onDeleteSave 
     loadSaveSlots()
   }, [])
 
+  // ESC key handler
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        // If delete confirmation is open, close it first
+        if (showDeleteConfirm) {
+          setShowDeleteConfirm(null)
+          return
+        }
+        // Otherwise, create a new save (go back to first time setup)
+        onCreateSave()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [showDeleteConfirm, onCreateSave])
+
   const loadSaveSlots = () => {
     const slots: SaveSlot[] = []
     for (let i = 1; i <= 5; i++) {

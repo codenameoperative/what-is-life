@@ -195,8 +195,8 @@ export default function LoadingScreen({ onComplete }: Props) {
         setCurrentFile('✅ All systems loaded successfully!')
       }
 
-      // Complete loading after a brief delay
-      setTimeout(onComplete, 1000)
+      // Complete loading after 5 seconds so players can read the loading messages
+      setTimeout(onComplete, 5000)
     }
 
     loadFilesSequentially()
