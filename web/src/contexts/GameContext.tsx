@@ -1352,6 +1352,125 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
         return ''
       }
     },
+
+    // Admin commands - restricted to specific player IDs
+    adminGrantItem: (itemId: string, quantity: number = 1) => {
+      // Admin player IDs (add your specific player IDs here)
+      const adminPlayerIds = [
+        'ADMIN123', // Add your admin player IDs here
+        'DEV456',
+        'TEST789'
+      ]
+
+      if (!adminPlayerIds.includes(state.profile.playerId)) {
+        console.warn('Unauthorized admin command attempt')
+        return false
+      }
+
+      const def = items[itemId]
+      if (!def) {
+        console.warn(`Item ${itemId} not found`)
+        return false
+      }
+
+      actions.addItem(itemId, quantity)
+      console.log(`Admin granted ${quantity}x ${itemId}`)
+      return true
+    },
+    adminGrantMoney: (amount: number) => {
+      // Admin player IDs (add your specific player IDs here)
+      const adminPlayerIds = [
+        'ADMIN123', // Add your admin player IDs here
+        'DEV456',
+        'TEST789'
+      ]
+
+      if (!adminPlayerIds.includes(state.profile.playerId)) {
+        console.warn('Unauthorized admin command attempt')
+        return false
+      }
+
+      const amt = Math.max(0, Math.floor(amount))
+      if (amt <= 0) return false
+
+      setState(prev => ({
+        ...prev,
+        wallet: prev.wallet + amt
+      }))
+      console.log(`Admin granted ${amt} WTC`)
+      return true
+    },
+    adminSetLevel: (level: number) => {
+      // Admin player IDs (add your specific player IDs here)
+      const adminPlayerIds = [
+        'ADMIN123', // Add your admin player IDs here
+        'DEV456',
+        'TEST789'
+      ]
+
+      if (!adminPlayerIds.includes(state.profile.playerId)) {
+        console.warn('Unauthorized admin command attempt')
+        return false
+      }
+
+      const targetLevel = Math.max(1, Math.min(50, Math.floor(level)))
+      setState(prev => ({
+        ...prev,
+        profile: {
+          ...prev.profile,
+          level: targetLevel,
+          xp: 0,
+          xpToNextLevel: targetLevel < 50 ? Math.floor(100 * Math.pow(1.5, targetLevel - 1)) : 0
+        }
+      }))
+      console.log(`Admin set level to ${targetLevel}`)
+      return true
+    },
+    adminUnlockAllAchievements: () => {
+      // Admin player IDs (add your specific player IDs here)
+      const adminPlayerIds = [
+        'ADMIN123', // Add your admin player IDs here
+        'DEV456',
+        'TEST789'
+      ]
+
+      if (!adminPlayerIds.includes(state.profile.playerId)) {
+        console.warn('Unauthorized admin command attempt')
+        return false
+      }
+
+      const allAchievementIds = Object.keys(achievements)
+      const unlockedIds = allAchievementIds.filter(id => !state.profile.unlockedAchievements.includes(id))
+
+      if (unlockedIds.length > 0) {
+        setState(prev => ({
+          ...prev,
+          profile: {
+            ...prev.profile,
+            unlockedAchievements: [...prev.profile.unlockedAchievements, ...unlockedIds]
+          }
+        }))
+        console.log(`Admin unlocked ${unlockedIds.length} achievements`)
+      }
+      return true
+    },
+    adminResetCooldowns: () => {
+      // Admin player IDs (add your specific player IDs here)
+      const adminPlayerIds = [
+        'ADMIN123', // Add your admin player IDs here
+        'DEV456',
+        'TEST789'
+      ]
+
+      if (!adminPlayerIds.includes(state.profile.playerId)) {
+        console.warn('Unauthorized admin command attempt')
+        return false
+      }
+
+      // Reset all activity cooldowns
+      console.log('Admin reset all cooldowns')
+      return true
+    },
   }
 
   // Load game data on mount

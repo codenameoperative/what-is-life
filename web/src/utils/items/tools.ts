@@ -356,6 +356,182 @@ export const toolsItems: Record<string, Item> = {
     breakChance: 0.0001
   },
 
+  // Job-specific tools and equipment
+  basic_toolkit: {
+    id: 'basic_toolkit',
+    name: 'Basic Toolkit',
+    tier: 'common',
+    category: 'tools',
+    description: 'Essential tools for basic repairs and maintenance. Contains screwdriver, pliers, and wrenches.',
+    value: 75,
+    usable: true,
+    source: 'Shop',
+    breakChance: 0.02,
+    craftable: true,
+    recipe: {
+      requiredItems: {
+        'screwdriver': 1,
+        'pliers': 1,
+        'wrench': 1,
+        'hammer': 1
+      }
+    }
+  },
+  knife_set: {
+    id: 'knife_set',
+    name: 'Professional Knife Set',
+    tier: 'uncommon',
+    category: 'tools',
+    description: 'High-quality chef knives for food preparation. Essential for culinary professionals.',
+    value: 150,
+    usable: true,
+    source: 'Shop',
+    breakChance: 0.005,
+    boost: {
+      type: 'work',
+      multiplier: 1.2,
+      uses: 50
+    }
+  },
+  hard_hat: {
+    id: 'hard_hat',
+    name: 'Construction Hard Hat',
+    tier: 'common',
+    category: 'tools',
+    description: 'Safety helmet for construction sites. Protects against falling objects.',
+    value: 45,
+    usable: true,
+    source: 'Shop',
+    breakChance: 0.01
+  },
+  electrical_kit: {
+    id: 'electrical_kit',
+    name: 'Electrical Repair Kit',
+    tier: 'uncommon',
+    category: 'tools',
+    description: 'Tools for electrical work including multimeter, wire cutters, and electrical tape.',
+    value: 200,
+    usable: true,
+    source: 'Shop',
+    breakChance: 0.015,
+    boost: {
+      type: 'work',
+      multiplier: 1.25,
+      uses: 30
+    }
+  },
+  plumbing_tools: {
+    id: 'plumbing_tools',
+    name: 'Plumbing Tool Set',
+    tier: 'uncommon',
+    category: 'tools',
+    description: 'Specialized tools for plumbing work including pipe wrenches and drain snakes.',
+    value: 180,
+    usable: true,
+    source: 'Shop',
+    breakChance: 0.02,
+    boost: {
+      type: 'work',
+      multiplier: 1.3,
+      uses: 25
+    }
+  },
+  welding_equipment: {
+    id: 'welding_equipment',
+    name: 'Welding Equipment',
+    tier: 'rare',
+    category: 'tools',
+    description: 'Professional welding gear including helmet, gloves, and welding machine.',
+    value: 350,
+    usable: true,
+    source: 'Shop',
+    breakChance: 0.008,
+    boost: {
+      type: 'work',
+      multiplier: 1.4,
+      uses: 20
+    }
+  },
+  medical_license: {
+    id: 'medical_license',
+    name: 'Medical License',
+    tier: 'rare',
+    category: 'tools',
+    description: 'Official certification allowing medical practice and pharmacy work.',
+    value: 500,
+    usable: false,
+    source: 'Achievement',
+    breakChance: 0
+  },
+  cdl_license: {
+    id: 'cdl_license',
+    name: 'Commercial Driver\'s License',
+    tier: 'rare',
+    category: 'tools',
+    description: 'License required for operating commercial vehicles and trucks.',
+    value: 300,
+    usable: false,
+    source: 'Achievement',
+    breakChance: 0
+  },
+
+  // Professional certifications and degrees
+  medical_degree: {
+    id: 'medical_degree',
+    name: 'Medical Degree (MD)',
+    tier: 'epic',
+    category: 'tools',
+    description: 'Advanced medical degree allowing surgical practice and high-level healthcare.',
+    value: 2000,
+    usable: false,
+    source: 'Achievement',
+    breakChance: 0
+  },
+  law_degree: {
+    id: 'law_degree',
+    name: 'Law Degree (JD)',
+    tier: 'epic',
+    category: 'tools',
+    description: 'Juris Doctor degree for legal practice and courtroom representation.',
+    value: 1800,
+    usable: false,
+    source: 'Achievement',
+    breakChance: 0
+  },
+  computer_science_degree: {
+    id: 'computer_science_degree',
+    name: 'Computer Science Degree',
+    tier: 'epic',
+    category: 'tools',
+    description: 'Bachelor\'s degree in computer science for software development roles.',
+    value: 1500,
+    usable: false,
+    source: 'Achievement',
+    breakChance: 0
+  },
+  finance_degree: {
+    id: 'finance_degree',
+    name: 'Finance Degree',
+    tier: 'epic',
+    category: 'tools',
+    description: 'Degree in finance for investment banking and financial management.',
+    value: 2200,
+    usable: false,
+    source: 'Achievement',
+    breakChance: 0
+  },
+  architecture_degree: {
+    id: 'architecture_degree',
+    name: 'Architecture Degree',
+    tier: 'epic',
+    category: 'tools',
+    description: 'Professional degree in architecture for building design and construction oversight.',
+    value: 1600,
+    usable: false,
+    source: 'Achievement',
+    breakChance: 0
+  },
+
   // Additional WDYFT Tools
   codename_operative_toolkit: {
     id: 'codename_operative_toolkit',
