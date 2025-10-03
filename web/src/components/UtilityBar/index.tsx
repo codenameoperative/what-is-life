@@ -7,6 +7,7 @@ import ShopModal from '../ShopModal'
 import JobModal from '../JobModal'
 import CraftModal from '../CraftModal'
 import AdminCommandsModal from '../AdminCommandsModal'
+import UpdateModal from '../UpdateModal'
 import { useGame } from '../../contexts/GameContext'
 
 interface UtilityBarProps {
@@ -25,6 +26,7 @@ export default function UtilityBar({ onOpenMiniGames }: UtilityBarProps) {
   const [showJob, setShowJob] = useState(false)
   const [showCraft, setShowCraft] = useState(false)
   const [showAdminCommands, setShowAdminCommands] = useState(false)
+  const [showUpdateModal, setShowUpdateModal] = useState(false)
 
   // Admin player IDs
   const adminPlayerIds = ['ADMIN123', 'DEV456', 'TEST789']
@@ -47,12 +49,14 @@ export default function UtilityBar({ onOpenMiniGames }: UtilityBarProps) {
       setShowCraft(true)
     } else if (label === 'Commands') {
       setShowAdminCommands(true)
+    } else if (label === 'Updates') {
+      setShowUpdateModal(true)
     } else if (label === 'Mini Games' && onOpenMiniGames) {
       onOpenMiniGames()
     }
   }
 
-  // Build utility items list, adding Commands for admins
+  // Build utility items list, adding Commands for admins and Updates for all users
   const utilityItems = [
     'ItemSearch',
     'Deposit/Withdraw',
@@ -61,11 +65,12 @@ export default function UtilityBar({ onOpenMiniGames }: UtilityBarProps) {
     'Shop',
     'Job',
     'Craft',
+    'Updates',
     'Mini Games'
   ]
 
   if (isAdmin) {
-    utilityItems.splice(utilityItems.indexOf('Craft'), 0, 'Commands')
+    utilityItems.splice(utilityItems.indexOf('Updates'), 0, 'Commands')
   }
 
   return (
@@ -79,7 +84,8 @@ export default function UtilityBar({ onOpenMiniGames }: UtilityBarProps) {
                   type="button"
                   onClick={() => handleUtilityClick(label)}
                   className={`px-3 py-1.5 text-xs sm:text-sm rounded-lg glass hover:glass-strong border border-border text-primary hover:text-accent transition-all duration-200 hover:scale-105 cursor-pointer select-none whitespace-nowrap ${
-                    label === 'Commands' ? 'bg-yellow-500/20 border-yellow-500/50 text-yellow-400' : ''
+                    label === 'Commands' ? 'bg-yellow-500/20 border-yellow-500/50 text-yellow-400' :
+                    label === 'Updates' ? 'bg-blue-500/20 border-blue-500/50 text-blue-400' : ''
                   }`}
                   aria-label={`${label}`}
                 >
@@ -98,6 +104,7 @@ export default function UtilityBar({ onOpenMiniGames }: UtilityBarProps) {
       <JobModal open={showJob} onClose={() => setShowJob(false)} />
       <CraftModal open={showCraft} onClose={() => setShowCraft(false)} />
       <AdminCommandsModal open={showAdminCommands} onClose={() => setShowAdminCommands(false)} />
+      <UpdateModal open={showUpdateModal} onClose={() => setShowUpdateModal(false)} />
     </div>
   )
 }

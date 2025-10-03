@@ -18,9 +18,7 @@ import Toaster from './Toaster/index'
 import { ErrorLogViewer } from './ErrorLogViewer'
 import MiniGamesSelector from './MiniGamesSelector'
 import MiniGames, { type MiniGameType } from './MiniGames'
-import { useGame } from '../contexts/GameContext'
-import { useMultiplayer } from '../contexts/MultiplayerContext'
-import { useNotify } from '../contexts/NotifyContext'
+import UpdateModal from './UpdateModal'
 
 const ACTIVITY_LIST = ['Search', 'Crime', 'Work', 'Hunt', 'Fish', 'Dig', 'Post', 'Stream', 'Explore', 'Garden'] as const
 type ActivityName = typeof ACTIVITY_LIST[number]
@@ -205,7 +203,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
   const [showMultiplayerMenu, setShowMultiplayerMenu] = useState(false)
   const [sessionIdInput, setSessionIdInput] = useState('')
   const [showMiniGamesSelector, setShowMiniGamesSelector] = useState(false)
-  const [activeMiniGame, setActiveMiniGame] = useState<MiniGameType | null>(null)
+  const [showUpdateModal, setShowUpdateModal] = useState(false)
   const [searchCooldown, setSearchCooldown] = useState<{isOnCooldown: boolean, timeLeft: number}>({
     isOnCooldown: false,
     timeLeft: 0
@@ -532,6 +530,13 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
         // Close username modal
         if (showUsernameModal) {
           setShowUsernameModal(false)
+          secretBufferRef.current = ''
+          return
+        }
+
+        // Open update modal (Ctrl+U)
+        if (event.ctrlKey && event.key === 'u') {
+          setShowUpdateModal(true)
           secretBufferRef.current = ''
           return
         }
@@ -882,6 +887,12 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
           onComplete={handleMiniGameComplete}
         />
       )}
+
+      {/* Update Modal */}
+      <UpdateModal
+        open={showUpdateModal}
+        onClose={() => setShowUpdateModal(false)}
+      />
 
       {/* Username Modal */}
       <UsernameModal

@@ -69,7 +69,12 @@
       "csp": null
     },
     "updater": {
-      "active": false
+      "active": true,
+      "endpoints": [
+        "https://api.github.com/repos/codenameoperative/what-is-life/releases/latest"
+      ],
+      "dialog": true,
+      "pubkey": ""
     },
     "windows": [
       {

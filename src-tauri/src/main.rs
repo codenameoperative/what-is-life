@@ -1,10 +1,9 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use rusqlite::Connection;
-use tauri::{command, AppHandle};
+use tauri::Manager;
+use std::path::PathBuf;
 use std::fs;
-use local_ip_address::local_ip;
 
 #[command]
 fn save_game(app_handle: AppHandle, data: String, player_id: String) -> Result<(), String> {
@@ -209,7 +208,67 @@ fn get_ban_reason(app_handle: AppHandle, player_id: String) -> Result<String, St
     Ok(reason.to_string())
 }
 
-fn main() {
+#[command]
+async fn check_for_updates() -> Result<String, String> {
+    // For now, return current version - in a real implementation,
+    // this would check against a remote server
+    Ok(env!("CARGO_PKG_VERSION").to_string())
+}
+
+#[command]
+async fn download_update(app_handle: AppHandle, version: String) -> Result<String, String> {
+    // This would download the update in a real implementation
+    // For now, we'll simulate the process
+    let app_dir = app_handle
+        .path_resolver()
+        .app_data_dir()
+        .ok_or("Failed to get app data directory")?;
+
+    // Create update directory
+    let update_dir = app_dir.join("updates");
+    fs::create_dir_all(&update_dir).map_err(|e| format!("Failed to create update directory: {}", e))?;
+
+    // Simulate download (in real implementation, this would download from GitHub releases)
+    let update_file = update_dir.join(format!("update_{}.zip", version));
+    fs::write(&update_file, "simulated_update_data").map_err(|e| format!("Failed to write update file: {}", e))?;
+
+    Ok(update_file.to_string_lossy().to_string())
+}
+
+#[command]
+async fn install_update(app_handle: AppHandle, update_path: String) -> Result<bool, String> {
+    // In a real implementation, this would:
+    // 1. Backup current save data
+    // 2. Extract and install the update
+    // 3. Restore save data
+    // 4. Restart the application
+
+    let app_dir = app_handle
+        .path_resolver()
+        .app_data_dir()
+        .ok_or("Failed to get app data directory")?;
+
+    // Backup save data
+    let saves_dir = app_dir.join("saves");
+    let backup_dir = app_dir.join("backup");
+    if saves_dir.exists() {
+        fs::create_dir_all(&backup_dir).map_err(|e| format!("Failed to create backup directory: {}", e))?;
+        // In a real implementation, copy all save files
+        // For now, we'll just mark that backup was attempted
+    }
+
+    // Simulate installation (in real implementation, this would extract and replace files)
+    println!("Installing update from: {}", update_path);
+
+    // In a real implementation, this would restart the app
+    // For now, we'll just return success
+    Ok(true)
+}
+
+#[command]
+fn get_current_version() -> Result<String, String> {
+    Ok(env!("CARGO_PKG_VERSION").to_string())
+}
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![
         save_game,
@@ -218,7 +277,11 @@ fn main() {
         ban_player,
         is_player_banned,
         get_ban_reason,
-        get_local_ip
+        get_local_ip,
+        check_for_updates,
+        download_update,
+        install_update,
+        get_current_version
     ])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
