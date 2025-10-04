@@ -1377,6 +1377,13 @@ export const weaponsItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'weapons',
     description: 'A special weapon from the codenameoperative item line "I\'ll operative your special!" The creator\'s ultimate creation.',
+    value: 10000,
+    usable: false,
+    source: 'WDYFT',
+    breakChance: 0.0,
+    icon: '🗡️'
+  },
+
   // NEW WEAPONS - Enhanced Arsenal
 
   // Uncommon Weapons
@@ -1402,7 +1409,7 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'Shop',
     breakChance: 0.02,
-    icon: '🏹'
+    icon: '🕳️'
   },
   tactical_knife: {
     id: 'tactical_knife',
@@ -1414,7 +1421,7 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'Shop',
     breakChance: 0.025,
-    icon: '🔪'
+    icon: '🕳️'
   },
 
   // Rare Weapons
@@ -1428,7 +1435,7 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'Quest',
     breakChance: 0.005,
-    icon: '⚔️'
+    icon: '🕳️'
   },
   plasma_rifle: {
     id: 'plasma_rifle',
@@ -1440,7 +1447,7 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'WDYFT',
     breakChance: 0.001,
-    icon: '🔫'
+    icon: '🕳️'
   },
   diamond_katana: {
     id: 'diamond_katana',
@@ -1452,7 +1459,7 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'Crafting',
     breakChance: 0.002,
-    icon: '🇯🇵'
+    icon: '🕳️'
   },
 
   // Epic Weapons
@@ -1466,7 +1473,7 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'Legend',
     breakChance: 0.0005,
-    icon: '🔨'
+    icon: '🕳️'
   },
   neutron_sniper: {
     id: 'neutron_sniper',
@@ -1478,7 +1485,7 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'WDYFT',
     breakChance: 0.0002,
-    icon: '🔭'
+    icon: '🕳️'
   },
 
   // Legendary Weapons
@@ -1492,7 +1499,7 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'Underworld',
     breakChance: 0.00005,
-    icon: '💀'
+    icon: '🕳️'
   },
   quantum_disruptor: {
     id: 'quantum_disruptor',
@@ -1504,7 +1511,7 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'WDYFT',
     breakChance: 0.00001,
-    icon: '⚛️'
+    icon: '🕳️'
   },
 
   // Mythical Weapons
@@ -1518,7 +1525,7 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'WDYFT',
     breakChance: 0.000001,
-    icon: '🌌'
+    icon: '🕳️'
   },
   god_slaying_blade: {
     id: 'god_slaying_blade',
@@ -1530,7 +1537,7 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'WDYFT',
     breakChance: 0.0000001,
-    icon: '👑'
+    icon: '🕳️'
   },
 
   // WDYFT Weapons
@@ -1544,7 +1551,7 @@ export const weaponsItems: Record<string, Item> = {
     usable: false,
     source: 'WDYFT',
     breakChance: 0.00000001,
-    icon: '💥'
+    icon: '🕳️'
   },
   existence_eraser: {
     id: 'existence_eraser',

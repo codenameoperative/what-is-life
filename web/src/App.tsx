@@ -220,49 +220,61 @@ function App() {
     localStorage.removeItem(saveId)
   }
 
+  const [isReturningUserLoading, setIsReturningUserLoading] = useState(false)
+
   // Load default save if set
   useEffect(() => {
-    if (isFirstTime === false && !showSaveSelector) {
+    if (isFirstTime === false && !showSaveSelector && !isReturningUserLoading) {
+      setIsReturningUserLoading(true)
+
       // Check if user has a default save setting
       try {
         const savedSettings = localStorage.getItem('game_settings')
         if (savedSettings) {
           const settings = JSON.parse(savedSettings)
           if (settings.defaultSaveId) {
-            // Auto-load the default save
-            const defaultSaveId = settings.defaultSaveId
-            const saveData = localStorage.getItem(defaultSaveId)
-            if (saveData) {
-              try {
-                const parsed = JSON.parse(saveData)
-                setUsername(parsed.profile?.username || 'Player')
-                setPlayerId(parsed.profile?.playerId || 'player-1')
-                setCurrentSaveId(defaultSaveId)
-                // The GameProvider will automatically load the save data when it mounts
-              } catch (error) {
-                console.error('Failed to load default save:', error)
-                // Fall back to save selector if default save is corrupted
+            // Auto-load the default save after a short delay to show loading screen
+            setTimeout(() => {
+              const defaultSaveId = settings.defaultSaveId
+              const saveData = localStorage.getItem(defaultSaveId)
+              if (saveData) {
+                try {
+                  const parsed = JSON.parse(saveData)
+                  setUsername(parsed.profile?.username || 'Player')
+                  setPlayerId(parsed.profile?.playerId || 'player-1')
+                  setCurrentSaveId(defaultSaveId)
+                  setIsReturningUserLoading(false)
+                  // The GameProvider will automatically load the save data when it mounts
+                } catch (error) {
+                  console.error('Failed to load default save:', error)
+                  // Fall back to save selector if default save is corrupted
+                  setShowSaveSelector(true)
+                  setIsReturningUserLoading(false)
+                }
+              } else {
+                // Default save doesn't exist, fall back to save selector
                 setShowSaveSelector(true)
+                setIsReturningUserLoading(false)
               }
-            } else {
-              // Default save doesn't exist, fall back to save selector
-              setShowSaveSelector(true)
-            }
+            }, 1500) // Show loading for 1.5 seconds
           } else {
             // No default save set, show save selector
             setShowSaveSelector(true)
+            setIsReturningUserLoading(false)
           }
         } else {
           // No settings found, show save selector
           setShowSaveSelector(true)
+          setIsReturningUserLoading(false)
         }
       } catch (error) {
         console.error('Error loading default save setting:', error)
         // Fall back to save selector on error
         setShowSaveSelector(true)
+        setIsReturningUserLoading(false)
       }
     }
-  }, [isFirstTime, showSaveSelector])
+  }, [isFirstTime, showSaveSelector, isReturningUserLoading])
 
   const handleBackToSaveSelector = () => {
     // Save current game state if we have a save ID
@@ -270,24 +282,6 @@ function App() {
       // TODO: Save game state
     }
     setShowSaveSelector(true)
-  }
-
-  // Show loading screen on app start
-  if (isLoading) {
-    return <LoadingScreen onComplete={() => setIsLoading(false)} />
-  }
-
-  // Show loading while checking setup status
-  if (isFirstTime === null) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
-        <div className="text-center space-y-6">
-          <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <div className="text-white text-xl font-bold">What is Life?</div>
-          <div className="text-neutral-300 text-sm">Loading your adventure...</div>
-        </div>
-      </div>
-    )
   }
 
   // Show first time setup for new users

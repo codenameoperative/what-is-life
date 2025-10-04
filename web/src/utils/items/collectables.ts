@@ -1389,7 +1389,7 @@ export const collectablesItems: Record<string, Item> = {
     breakChance: 0
   },
 
-  // === WDYFT (What Did You Find There) Items - Ultra Rare Collectibles ===
+  // === WDYFT (Where Did You Find This?!) Items - Ultra Rare Collectibles ===
 
   // WDYFT Artifacts (50k - 100k value range)
   ancient_scroll: {

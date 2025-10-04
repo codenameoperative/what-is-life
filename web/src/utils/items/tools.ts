@@ -538,88 +538,204 @@ export const toolsItems: Record<string, Item> = {
     name: 'Codename Operative\'s Toolkit',
     tier: 'wdyft',
     category: 'tools',
-    description: 'The ultimate toolkit from the codename operative. "I\'ll operative this fix!" Contains everything and nothing.',
+    description: 'A mysterious toolkit that seems to contain tools for every situation.',
+    value: 10000,
+    usable: true,
+    source: 'WDYFT',
+    breakChance: 0.0,
+    icon: '🛠️'
+  },
+
+  // NEW TOOLS - Enhanced Toolkit
+
+  // Uncommon Tools
+  digital_multimeter: {
+    id: 'digital_multimeter',
+    name: 'Digital Multimeter',
+    tier: 'uncommon',
+    category: 'tools',
+    description: 'Professional electrical testing tool for precise measurements and diagnostics.',
+    value: 180,
+    usable: true,
+    source: 'Shop',
+    breakChance: 0.02,
+    boost: {
+      type: 'work',
+      multiplier: 1.25,
+      uses: 50
+    },
+    icon: '🔋'
+  },
+  professional_camera: {
+    id: 'professional_camera',
+    name: 'Professional Camera',
+    tier: 'uncommon',
+    category: 'tools',
+    description: 'High-end DSLR camera for capturing stunning photographs and videos.',
+    value: 250,
+    usable: true,
+    source: 'Shop',
+    breakChance: 0.015,
+    boost: {
+      type: 'search',
+      multiplier: 1.3,
+      uses: 40
+    },
+    icon: '📷'
+  },
+  smart_watch: {
+    id: 'smart_watch',
+    name: 'Smart Watch',
+    tier: 'uncommon',
+    category: 'tools',
+    description: 'Advanced wearable technology for tracking activities and notifications.',
+    value: 220,
+    usable: true,
+    source: 'Shop',
+    breakChance: 0.01,
+    icon: '⌚'
+  },
+
+  // Rare Tools
+  quantum_computer: {
+    id: 'quantum_computer',
+    name: 'Quantum Computer',
+    tier: 'rare',
+    category: 'tools',
+    description: 'Revolutionary computing device that can solve impossible problems in seconds.',
+    value: 800,
+    usable: true,
+    source: 'WDYFT',
+    breakChance: 0.005,
+    boost: {
+      type: 'work',
+      multiplier: 2.0,
+      uses: 25
+    },
+    icon: '💻'
+  },
+  molecular_assembler: {
+    id: 'molecular_assembler',
+    name: 'Molecular Assembler',
+    tier: 'rare',
+    category: 'tools',
+    description: 'Nanotechnology device that can assemble items at the molecular level.',
+    value: 1200,
+    usable: true,
+    source: 'Crafting',
+    breakChance: 0.002,
+    icon: '🧬'
+  },
+
+  // Epic Tools
+  time_dilation_device: {
+    id: 'time_dilation_device',
+    name: 'Time Dilation Device',
+    tier: 'epic',
+    category: 'tools',
+    description: 'Experimental device that can slow down or speed up time in localized areas.',
+    value: 3000,
+    usable: true,
+    source: 'Quest',
+    breakChance: 0.001,
+    boost: {
+      type: 'work',
+      multiplier: 3.0,
+      uses: 10
+    },
+    icon: '⏰'
+  },
+  neural_interface: {
+    id: 'neural_interface',
+    name: 'Neural Interface',
+    tier: 'epic',
+    category: 'tools',
+    description: 'Direct brain-computer interface for enhanced mental capabilities and control.',
+    value: 4500,
+    usable: true,
+    source: 'WDYFT',
+    breakChance: 0.0005,
+    boost: {
+      type: 'search',
+      multiplier: 2.5,
+      uses: 15
+    },
+    icon: '🧠'
+  },
+
+  // Legendary Tools
+  reality_engine: {
+    id: 'reality_engine',
+    name: 'Reality Engine',
+    tier: 'legendary',
+    category: 'tools',
+    description: 'A device capable of manipulating the fundamental laws of physics.',
+    value: 15000,
+    usable: true,
+    source: 'WDYFT',
+    breakChance: 0.0001,
+    boost: {
+      type: 'work',
+      multiplier: 5.0,
+      uses: 5
+    },
+    icon: '🌌'
+  },
+  consciousness_uploader: {
+    id: 'consciousness_uploader',
+    name: 'Consciousness Uploader',
+    tier: 'legendary',
+    category: 'tools',
+    description: 'Technology that can digitize and upload consciousness to the digital realm.',
+    value: 25000,
+    usable: true,
+    source: 'WDYFT',
+    breakChance: 0.00005,
+    icon: '☁️'
+  },
+
+  // Mythical Tools
+  universe_simulator: {
+    id: 'universe_simulator',
+    name: 'Universe Simulator',
+    tier: 'mythical',
+    category: 'tools',
+    description: 'A computer that can simulate entire universes and predict any outcome.',
     value: 50000,
     usable: true,
     source: 'WDYFT',
-    breakChance: 0.00001
+    breakChance: 0.00001,
+    boost: {
+      type: 'work',
+      multiplier: 10.0,
+      uses: 3
+    },
+    icon: '🌍'
+  },
+
+  // WDYFT Tools
+  developer_console: {
+    id: 'developer_console',
+    name: 'Developer Console',
+    tier: 'wdyft',
+    category: 'tools',
+    description: 'The ultimate debugging tool that can modify reality itself. "console.log(\'Hello, Universe\');"',
+    value: 100000,
+    usable: true,
+    source: 'WDYFT',
+    breakChance: 0.000001,
+    icon: '💻'
+  },
+  existence_compiler: {
+    id: 'existence_compiler',
+    name: 'Existence Compiler',
+    tier: 'wdyft',
+    category: 'tools',
+    description: 'A compiler that can compile existence itself. Warning: May cause stack overflow in reality.',
+    value: 999999,
+    usable: true,
+    source: 'WDYFT',
+    breakChance: 0.0,
+    icon: '⚡'
   }
-  retail_salesperson: {
-  gas_station_attendant: {
-  library_assistant: {
-  parking_attendant: {
-  tour_guide: {
-  real_estate_agent: {
-  personal_trainer: {
-  event_planner: {
-  software_developer: {
-  neurosurgeon: {
-    id: 'neurosurgeon',
-    name: 'Neurosurgeon',
-    tier: 'expert',
-    description: 'Perform complex brain and nervous system surgeries with precision and expertise.',
-    payPerWork: { min: 150, max: 300 },
-    requirements: { minWTC: 5000, requiredItemId: 'medical_license' },
-  },
-    id: 'software_developer',
-    name: 'Software Developer',
-    tier: 'advanced',
-    description: 'Design, code, and maintain software applications for various platforms.',
-    payPerWork: { min: 45, max: 95 },
-    requirements: { minWTC: 1000, requiredItemId: 'programming_laptop' },
-  },
-    id: 'event_planner',
-    name: 'Event Planner',
-    tier: 'intermediate',
-    description: 'Organize and coordinate events, from corporate meetings to wedding receptions.',
-    payPerWork: { min: 28, max: 62 },
-    requirements: { minWTC: 400, requiredItemId: 'organizer_planner' },
-  },
-    id: 'personal_trainer',
-    name: 'Personal Trainer',
-    tier: 'intermediate',
-    description: 'Design workout plans and motivate clients to achieve their fitness goals.',
-    payPerWork: { min: 22, max: 48 },
-    requirements: { minWTC: 300 },
-  },
-    id: 'real_estate_agent',
-    name: 'Real Estate Agent',
-    tier: 'intermediate',
-    description: 'Show properties, negotiate deals, and help clients buy or sell homes.',
-    payPerWork: { min: 25, max: 55 },
-    requirements: { minWTC: 500, requiredItemId: 'business_suit' },
-  },
-    id: 'tour_guide',
-    name: 'Tour Guide',
-    tier: 'entry',
-    description: 'Lead sightseeing tours and share knowledge about local attractions and history.',
-    payPerWork: { min: 12, max: 28 },
-    requirements: { minWTC: 150 },
-  },
-    id: 'parking_attendant',
-    name: 'Parking Attendant',
-    tier: 'entry',
-    description: 'Direct traffic and collect parking fees in busy lots and garages.',
-    payPerWork: { min: 11, max: 26 },
-  },
-    id: 'library_assistant',
-    name: 'Library Assistant',
-    tier: 'entry',
-    description: 'Help organize books, assist patrons, and maintain the library collection.',
-    payPerWork: { min: 10, max: 24 },
-    requirements: { minWTC: 75 },
-  },
-    id: 'gas_station_attendant',
-    name: 'Gas Station Attendant',
-    tier: 'entry',
-    description: 'Pump gas, stock shelves, and handle customer payments at a busy gas station.',
-    payPerWork: { min: 9, max: 22 },
-  },
-    id: 'retail_salesperson',
-    name: 'Retail Salesperson',
-    tier: 'entry',
-    description: 'Help customers find products and process transactions in a retail environment.',
-    payPerWork: { min: 8, max: 20 },
-    requirements: { minWTC: 30 },
-  },
 }
