@@ -1,8 +1,8 @@
 # 🎮 What is Life? (Development Halted)
 
-**Notice (October 2024):** Development of "What is Life?" has been temporarily halted due to unforeseen circumstances. I am currently focusing all my efforts on another large-scale project that requires my full attention. 
+**Notice (October 2025):** Development of "What is Life?" has been temporarily halted due to unforeseen circumstances. I am currently focusing all my efforts on another large-scale project that requires my full attention. 
 
-Development may potentially resume between late December 2024 and mid-January 2025, depending on the progress of my current commitments.
+Development may potentially resume between late December 2025 and mid-August 2026, depending on the progress of my current commitments.
 
 All current development work will be pushed to the repository for archival purposes, but no further updates are planned at this time. Thank you for your understanding and support.
 
