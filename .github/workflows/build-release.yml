@@ -50,8 +50,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tauriScript: npm run tauri:build -- --target x86_64-pc-windows-msvc
-          includeRelease: true
+          tauriScript: npm run tauri:build:windows:msi
 
       - name: Create MSI installer
         run: |
@@ -130,8 +129,50 @@ jobs:
           path: What_Is_Life_Setup.msi
           if-no-files-found: error
 
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Android APKs with Docker
+        run: |
+          # Build Docker image and run Android builds
+          docker build -f Dockerfile.android -t android-builder .
+
+          # Build ARM64 APK
+          docker run --rm -v $(pwd):/app android-builder bash -c "
+            cd /app/web/android && \
+            ./gradlew assembleDebug -PabiFilter=arm64-v8a && \
+            cp app/build/outputs/apk/debug/app-arm64-v8a-debug.apk /app/
+          "
+
+          # Build ARM32 APK
+          docker run --rm -v $(pwd):/app android-builder bash -c "
+            cd /app/web/android && \
+            ./gradlew assembleDebug -PabiFilter=armeabi-v7a && \
+            cp app/build/outputs/apk/debug/app-armeabi-v7a-debug.apk /app/
+          "
+
+      - name: Upload ARM64 APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-arm64
+          path: app-arm64-v8a-debug.apk
+          if-no-files-found: error
+
+      - name: Upload ARM32 APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-arm32
+          path: app-armeabi-v7a-debug.apk
+          if-no-files-found: error
+
   release:
-    needs: [build-windows-msi]
+    needs: [build-windows-msi, build-android]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
@@ -140,13 +181,13 @@ jobs:
         with:
           path: artifacts
 
-      - name: Create MSI installer archive
+      - name: Create release archives
         run: |
           cd artifacts
           for dir in */; do
             if [ -d "$dir" ]; then
               dirname=$(basename "$dir")
-              tar -czf "${dirname}-installer.tar.gz" -C "$dir" .
+              tar -czf "${dirname}.tar.gz" -C "$dir" .
             fi
           done
 
@@ -155,6 +196,7 @@ jobs:
         with:
           files: |
             artifacts/**/*.tar.gz
+            artifacts/**/*.apk
             artifacts/**/*.msi
           generate_release_notes: true
         env:

@@ -1,42 +1,111 @@
-# Android SDK Setup Instructions for those looking to make their own builds (made for linux but you can search up to find your specific platform)
+# Android Build Setup - Docker-Based Approach
 
-## Install Android Studio on Linux:
+## 🚀 Quick Start with Docker (Recommended)
+
+### Prerequisites
+- **Docker** installed on your system
+- **Git** for cloning the repository
+- **Basic command line knowledge**
+
+### Build Android APKs
 ```bash
-# Download Android Studio
-wget -O android-studio.tar.gz https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2023.3.1.18/android-studio-2023.3.1.18-linux.tar.gz
+# Clone the repository
+cd /home/arcelus/Desktop/
+git clone https://github.com/codenameoperative/what-is-life.git
+cd what-is-life
 
-# Extract
-sudo tar -xzf android-studio.tar.gz -C /opt/
-
-# Add to PATH
-echo 'export ANDROID_HOME=/opt/android-studio' >> ~/.bashrc
-echo 'export ANDROID_SDK_ROOT=$ANDROID_HOME/sdk' >> ~/.bashrc
-echo 'export PATH=$PATH:$ANDROID_HOME/bin:$ANDROID_SDK_ROOT/platform-tools' >> ~/.bashrc
-source ~/.bashrc
-
-# Launch Android Studio to download SDK
-/opt/android-studio/bin/studio.sh
+# Build Android APKs for ARM32 and ARM64
+./scripts/build-android.sh
 ```
 
-## In Android Studio:
-1. Open SDK Manager
-2. Install:
-   - Android SDK Platform 34 (API 34)
-   - Android SDK Build-Tools 34.0.0
-   - Android SDK Command-line Tools
-   - Android SDK Platform-Tools
-   - Android Emulator (optional)
+### What happens during the build:
+1. **Docker image creation** - Builds a complete Android development environment
+2. **Dependency installation** - Downloads all required Android SDK components
+3. **Web asset building** - Compiles the React frontend
+4. **APK generation** - Creates optimized APKs for ARM32 and ARM64
+5. **Artifact output** - APK files are saved in the project root
 
-## After SDK Setup, Build APKs:
+### Output Files
+- `app-arm64-v8a-debug.apk` - For ARM64 devices (most modern phones)
+- `app-armeabi-v7a-debug.apk` - For ARM32 devices (older phones)
+
+## 🛠️ Manual Setup (Advanced Users)
+
+If you prefer to set up the Android development environment manually:
+
+### Install Java JDK 11+
 ```bash
-``cd /home/arcelus/Desktop/What\ is\ life``
+# Ubuntu/Debian
+sudo apt install openjdk-11-jdk
 
-# Build Android APKs
-npm run android:build:all
-
-# Individual architectures:
-npm run android:build:arm64    # ARM64 (Android 8-15)
-npm run android:build:arm32    # ARM32 (Android 8-15)
-npm run android:build:x86_64   # x86_64 (Android 8-15)
-npm run android:build:x86      # x86 (Android 8-15)
+# Or download from Oracle/OpenJDK website
 ```
+
+### Install Android SDK
+```bash
+# Download command line tools
+wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+unzip commandlinetools-linux-11076708_latest.zip
+
+# Set up environment
+mkdir -p ~/android-sdk/cmdline-tools
+export ANDROID_SDK_ROOT=~/android-sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools
+
+# Install required packages
+sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0" "ndk;25.2.9519653" "cmake;3.22.1"
+```
+
+### Install Node.js Dependencies
+```bash
+npm install
+cd web
+npm install @capacitor/android
+npx cap add android
+npx cap sync android
+```
+
+### Build APKs Manually
+```bash
+# Build web assets first
+npm run build
+
+# Build ARM64 APK
+cd web/android
+./gradlew assembleDebug -PabiFilter=arm64-v8a
+
+# Build ARM32 APK
+./gradlew assembleDebug -PabiFilter=armeabi-v7a
+```
+
+## 📱 Supported Architectures
+
+| Architecture | Support | Target Devices |
+|-------------|---------|----------------|
+| **ARM64** | ✅ **Primary** | Most modern Android phones/tablets |
+| **ARM32** | ✅ **Secondary** | Older Android devices |
+| **x86** | ❌ **Not supported** | Intel-based tablets (discontinued) |
+| **x86_64** | ❌ **Not supported** | Intel-based devices (discontinued) |
+
+## 🔧 Troubleshooting
+
+### Docker Issues
+- Ensure Docker daemon is running: `sudo systemctl start docker`
+- Check Docker version: `docker --version`
+- Free up disk space if needed: `docker system prune -a`
+
+### Build Failures
+- Check available disk space: `df -h`
+- Verify internet connection for downloading dependencies
+- Check Docker logs: `docker logs <container_id>`
+
+### APK Installation Issues
+- Enable "Install from Unknown Sources" in Android settings
+- Check if device meets minimum requirements (Android 8.0+)
+- Verify APK integrity if transfer was interrupted
+
+## 📋 Requirements Summary
+
+### Minimum Android Version: **8.0 (API 26)**
+### Supported ABIs: **armeabi-v7a, arm64-v8a**
+### Recommended: **Docker Desktop** or **Docker Engine 20.10+**

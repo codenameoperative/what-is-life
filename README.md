@@ -56,10 +56,14 @@ npm run tauri:build:linux:x64    # 64-bit Intel/AMD
 # npm run tauri:build:linux:i686   # 32-bit Intel
 ```
 
-### **Android Build**
+### **Android Build** (Docker-based)
 ```bash
-# Android builds are available
-echo 'Android builds available - check BUILD_README.md for instructions'
+# Build Android APKs using Docker
+./scripts/build-android.sh
+
+# Or build manually:
+docker build -f Dockerfile.android -t android-builder .
+docker run --rm -v $(pwd):/app android-builder
 ```
 
 ## 🎮 **Core Features**
@@ -159,9 +163,10 @@ echo 'Android builds available - check BUILD_README.md for instructions'
 > **💻 Call for macOS Contributors**: We need developers with macOS machines to create native macOS `.app` bundles and iOS versions! The build system is ready - just run the GitHub Actions workflow or use the provided build scripts. Contributors will be credited and can maintain their own release channels.
 
 ### **Android** 🤖
-- **APK** packages for all architectures
+- **APK packages** for ARM32 and ARM64 architectures only
+- **Docker-based builds** for consistent cross-platform development
 - **Minimum API 26** (Android 8.0)
-- **ARM64, ARM32, x86_64, x86** support
+- **ARM64 and ARM32** support (x86/x86_64 not supported)
 
 ## 🏗️ **Project Structure**
 
@@ -265,9 +270,11 @@ npm run tauri:build
 - Xcode command line tools
 
 ### **Android Builds**
-- Java JDK 11+
-- Android SDK & NDK
-- Capacitor CLI
+- **Docker** (recommended) - Complete build environment in container
+- **Java JDK 11+** - For manual builds without Docker
+- **Android SDK & NDK** - For manual builds without Docker
+- **Capacitor CLI** - For manual builds without Docker
+- **Linux/macOS/Windows** - Docker works on all platforms
 
 ## 📚 **Documentation**
 

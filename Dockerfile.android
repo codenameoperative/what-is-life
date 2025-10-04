@@ -1,0 +1,52 @@
+# Android Build Dockerfile
+FROM ubuntu:22.04
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    unzip \
+    openjdk-11-jdk \
+    wget \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Node.js 18
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs
+
+# Install Android SDK
+RUN wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip && \
+    unzip commandlinetools-linux-11076708_latest.zip && \
+    mkdir -p /opt/android-sdk/cmdline-tools && \
+    mv cmdline-tools /opt/android-sdk/cmdline-tools/latest
+
+ENV ANDROID_SDK_ROOT=/opt/android-sdk
+ENV PATH="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH"
+
+# Accept licenses and install required packages
+RUN yes | sdkmanager --licenses && \
+    sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0" "ndk;25.2.9519653" "cmake;3.22.1"
+
+# Install Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:$PATH"
+
+WORKDIR /app
+
+# Copy package files for dependency installation
+COPY package*.json ./
+COPY web/package*.json ./web/
+
+# Install npm dependencies
+RUN npm ci && cd web && npm ci
+
+# Copy source code
+COPY . .
+
+# Build web assets
+RUN npm run build
+
+# Set up for Android builds
+RUN cd web && npm install @capacitor/android && npx cap add android && npx cap sync android
+
+CMD ["bash"]
