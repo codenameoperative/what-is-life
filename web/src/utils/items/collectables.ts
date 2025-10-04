@@ -1106,7 +1106,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'lets act like you didnt steal from a tomb.',
-    value: 0,
+    value: 50000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1117,7 +1117,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'A recalled map from WDYFT.',
-    value: 0,
+    value: 75000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1139,7 +1139,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'Access to the game\'s inner workings.',
-    value: 0,
+    value: 100000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1150,7 +1150,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'You found the hidden treasure!',
-    value: 0,
+    value: 250000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1161,7 +1161,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'The forbidden knowledge.',
-    value: 0,
+    value: 500000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1172,7 +1172,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'Secrets from the game creators.',
-    value: 0,
+    value: 150000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1183,7 +1183,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'You helped shape the game!',
-    value: 0,
+    value: 200000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1194,7 +1194,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'From the codenameoperative timeline.',
-    value: 0,
+    value: 750000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1205,7 +1205,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'A piece of corrupted reality.',
-    value: 0,
+    value: 1000000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1216,7 +1216,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'Unlimited access granted.',
-    value: 0,
+    value: 2500000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1227,7 +1227,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'The blueprint of reality.',
-    value: 0,
+    value: 5000000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1238,7 +1238,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'Links particles across dimensions.',
-    value: 0,
+    value: 10000000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1249,7 +1249,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'Change the rules of existence.',
-    value: 0,
+    value: 25000000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1260,7 +1260,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'Walk between realities.',
-    value: 0,
+    value: 50000000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1271,7 +1271,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'Rule over all creation.',
-    value: 0,
+    value: 100000000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1282,7 +1282,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'Become invincible.',
-    value: 0,
+    value: 250000000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1293,7 +1293,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'Exit the simulation.',
-    value: 0,
+    value: 500000000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0
@@ -1304,7 +1304,7 @@ export const collectablesItems: Record<string, Item> = {
     tier: 'wdyft',
     category: 'collectables',
     description: 'The universe is a freaking tv show',
-    value: 0,
+    value: 1000000000,
     usable: false,
     source: 'WDYFT',
     breakChance: 0

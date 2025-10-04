@@ -56,13 +56,11 @@ npm run tauri:build:linux:x64    # 64-bit Intel/AMD (official release target)
 # npm run tauri:build:linux:i686   # 32-bit Intel
 ```
 
-### **Android Build**
+### **Android Build** (Low Priority)
 ```bash
-# Install Android dependencies
-npm install @capacitor/android
-
-# Build Android APKs
-npm run android:build:all
+# Android builds are currently deprioritized
+# Focus is on Windows MSI installer development
+echo 'Android builds available but not actively maintained'
 ```
 
 ## 🎮 **Core Features**
@@ -83,16 +81,16 @@ npm run android:build:all
 
 | Activity | Icon | Requirements | Cooldown | Rewards |
 |----------|------|--------------|----------|---------|
-| **Search** | 🕵️ | None | 5s | Items only |
-| **Crime** | 🦹 | None | Variable | WTC (50-200) |
-| **Work** | 💼 | None | 30s | WTC (10-50) |
-| **Hunt** | 🦌 | Hunting Rifle | 5s | Animals, Items, Treasure |
-| **Fish** | 🎣 | Fishing Rod | 5s | Fish, Items, Pirate Stashes |
-| **Dig** | ⛏️ | Shovel/Pickaxe | 5s | Ores, Buried Treasure |
-| **Post** | 📱 | Phone/Laptop/PC | 10s | WTC, Items, Viral Success |
-| **Stream** | 🎥 | Streaming Setup | 10s | WTC, Items, Followers |
-| **Explore** | 🗺️ | None | Variable | WTC, Items, Death Risk |
-| **Garden** | 🌾 | None | Variable | Plants, Harvests, Pests |
+| **Search** | 🔍 | None | 15s | Items only |
+| **Crime** | 🦹 | None | 30s | WTC (50-200) |
+| **Work** | 💼 | None | 10s | WTC (10-50) |
+| **Hunt** | 🏹 | Hunting Rifle | 45s | Animals, Items, Treasure |
+| **Fish** | 🐟 | Fishing Rod | 45s | Fish, Items, Pirate Stashes |
+| **Dig** | ⛏️ | Shovel/Pickaxe | 45s | Ores, Buried Treasure |
+| **Post** | 💬 | Phone/Laptop/PC | 45s | WTC, Items, Viral Success |
+| **Stream** | ⏺️ | Streaming Setup | 45s | WTC, Items, Followers |
+| **Explore** | 🗺️ | None | 45s | WTC, Items, Death Risk |
+| **Garden** | 🌾 | None | 45s | Plants, Harvests, Pests |
 
 ### **🌐 LAN Multiplayer**
 - **Local Network Gaming**: Connect with friends on the same network
@@ -309,12 +307,15 @@ npm run tauri:build
 - Windows compatibility (WSL bootstrapper + native builds)
 - Professional documentation suite
 - Cross-platform CI/CD pipeline setup
+- Fixed activity system and save functionality
+- Improved UI with reduced hover glitches
+- Optimized activity cooldowns for better gameplay
 
 **🔄 In Progress:**
-- **Native Windows builds** via GitHub Actions CI/CD
-- **Android APK packages** for mobile distribution
-- **macOS community builds** (call for contributors!)
-
+- [ ] Native Windows MSI installer development
+- [ ] Windows + macOS CI stabilization
+- [ ] Android packaging automation (deprioritized)
+- [ ] Documentation migration to GitHub Wiki
 
 ### **🚀 How to Contribute**
 

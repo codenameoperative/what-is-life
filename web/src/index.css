@@ -241,7 +241,6 @@ body {
               radial-gradient(circle at 120% 20%, rgba(59, 255, 215, 0.25), transparent 55%),
               radial-gradient(circle at -10% 130%, rgba(255, 113, 198, 0.25), transparent 65%),
               linear-gradient(140deg, #040407 0%, #090a14 40%, #050509 100%);
-  overflow: hidden;
   --ambient-primary: rgba(107, 77, 255, 0.55);
   --ambient-secondary: rgba(59, 255, 215, 0.35);
   --ambient-pointer: rgba(255, 255, 255, 0.16);
