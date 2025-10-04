@@ -81,16 +81,16 @@ echo 'Android builds available but not actively maintained'
 
 | Activity | Icon | Requirements | Cooldown | Rewards |
 |----------|------|--------------|----------|---------|
-| **Search** | 🔍 | None | 15s | Items only |
-| **Crime** | 🦹 | None | 30s | WTC (50-200) |
+| **Search** | 🔍 | None | 5s | Items only |
+| **Crime** | 🦹 | None | 5s | WTC (50-200) |
 | **Work** | 💼 | None | 10s | WTC (10-50) |
-| **Hunt** | 🏹 | Hunting Rifle | 45s | Animals, Items, Treasure |
-| **Fish** | 🐟 | Fishing Rod | 45s | Fish, Items, Pirate Stashes |
+| **Hunt** | 🏹 | Hunting Rifle | 5s | Animals, Items, Treasure |
+| **Fish** | 🐟 | Fishing Rod | 5s | Fish, Items, Pirate Stashes |
 | **Dig** | ⛏️ | Shovel/Pickaxe | 45s | Ores, Buried Treasure |
 | **Post** | 💬 | Phone/Laptop/PC | 45s | WTC, Items, Viral Success |
 | **Stream** | ⏺️ | Streaming Setup | 45s | WTC, Items, Followers |
-| **Explore** | 🗺️ | None | 45s | WTC, Items, Death Risk |
-| **Garden** | 🌾 | None | 45s | Plants, Harvests, Pests |
+| **Explore** | 🗺️ | None | 10s | WTC, Items, Death Risk |
+| **Garden** | 🌾 | None | 10s | Plants, Harvests, Pests |
 
 ### **🌐 LAN Multiplayer**
 - **Local Network Gaming**: Connect with friends on the same network

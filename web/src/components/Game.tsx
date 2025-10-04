@@ -811,7 +811,7 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
                   onClick={() => setActiveActivity(null)}
                   className="mb-6 px-4 py-2 text-sm btn-secondary"
                 >
-                  ← Back to Activities (ESC)
+                  ← Back to Activities
                 </button>
                 {renderActivity()}
               </div>

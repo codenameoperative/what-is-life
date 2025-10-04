@@ -151,7 +151,7 @@ export default function ExploreActivity({ isOnCooldown, cooldownTime, onCooldown
     }
 
     // Set exploration duration
-    onCooldownChange(true, location.explorationTime)
+    onCooldownChange(true, 10)
   }
 
   const handleChoice = (outcomeId: string) => {

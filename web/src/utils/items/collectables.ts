@@ -1116,7 +1116,7 @@ export const collectablesItems: Record<string, Item> = {
     name: 'Mysterious Map',
     tier: 'wdyft',
     category: 'collectables',
-    description: 'A recalled map from WDYFT.',
+    description: 'A recalled map from long ago',
     value: 75000,
     usable: false,
     source: 'WDYFT',

@@ -213,8 +213,8 @@ export default function CrimeActivity({ isOnCooldown, cooldownTime, onCooldownCh
       notify({ type: 'error', title: 'Crime Failed', message })
     }
 
-    // Start cooldown and return to main UI with smooth transition
-    onCooldownChange(true, crime.riskLevel === 'extreme' ? 8 : crime.riskLevel === 'high' ? 6 : 4)
+    // Start 5s cooldown and return to main UI with smooth transition
+    onCooldownChange(true, 5)
 
     // Delay the UI transition slightly for smooth animation
     const transitionDelay = crime.riskLevel === 'extreme' || crime.riskLevel === 'high' ? 50 : 100

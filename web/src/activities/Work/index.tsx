@@ -66,8 +66,8 @@ export default function WorkActivity({ isOnCooldown, cooldownTime, onCooldownCha
       message: `You made ${baseSalary} WTC from ${job ? job.name : 'your job'}, but no bonus was awarded.`
     })
 
-    // Start 15s cooldown and return to main UI
-    onCooldownChange(true, 15)
+    // Start 10s cooldown and return to main UI
+    onCooldownChange(true, 10)
 
     setTimeout(() => {
       onWorkComplete()
@@ -185,8 +185,8 @@ export default function WorkActivity({ isOnCooldown, cooldownTime, onCooldownCha
       message: outcomeMessage
     })
 
-    // Start 15s cooldown and return to main UI
-    onCooldownChange(true, 15)
+    // Start 10s cooldown and return to main UI
+    onCooldownChange(true, 10)
 
     setTimeout(() => {
       onWorkComplete()
@@ -225,8 +225,8 @@ export default function WorkActivity({ isOnCooldown, cooldownTime, onCooldownCha
       message: `You made ${baseSalary} WTC from ${job ? job.name : 'your job'}, but no bonus was awarded.`
     })
 
-    // Start 15s cooldown and return to main UI
-    onCooldownChange(true, 15)
+    // Start 10s cooldown and return to main UI
+    onCooldownChange(true, 10)
 
     setTimeout(() => {
       onWorkComplete()

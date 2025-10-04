@@ -126,7 +126,7 @@ export default function GardenActivity({ isOnCooldown, cooldownTime, onCooldownC
 
     actions.plantInGarden(plotId, selectedPlant)
     actions.trackActivity(`Garden: Planted ${gardenPlants[selectedPlant as keyof typeof gardenPlants]?.name}`)
-    onCooldownChange(true, 3) // 3 second cooldown for planting
+    onCooldownChange(true, 10) // 10 second cooldown for planting
 
     notify({
       type: 'success',
@@ -146,7 +146,7 @@ export default function GardenActivity({ isOnCooldown, cooldownTime, onCooldownC
 
     const plant = gardenPlants[plot.plantId as keyof typeof gardenPlants]
     actions.trackActivity(`Garden: Watered ${plant.name}`)
-    onCooldownChange(true, 2) // 2 second cooldown for watering
+    onCooldownChange(true, 10) // 10 second cooldown for watering
 
     notify({
       type: 'info',
@@ -175,7 +175,7 @@ export default function GardenActivity({ isOnCooldown, cooldownTime, onCooldownC
     actions.harvestPlant(plotId)
     actions.trackActivity(`Garden: Harvested ${finalYield}x ${plant.name}`)
 
-    onCooldownChange(true, 5) // 5 second cooldown for harvesting
+    onCooldownChange(true, 10) // 10 second cooldown for harvesting
 
     notify({
       type: 'success',
