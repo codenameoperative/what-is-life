@@ -2,7 +2,7 @@
 
 **NOTICE: (October 2025)**: Developed of "What is Life?" due to unforseen circumstances. I am Currently Focusing all my efforts on another large scale project that requires my full attention
 
-Development may potentially Resume between late December 2025 and Mid to late August 2026, Depending on the progress, of my current commitments
+Development may potentially Resume between late December 2025 and Mid to late August 2026, Depending on the progress of my current commitments
 
 All current development work will be pushed to repository for archival purposes, but no further updates are planned at this time. Thank you for your understanding and support 
 
