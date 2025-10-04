@@ -63,6 +63,5 @@ temp/
 # Android build artifacts (keep the project structure)
 android/app/build/
 
-# Tauri
-src-tauri/gen/
-src-tauri/icons/
+# LPC Spritesheet Character Generator (external dependency)
+assets/lpc-spritesheet-generator/

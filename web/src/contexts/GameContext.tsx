@@ -87,6 +87,7 @@ export interface GameState {
     confirmDeposit: boolean
     animationSpeed: 'slow' | 'normal' | 'fast'
     performanceMode: boolean
+    defaultSaveId?: string // Default save slot to auto-load
   }
   secrets: {
     retroUnlocked: boolean
@@ -352,7 +353,8 @@ export const GameProvider = ({ children, initialUsername = '', initialPlayerId =
         confirmSell: true,
         confirmDeposit: true,
         animationSpeed: 'normal',
-        performanceMode: false
+        performanceMode: false,
+        defaultSaveId: undefined
       },
       secrets: initialSecrets
     }

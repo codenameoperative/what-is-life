@@ -89,8 +89,8 @@ export default function SaveSelector({ onSelectSave, onCreateSave, onDeleteSave 
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center modal-overlay backdrop-blur-sm">
-      <div className="w-full max-w-2xl mx-4 modal-content glass-strong border border-border/50 shadow-2xl p-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="w-full max-w-2xl mx-4 glass-strong border border-border/50 shadow-2xl p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-primary mb-2">What is Life?</h1>
           <p className="text-muted">Select a save slot to continue your adventure</p>

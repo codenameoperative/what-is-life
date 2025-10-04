@@ -56,7 +56,7 @@ export default function InventoryModal({ open, onClose }: Props) {
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center modal-overlay backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-start justify-center" onClick={onClose}>
       {/* Container */}
       <div className="relative mt-16 w-[min(92vw,900px)] glass-strong border border-border/50 shadow-2xl animate-scaleIn" onClick={(e) => e.stopPropagation()}>
         <div className="p-4 border-b border-border/30 flex items-center gap-3 backdrop-blur-xl">
@@ -97,7 +97,22 @@ export default function InventoryModal({ open, onClose }: Props) {
                             </span>
                           )}
                         </div>
-                        <div className="text-xs text-neutral-400">{i.def.tier} • {i.def.category}</div>
+                        <div className="flex items-center gap-2 text-xs">
+                          <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                            i.def.tier === 'useless' ? 'bg-gray-600 text-gray-200' :
+                            i.def.tier === 'common' ? 'bg-gray-500 text-gray-100' :
+                            i.def.tier === 'uncommon' ? 'bg-green-600 text-green-100' :
+                            i.def.tier === 'rare' ? 'bg-blue-600 text-blue-100' :
+                            i.def.tier === 'epic' ? 'bg-purple-600 text-purple-100' :
+                            i.def.tier === 'legendary' ? 'bg-yellow-600 text-yellow-100' :
+                            i.def.tier === 'mythical' ? 'bg-red-600 text-red-100' :
+                            'bg-pink-600 text-pink-100'
+                          }`}>
+                            {i.def.tier.charAt(0).toUpperCase() + i.def.tier.slice(1)}
+                          </span>
+                          <span className="text-neutral-400">•</span>
+                          <span className="text-neutral-400">{i.def.category}</span>
+                        </div>
                       </div>
                       <div className="flex items-center gap-2 text-xs text-neutral-300">
                         {i.def.maxDurability && i.def.maxDurability > 0 && (
@@ -117,7 +132,21 @@ export default function InventoryModal({ open, onClose }: Props) {
             {selected ? (
               <div className="space-y-2">
                 <div className="text-lg font-semibold">{selected.name}</div>
-                <div className="text-sm text-neutral-400">Tier: {selected.tier} • {selected.category}</div>
+                <div className="flex items-center gap-2">
+                  <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                    selected.tier === 'useless' ? 'bg-gray-600 text-gray-200' :
+                    selected.tier === 'common' ? 'bg-gray-500 text-gray-100' :
+                    selected.tier === 'uncommon' ? 'bg-green-600 text-green-100' :
+                    selected.tier === 'rare' ? 'bg-blue-600 text-blue-100' :
+                    selected.tier === 'epic' ? 'bg-purple-600 text-purple-100' :
+                    selected.tier === 'legendary' ? 'bg-yellow-600 text-yellow-100' :
+                    selected.tier === 'mythical' ? 'bg-red-600 text-red-100' :
+                    'bg-pink-600 text-pink-100'
+                  }`}>
+                    {selected.tier.charAt(0).toUpperCase() + selected.tier.slice(1)}
+                  </span>
+                  <span className="text-sm text-neutral-400">• {selected.category}</span>
+                </div>
                 <div className="text-sm text-neutral-300">Value: {selected.value} WTC</div>
                 <div className="text-sm text-neutral-300">Usable: {selected.usable ? 'Yes' : 'No'}</div>
                 <div className="text-sm text-neutral-300">Source: {selected.source}</div>

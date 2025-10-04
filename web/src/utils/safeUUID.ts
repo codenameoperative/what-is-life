@@ -7,7 +7,7 @@ export const safeUUID = () => {
   return Math.random().toString(36).slice(2) + Date.now().toString(36)
 }
 
-// Generate Q1D5A-style player ID (5 characters, alphanumeric)
+// Generate 5-style player ID (5 characters, alphanumeric)
 export const generatePlayerId = () => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
   let result = ''

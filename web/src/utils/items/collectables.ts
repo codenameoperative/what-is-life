@@ -1387,5 +1387,193 @@ export const collectablesItems: Record<string, Item> = {
     usable: false,
     source: 'Found',
     breakChance: 0
+  },
+
+  // === WDYFT (What Did You Find There) Items - Ultra Rare Collectibles ===
+
+  // WDYFT Artifacts (50k - 100k value range)
+  ancient_scroll: {
+    id: 'ancient_scroll',
+    name: 'Ancient Scroll of Forbidden Knowledge',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'A scroll containing knowledge that was never meant to be discovered. Scholars would pay a fortune for this.',
+    value: 75000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '📜'
+  },
+
+  cursed_diamond: {
+    id: 'cursed_diamond',
+    name: 'Cursed Diamond of Eternal Night',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'A diamond that seems to absorb all light around it. Those who possess it report strange dreams.',
+    value: 85000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '💎'
+  },
+
+  phoenix_feather: {
+    id: 'phoenix_feather',
+    name: 'Phoenix Feather of Rebirth',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'A feather from the legendary phoenix. It glows with an inner fire that never extinguishes.',
+    value: 95000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '🔥'
+  },
+
+  // WDYFT Relics (100k - 1M value range)
+  dragon_scale: {
+    id: 'dragon_scale',
+    name: 'Ancient Dragon Scale',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'A scale from an ancient dragon, harder than diamond and warm to the touch.',
+    value: 150000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '🐲'
+  },
+
+  mermaid_tear: {
+    id: 'mermaid_tear',
+    name: 'Mermaid\'s Tear of the Deep',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'A tear shed by a mermaid in the deepest ocean trenches. It shimmers with impossible colors.',
+    value: 200000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '🧜‍♀️'
+  },
+
+  unicorn_horn: {
+    id: 'unicorn_horn',
+    name: 'Unicorn Horn of Purity',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'A horn from a pure unicorn. It radiates healing energy and wards off evil.',
+    value: 300000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '🦄'
+  },
+
+  // WDYFT Artifacts (1M - 10M value range)
+  time_crystal: {
+    id: 'time_crystal',
+    name: 'Time Crystal of Eternity',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'A crystal that bends time itself. Scientists and mages alike would kill for this artifact.',
+    value: 1000000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '⏳'
+  },
+
+  void_essence: {
+    id: 'void_essence',
+    name: 'Essence of the Void',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'Pure nothingness condensed into physical form. It whispers secrets of the universe.',
+    value: 2500000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '🌑'
+  },
+
+  god_forged_relic: {
+    id: 'god_forged_relic',
+    name: 'God-Forged Relic of Creation',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'An artifact said to be forged by the gods themselves during the creation of the world.',
+    value: 5000000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '⚡'
+  },
+
+  // WDYFT Legends (10M - 100M value range)
+  infinity_stone: {
+    id: 'infinity_stone',
+    name: 'Infinity Stone Fragment',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'A fragment of an Infinity Stone. It contains power beyond mortal comprehension.',
+    value: 25000000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '💫'
+  },
+
+  philosopher_stone: {
+    id: 'philosopher_stone',
+    name: 'Philosopher\'s Stone',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'The legendary stone that can transmute any metal into gold and grant immortality.',
+    value: 50000000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '🪄'
+  },
+
+  // WDYFT Ultimates (100M - 1B value range)
+  universe_core: {
+    id: 'universe_core',
+    name: 'Core of the Universe',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'The very core of existence itself. Holding it feels like holding the weight of creation.',
+    value: 100000000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '🌌'
+  },
+
+  reality_engine: {
+    id: 'reality_engine',
+    name: 'Reality Engine',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'A device capable of reshaping reality itself. Governments would start wars over this.',
+    value: 500000000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '⚙️'
+  },
+
+  // WDYFT Supreme (1B+ value range)
+  god_particle: {
+    id: 'god_particle',
+    name: 'God Particle',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'The fundamental particle that gives rise to all existence. Worth more than all the wealth in the world.',
+    value: 1000000000,
+    usable: false,
+    source: 'WDYFT',
+    icon: '✨'
+  },
+
+  existence_matrix: {
+    id: 'existence_matrix',
+    name: 'Matrix of All Existence',
+    tier: 'wdyft',
+    category: 'collectables',
+    description: 'The blueprint of reality itself. Contains the code that defines everything that is, was, and will be.',
+    value: 999999999999,
+    usable: false,
+    source: 'WDYFT',
+    icon: '🌀'
   }
 }

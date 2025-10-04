@@ -1028,7 +1028,427 @@ export const searchLocations: Record<string, SearchLocation> = {
       mythical: 0.0022,
       wdyft: 0.0011
     },
-    specialEffect: 'Higher chance for space-age technology and zero-gravity items',
+  },
+
+  // === ADDITIONAL 20 NEW LOCATIONS (41-60) ===
+
+  cyberpunk_megacity: {
+    id: 'cyberpunk_megacity',
+    name: 'Cyberpunk Megacity',
+    description: 'A sprawling neon-lit metropolis filled with hackers, corporations, and high-tech black market deals.',
+    wtcReward: { min: 22, max: 72 },
+    itemDropChances: {
+      useless: 0.24,
+      common: 0.19,
+      uncommon: 0.21,
+      rare: 0.15,
+      epic: 0.08,
+      ultra_rare: 0.04,
+      ultra_epic: 0.009,
+      legendary: 0.004,
+      mythical: 0.002,
+      wdyft: 0.001
+    },
+    specialEffect: 'Higher chance for cybernetic implants and hacking tools',
+    rarity: 'rare'
+  },
+
+  wizard_tower: {
+    id: 'wizard_tower',
+    name: 'Wizard\'s Tower',
+    description: 'A towering spire filled with arcane knowledge, potion labs, and mystical experiments gone wrong.',
+    wtcReward: { min: 18, max: 58 },
+    itemDropChances: {
+      useless: 0.28,
+      common: 0.2,
+      uncommon: 0.18,
+      rare: 0.13,
+      epic: 0.07,
+      ultra_rare: 0.035,
+      ultra_epic: 0.008,
+      legendary: 0.0035,
+      mythical: 0.0018,
+      wdyft: 0.0009
+    },
+    specialEffect: 'Higher chance for magical artifacts and potion ingredients',
+    rarity: 'uncommon'
+  },
+
+  dinosaur_excavation_site: {
+    id: 'dinosaur_excavation_site',
+    name: 'Dinosaur Excavation Site',
+    description: 'A paleontological dig site where ancient bones and prehistoric artifacts are being unearthed.',
+    wtcReward: { min: 16, max: 52 },
+    itemDropChances: {
+      useless: 0.29,
+      common: 0.21,
+      uncommon: 0.17,
+      rare: 0.11,
+      epic: 0.06,
+      ultra_rare: 0.03,
+      ultra_epic: 0.007,
+      legendary: 0.003,
+      mythical: 0.0015,
+      wdyft: 0.0007
+    },
+    specialEffect: 'Higher chance for fossil artifacts and ancient bones',
+    rarity: 'uncommon'
+  },
+
+  underwater_volcano: {
+    id: 'underwater_volcano',
+    name: 'Underwater Volcano',
+    description: 'An active submarine volcano venting hot water and minerals, creating bizarre deep-sea formations.',
+    wtcReward: { min: 24, max: 78 },
+    itemDropChances: {
+      useless: 0.22,
+      common: 0.16,
+      uncommon: 0.19,
+      rare: 0.17,
+      epic: 0.09,
+      ultra_rare: 0.045,
+      ultra_epic: 0.011,
+      legendary: 0.0045,
+      mythical: 0.0022,
+      wdyft: 0.0011
+    },
+    specialEffect: 'Higher chance for volcanic minerals and heat-resistant items',
+    rarity: 'rare'
+  },
+
+  steampunk_workshop: {
+    id: 'steampunk_workshop',
+    name: 'Steampunk Workshop',
+    description: 'A Victorian-era laboratory filled with brass gears, steam engines, and mechanical marvels.',
+    wtcReward: { min: 20, max: 65 },
+    itemDropChances: {
+      useless: 0.26,
+      common: 0.18,
+      uncommon: 0.2,
+      rare: 0.14,
+      epic: 0.075,
+      ultra_rare: 0.038,
+      ultra_epic: 0.0085,
+      legendary: 0.0038,
+      mythical: 0.0019,
+      wdyft: 0.001
+    },
+    specialEffect: 'Higher chance for mechanical parts and steam-powered devices',
+    rarity: 'rare'
+  },
+
+  alien_biology_lab: {
+    id: 'alien_biology_lab',
+    name: 'Alien Biology Laboratory',
+    description: 'An extraterrestrial research facility studying bizarre life forms and genetic experiments.',
+    wtcReward: { min: 26, max: 85 },
+    itemDropChances: {
+      useless: 0.21,
+      common: 0.15,
+      uncommon: 0.18,
+      rare: 0.18,
+      epic: 0.1,
+      ultra_rare: 0.05,
+      ultra_epic: 0.012,
+      legendary: 0.005,
+      mythical: 0.0025,
+      wdyft: 0.0012
+    },
+    specialEffect: 'Highest chance for xenobiology specimens and genetic material',
+    rarity: 'epic'
+  },
+
+  time_travelers_hideout: {
+    id: 'time_travelers_hideout',
+    name: 'Time Traveler\'s Hideout',
+    description: 'A secret base where time travelers store their equipment and plan temporal excursions.',
+    wtcReward: { min: 28, max: 92 },
+    itemDropChances: {
+      useless: 0.19,
+      common: 0.13,
+      uncommon: 0.16,
+      rare: 0.19,
+      epic: 0.12,
+      ultra_rare: 0.06,
+      ultra_epic: 0.015,
+      legendary: 0.006,
+      mythical: 0.003,
+      wdyft: 0.0015
+    },
+    specialEffect: 'Higher chance for temporal devices and anachronistic items',
+    rarity: 'epic'
+  },
+
+  digital_consciousness_realm: {
+    id: 'digital_consciousness_realm',
+    name: 'Digital Consciousness Realm',
+    description: 'A virtual reality where digital beings live and AI consciousness manifests as physical objects.',
+    wtcReward: { min: 30, max: 100 },
+    itemDropChances: {
+      useless: 0.18,
+      common: 0.12,
+      uncommon: 0.15,
+      rare: 0.2,
+      epic: 0.13,
+      ultra_rare: 0.065,
+      ultra_epic: 0.016,
+      legendary: 0.0065,
+      mythical: 0.0032,
+      wdyft: 0.0016
+    },
+    specialEffect: 'Higher chance for digital artifacts and AI consciousness fragments',
+    rarity: 'epic'
+  },
+
+  quantum_foam_void: {
+    id: 'quantum_foam_void',
+    name: 'Quantum Foam Void',
+    description: 'The fundamental layer of reality where quantum fluctuations create and destroy particles.',
+    wtcReward: { min: 35, max: 120 },
+    itemDropChances: {
+      useless: 0.15,
+      common: 0.1,
+      uncommon: 0.12,
+      rare: 0.18,
+      epic: 0.16,
+      ultra_rare: 0.08,
+      ultra_epic: 0.02,
+      legendary: 0.008,
+      mythical: 0.004,
+      wdyft: 0.002
+    },
+    specialEffect: 'Highest chance for quantum particles and reality-warping items',
+    rarity: 'epic'
+  },
+
+  dream_weaver_citadel: {
+    id: 'dream_weaver_citadel',
+    name: 'Dream Weaver Citadel',
+    description: 'A fortress built in the collective unconscious, where dream architects shape reality.',
+    wtcReward: { min: 32, max: 105 },
+    itemDropChances: {
+      useless: 0.17,
+      common: 0.11,
+      uncommon: 0.14,
+      rare: 0.19,
+      epic: 0.14,
+      ultra_rare: 0.07,
+      ultra_epic: 0.017,
+      legendary: 0.007,
+      mythical: 0.0035,
+      wdyft: 0.0018
+    },
+    specialEffect: 'Higher chance for dream artifacts and subconscious manifestations',
+    rarity: 'epic'
+  },
+
+  parallel_universe_crossroads: {
+    id: 'parallel_universe_crossroads',
+    name: 'Parallel Universe Crossroads',
+    description: 'An intersection point where multiple realities converge, leaking items from alternate timelines.',
+    wtcReward: { min: 38, max: 125 },
+    itemDropChances: {
+      useless: 0.14,
+      common: 0.09,
+      uncommon: 0.11,
+      rare: 0.17,
+      epic: 0.17,
+      ultra_rare: 0.085,
+      ultra_epic: 0.021,
+      legendary: 0.0085,
+      mythical: 0.0042,
+      wdyft: 0.0021
+    },
+    specialEffect: 'Highest chance for alternate reality items and dimensional artifacts',
+    rarity: 'epic'
+  },
+
+  singularity_core: {
+    id: 'singularity_core',
+    name: 'Singularity Core',
+    description: 'The heart of a collapsed star, containing infinite density and impossible physics.',
+    wtcReward: { min: 40, max: 140 },
+    itemDropChances: {
+      useless: 0.12,
+      common: 0.08,
+      uncommon: 0.1,
+      rare: 0.16,
+      epic: 0.18,
+      ultra_rare: 0.09,
+      ultra_epic: 0.022,
+      legendary: 0.009,
+      mythical: 0.0045,
+      wdyft: 0.0022
+    },
+    specialEffect: 'Contains items that bend the laws of physics themselves',
+    rarity: 'epic'
+  },
+
+  neural_network_nexus: {
+    id: 'neural_network_nexus',
+    name: 'Neural Network Nexus',
+    description: 'A massive AI data center where machine learning algorithms manifest as physical objects.',
+    wtcReward: { min: 27, max: 88 },
+    itemDropChances: {
+      useless: 0.2,
+      common: 0.14,
+      uncommon: 0.17,
+      rare: 0.18,
+      epic: 0.11,
+      ultra_rare: 0.055,
+      ultra_epic: 0.013,
+      legendary: 0.0055,
+      mythical: 0.0027,
+      wdyft: 0.0014
+    },
+    specialEffect: 'Higher chance for AI-generated items and computational artifacts',
+    rarity: 'rare'
+  },
+
+  bio_luminescent_caverns: {
+    id: 'bio_luminescent_caverns',
+    name: 'Bio-luminescent Caverns',
+    description: 'Underground caves filled with glowing organisms and phosphorescent crystals.',
+    wtcReward: { min: 21, max: 68 },
+    itemDropChances: {
+      useless: 0.25,
+      common: 0.18,
+      uncommon: 0.2,
+      rare: 0.14,
+      epic: 0.075,
+      ultra_rare: 0.038,
+      ultra_epic: 0.0085,
+      legendary: 0.0038,
+      mythical: 0.0019,
+      wdyft: 0.001
+    },
+    specialEffect: 'Higher chance for glowing crystals and bio-luminescent organisms',
+    rarity: 'uncommon'
+  },
+
+  ancient_astronaut_ruins: {
+    id: 'ancient_astronaut_ruins',
+    name: 'Ancient Astronaut Ruins',
+    description: 'The remains of an alien civilization that visited Earth in prehistoric times.',
+    wtcReward: { min: 29, max: 95 },
+    itemDropChances: {
+      useless: 0.19,
+      common: 0.13,
+      uncommon: 0.16,
+      rare: 0.19,
+      epic: 0.12,
+      ultra_rare: 0.06,
+      ultra_epic: 0.015,
+      legendary: 0.006,
+      mythical: 0.003,
+      wdyft: 0.0015
+    },
+    specialEffect: 'Highest chance for ancient alien technology and extraterrestrial artifacts',
+    rarity: 'epic'
+  },
+
+  shadow_market: {
+    id: 'shadow_market',
+    name: 'Shadow Market',
+    description: 'An underground bazaar where forbidden items and dark magic are traded openly.',
+    wtcReward: { min: 23, max: 75 },
+    itemDropChances: {
+      useless: 0.23,
+      common: 0.17,
+      uncommon: 0.19,
+      rare: 0.16,
+      epic: 0.085,
+      ultra_rare: 0.043,
+      ultra_epic: 0.01,
+      legendary: 0.0043,
+      mythical: 0.0021,
+      wdyft: 0.0011
+    },
+    specialEffect: 'Higher chance for cursed items and black market goods',
+    rarity: 'rare'
+  },
+
+  coral_reef_kingdom: {
+    id: 'coral_reef_kingdom',
+    name: 'Coral Reef Kingdom',
+    description: 'A vibrant underwater kingdom built by intelligent sea creatures and protected by coral guardians.',
+    wtcReward: { min: 19, max: 62 },
+    itemDropChances: {
+      useless: 0.27,
+      common: 0.2,
+      uncommon: 0.18,
+      rare: 0.13,
+      epic: 0.065,
+      ultra_rare: 0.033,
+      ultra_epic: 0.0075,
+      legendary: 0.0033,
+      mythical: 0.0017,
+      wdyft: 0.0008
+    },
+    specialEffect: 'Higher chance for aquatic and coral-based items',
+    rarity: 'uncommon'
+  },
+
+  mad_scientists_laboratory: {
+    id: 'mad_scientists_laboratory',
+    name: 'Mad Scientist\'s Laboratory',
+    description: 'The chaotic workspace of a brilliant but unstable researcher, filled with experimental equipment.',
+    wtcReward: { min: 25, max: 80 },
+    itemDropChances: {
+      useless: 0.22,
+      common: 0.16,
+      uncommon: 0.18,
+      rare: 0.17,
+      epic: 0.09,
+      ultra_rare: 0.045,
+      ultra_epic: 0.011,
+      legendary: 0.0045,
+      mythical: 0.0022,
+      wdyft: 0.0011
+    },
+    specialEffect: 'Higher chance for experimental technology and unstable inventions',
+    rarity: 'rare'
+  },
+
+  elemental_nexus_chamber: {
+    id: 'elemental_nexus_chamber',
+    name: 'Elemental Nexus Chamber',
+    description: 'A chamber where the four classical elements converge, creating powerful elemental artifacts.',
+    wtcReward: { min: 31, max: 102 },
+    itemDropChances: {
+      useless: 0.16,
+      common: 0.1,
+      uncommon: 0.13,
+      rare: 0.18,
+      epic: 0.15,
+      ultra_rare: 0.075,
+      ultra_epic: 0.019,
+      legendary: 0.0075,
+      mythical: 0.0037,
+      wdyft: 0.0019
+    },
+    specialEffect: 'Guaranteed elemental artifacts with fire, water, earth, and air themes',
+    rarity: 'epic'
+  },
+
+  virtual_reality_construct: {
+    id: 'virtual_reality_construct',
+    name: 'Virtual Reality Construct',
+    description: 'A digital realm that has become partially real, containing VR artifacts and digital consciousness.',
+    wtcReward: { min: 26, max: 85 },
+    itemDropChances: {
+      useless: 0.21,
+      common: 0.15,
+      uncommon: 0.17,
+      rare: 0.18,
+      epic: 0.1,
+      ultra_rare: 0.05,
+      ultra_epic: 0.012,
+      legendary: 0.005,
+      mythical: 0.0025,
+      wdyft: 0.0012
+    },
+    specialEffect: 'Higher chance for digital artifacts and virtual reality equipment',
     rarity: 'rare'
   }
 }

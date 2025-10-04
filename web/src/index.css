@@ -800,25 +800,6 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-/***** Modal Enhancements ******/
-.modal-overlay {
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  animation: fadeIn 0.2s ease-out;
-}
-
-.modal-content {
-  background: var(--secondary);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-strong);
-  max-width: 90vw;
-  max-height: 90vh;
-  overflow: hidden;
-  animation: slideInUp 0.3s ease-out;
-}
-
 /***** Activity Cards ******/
 .activity-grid {
   display: grid;
@@ -903,11 +884,6 @@ body {
 
 .notification-info {
   border-left: 4px solid var(--primary);
-}
-
-/***** Smooth Transitions ******/
-* {
-  transition: var(--transition-fast);
 }
 
 /***** Print Styles ******/

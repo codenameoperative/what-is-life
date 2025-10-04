@@ -209,7 +209,24 @@ export default function ShopModal({ open, onClose }: Props) {
                     className="w-full text-left px-3 py-2 rounded-lg hover:bg-neutral-900/60 border border-neutral-900/60"
                   >
                     <div className="text-sm text-white">{it.name}</div>
-                    <div className="text-xs text-neutral-400">{it.tier} • {it.category} • {it.value} WTC</div>
+                    <div className="flex items-center gap-2 text-xs">
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                        it.tier === 'useless' ? 'bg-gray-600 text-gray-200' :
+                        it.tier === 'common' ? 'bg-gray-500 text-gray-100' :
+                        it.tier === 'uncommon' ? 'bg-green-600 text-green-100' :
+                        it.tier === 'rare' ? 'bg-blue-600 text-blue-100' :
+                        it.tier === 'epic' ? 'bg-purple-600 text-purple-100' :
+                        it.tier === 'legendary' ? 'bg-yellow-600 text-yellow-100' :
+                        it.tier === 'mythical' ? 'bg-red-600 text-red-100' :
+                        'bg-pink-600 text-pink-100'
+                      }`}>
+                        {it.tier.charAt(0).toUpperCase() + it.tier.slice(1)}
+                      </span>
+                      <span className="text-neutral-400">•</span>
+                      <span className="text-neutral-400">{it.category}</span>
+                      <span className="text-neutral-400">•</span>
+                      <span className="text-emerald-400">{it.value} WTC</span>
+                    </div>
                   </button>
                 </li>
               ))}
@@ -224,7 +241,21 @@ export default function ShopModal({ open, onClose }: Props) {
             {selected ? (
               <div className="space-y-3">
                 <div className="text-base font-semibold text-white">{selected.name}</div>
-                <div className="text-xs text-neutral-400">{selected.tier} • {selected.category}</div>
+                <div className="flex items-center gap-2">
+                  <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                    selected.tier === 'useless' ? 'bg-gray-600 text-gray-200' :
+                    selected.tier === 'common' ? 'bg-gray-500 text-gray-100' :
+                    selected.tier === 'uncommon' ? 'bg-green-600 text-green-100' :
+                    selected.tier === 'rare' ? 'bg-blue-600 text-blue-100' :
+                    selected.tier === 'epic' ? 'bg-purple-600 text-purple-100' :
+                    selected.tier === 'legendary' ? 'bg-yellow-600 text-yellow-100' :
+                    selected.tier === 'mythical' ? 'bg-red-600 text-red-100' :
+                    'bg-pink-600 text-pink-100'
+                  }`}>
+                    {selected.tier.charAt(0).toUpperCase() + selected.tier.slice(1)}
+                  </span>
+                  <span className="text-xs text-neutral-400">• {selected.category}</span>
+                </div>
                 <div className="text-sm text-neutral-300">Price: {selected.value} WTC each</div>
                 <div className="text-sm text-neutral-200">{selected.description}</div>
 

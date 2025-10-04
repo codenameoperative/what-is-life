@@ -377,6 +377,25 @@ function Game({ onBackToMenu, onLoad }: { onBackToMenu?: () => void; onLoad?: ()
     return () => window.clearInterval(interval)
   }, [])
 
+  const handleBackToMenu = useCallback(async () => {
+    // Save the current game state before going back to menu
+    try {
+      const saveSuccess = await actions.saveGameData()
+      if (saveSuccess) {
+        console.log('Game saved successfully before returning to menu')
+      } else {
+        console.warn('Failed to save game before returning to menu')
+      }
+    } catch (error) {
+      console.error('Error saving game before returning to menu:', error)
+    }
+
+    // Call the original back to menu handler
+    if (onBackToMenu) {
+      onBackToMenu()
+    }
+  }, [actions, onBackToMenu])
+
   const toggleRetroMode = useCallback((enable: boolean, silent = false) => {
     setRetroModeActive(enable)
     try {

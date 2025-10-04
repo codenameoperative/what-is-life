@@ -248,6 +248,100 @@ export const jobs: Record<string, JobDefinition> = {
     payPerWork: { min: 45, max: 90 },
     requirements: { minWTC: 700, requiredItemId: 'architecture_degree' },
   },
+
+  // === NEW JOBS - Expanded Career Opportunities ===
+
+  // Entry Level Jobs (5 more)
+  retail_salesperson: {
+    id: 'retail_salesperson',
+    name: 'Retail Salesperson',
+    tier: 'entry',
+    description: 'Help customers find products and process transactions in a retail environment.',
+    payPerWork: { min: 8, max: 20 },
+    requirements: { minWTC: 30 },
+  },
+
+  gas_station_attendant: {
+    id: 'gas_station_attendant',
+    name: 'Gas Station Attendant',
+    tier: 'entry',
+    description: 'Pump gas, stock shelves, and handle customer payments at a busy gas station.',
+    payPerWork: { min: 9, max: 22 },
+  },
+
+  library_assistant: {
+    id: 'library_assistant',
+    name: 'Library Assistant',
+    tier: 'entry',
+    description: 'Help organize books, assist patrons, and maintain the library collection.',
+    payPerWork: { min: 10, max: 24 },
+    requirements: { minWTC: 75 },
+  },
+
+  parking_attendant: {
+    id: 'parking_attendant',
+    name: 'Parking Attendant',
+    tier: 'entry',
+    description: 'Direct traffic and collect parking fees in busy lots and garages.',
+    payPerWork: { min: 11, max: 26 },
+  },
+
+  tour_guide: {
+    id: 'tour_guide',
+    name: 'Tour Guide',
+    tier: 'entry',
+    description: 'Lead sightseeing tours and share knowledge about local attractions and history.',
+    payPerWork: { min: 12, max: 28 },
+    requirements: { minWTC: 150 },
+  },
+
+  // Intermediate Jobs (3 more)
+  real_estate_agent: {
+    id: 'real_estate_agent',
+    name: 'Real Estate Agent',
+    tier: 'intermediate',
+    description: 'Show properties, negotiate deals, and help clients buy or sell homes.',
+    payPerWork: { min: 25, max: 55 },
+    requirements: { minWTC: 500, requiredItemId: 'business_suit' },
+  },
+
+  personal_trainer: {
+    id: 'personal_trainer',
+    name: 'Personal Trainer',
+    tier: 'intermediate',
+    description: 'Design workout plans and motivate clients to achieve their fitness goals.',
+    payPerWork: { min: 22, max: 48 },
+    requirements: { minWTC: 300 },
+  },
+
+  event_planner: {
+    id: 'event_planner',
+    name: 'Event Planner',
+    tier: 'intermediate',
+    description: 'Organize and coordinate events, from corporate meetings to wedding receptions.',
+    payPerWork: { min: 28, max: 62 },
+    requirements: { minWTC: 400, requiredItemId: 'organizer_planner' },
+  },
+
+  // Advanced Jobs (1 more)
+  software_developer: {
+    id: 'software_developer',
+    name: 'Software Developer',
+    tier: 'advanced',
+    description: 'Design, code, and maintain software applications for various platforms.',
+    payPerWork: { min: 45, max: 95 },
+    requirements: { minWTC: 1000, requiredItemId: 'programming_laptop' },
+  },
+
+  // Expert Jobs (1 more)
+  neurosurgeon: {
+    id: 'neurosurgeon',
+    name: 'Neurosurgeon',
+    tier: 'expert',
+    description: 'Perform complex brain and nervous system surgeries with precision and expertise.',
+    payPerWork: { min: 150, max: 300 },
+    requirements: { minWTC: 5000, requiredItemId: 'medical_license' },
+  }
 }
 
 export const jobTierOrder: Record<JobTier, number> = {

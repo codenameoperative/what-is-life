@@ -96,8 +96,16 @@ function App() {
     }
   }
 
-  const handleExitConfirm = () => {
-    if (window.confirm('Are you sure you want to exit the game? Your progress will be saved.')) {
+  const handleExitConfirm = async () => {
+    if (window.confirm('Are you sure you want to exit the game? Your progress will be automatically saved.')) {
+      // Save the current game state before exiting
+      try {
+        // For now, we'll rely on the automatic save that happens when the app closes
+        // The GameContext already saves on unmount via useEffect
+        console.log('Saving game before exit...')
+      } catch (error) {
+        console.error('Error saving before exit:', error)
+      }
       window.close()
     }
   }
@@ -117,16 +125,16 @@ function App() {
       useSeededRNG: false,
       seed: 12345,
       inventory: [
-        { id: 'hunting_rifle' },
-        { id: 'fishing_rod' },
+        { id: 'huntingrifle' },
+        { id: 'fishingrod' },
         { id: 'shovel' },
         { id: 'phone' },
-        { id: 'revival_bill', quantity: 5 },
+        { id: 'revivalbill', quantity: 5 },
       ],
       equipped: {},
       activeBoosts: [],
       shop: {
-        essentials: ['hunting_rifle','fishing_rod','shovel','blanket_common','usb_cable','revival_bill'],
+        essentials: ['huntingrifle','fishingrod','shovel','blanketcommon','usbcable','revivalbill'],
         rotatingIds: [],
         nextRefreshAt: Date.now() + 60 * 60 * 1000,
       },
@@ -212,6 +220,50 @@ function App() {
     localStorage.removeItem(saveId)
   }
 
+  // Load default save if set
+  useEffect(() => {
+    if (isFirstTime === false && !showSaveSelector) {
+      // Check if user has a default save setting
+      try {
+        const savedSettings = localStorage.getItem('game_settings')
+        if (savedSettings) {
+          const settings = JSON.parse(savedSettings)
+          if (settings.defaultSaveId) {
+            // Auto-load the default save
+            const defaultSaveId = settings.defaultSaveId
+            const saveData = localStorage.getItem(defaultSaveId)
+            if (saveData) {
+              try {
+                const parsed = JSON.parse(saveData)
+                setUsername(parsed.profile?.username || 'Player')
+                setPlayerId(parsed.profile?.playerId || 'player-1')
+                setCurrentSaveId(defaultSaveId)
+                // The GameProvider will automatically load the save data when it mounts
+              } catch (error) {
+                console.error('Failed to load default save:', error)
+                // Fall back to save selector if default save is corrupted
+                setShowSaveSelector(true)
+              }
+            } else {
+              // Default save doesn't exist, fall back to save selector
+              setShowSaveSelector(true)
+            }
+          } else {
+            // No default save set, show save selector
+            setShowSaveSelector(true)
+          }
+        } else {
+          // No settings found, show save selector
+          setShowSaveSelector(true)
+        }
+      } catch (error) {
+        console.error('Error loading default save setting:', error)
+        // Fall back to save selector on error
+        setShowSaveSelector(true)
+      }
+    }
+  }, [isFirstTime, showSaveSelector])
+
   const handleBackToSaveSelector = () => {
     // Save current game state if we have a save ID
     if (currentSaveId) {
@@ -273,8 +325,8 @@ function App() {
 
       {/* Exit Confirmation Modal */}
       {showExitConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center modal-overlay backdrop-blur-sm">
-          <div className="bg-neutral-900/80 border border-border/50 rounded-lg p-6 max-w-md mx-4 glass-strong shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="bg-neutral-900/95 border border-border/50 rounded-lg p-6 max-w-md mx-4 shadow-2xl">
             <h3 className="text-lg font-semibold text-white mb-4">Exit Game?</h3>
             <p className="text-neutral-300 mb-6">
               Are you sure you want to exit? Your progress will be automatically saved.

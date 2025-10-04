@@ -132,6 +132,32 @@ export default function SettingsModal({ open, onClose }: Props) {
             </div>
           </div>
 
+          {/* Save Settings */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-primary">Save & Loading</h3>
+
+            <div className="space-y-4">
+              <label className="flex items-center justify-between glass p-4 rounded-lg hover:glass-strong transition-all duration-200">
+                <div>
+                  <div className="text-sm font-medium text-primary">Auto-Load Default Save</div>
+                  <div className="text-xs text-muted">Automatically load this save slot when starting the game</div>
+                </div>
+                <select
+                  value={tempSettings.defaultSaveId || ''}
+                  onChange={(e) => setTempSettings(prev => ({ ...prev, defaultSaveId: e.target.value || undefined }))}
+                  className="px-3 py-1 input-modern"
+                >
+                  <option value="">None (Show save selector)</option>
+                  <option value="save-slot-1">Save Slot 1</option>
+                  <option value="save-slot-2">Save Slot 2</option>
+                  <option value="save-slot-3">Save Slot 3</option>
+                  <option value="save-slot-4">Save Slot 4</option>
+                  <option value="save-slot-5">Save Slot 5</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
           {/* Save Management */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-red-400">Save Management</h3>
