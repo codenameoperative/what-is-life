@@ -40,27 +40,26 @@ npm ci
 npm run dev
 ```
 
-### **Desktop Builds** (Linux, Windows, macOS)
+### **Desktop Builds** (Windows MSI Focus)
 ```bash
 # Install dependencies
 npm ci
 npm ci --prefix web
 
-# Build for your platform
-npm run tauri:build
+# Build for Windows (MSI installer)
+npm run tauri:build:windows:msi
 
-# Or build for specific Linux architectures
-npm run tauri:build:linux:x64    # 64-bit Intel/AMD (official release target)
+# Legacy builds (Linux - deprioritized)
+npm run tauri:build:linux:x64    # 64-bit Intel/AMD (community maintained)
 # Community builds (require extra setup):
 # npm run tauri:build:linux:arm64  # 64-bit ARM
 # npm run tauri:build:linux:i686   # 32-bit Intel
 ```
 
-### **Android Build** (Low Priority)
+### **Android Build** (Community Maintained)
 ```bash
-# Android builds are currently deprioritized
-# Focus is on Windows MSI installer development
-echo 'Android builds available but not actively maintained'
+# Android builds are community-maintained
+echo 'Android builds available but community supported'
 ```
 
 ## 🎮 **Core Features**
@@ -133,21 +132,24 @@ echo 'Android builds available but not actively maintained'
 ## 📦 **Distribution**
 
 ### **Linux** 🐧
-- **`.deb`**, **`.rpm`**, and **`.AppImage`** bundles
+- **Community-maintained** `.deb`, `.rpm`, and `.AppImage` bundles
 - **Official support**: x64 (Intel/AMD)
 - **Community builds**: ARM64 / i686 (require additional toolchains)
 
+> **🐧 Linux Notice**: Linux builds are now community-maintained. The focus has shifted to Windows MSI installer development, but Linux builds remain functional for community use.
+
 ### **Windows** 🪟
-- **`.msi`** installer packages
+- **`.msi`** installer packages (Primary focus)
 - **64-bit** native builds
 - **WebView2** integration
+- **MSI installer** with Start Menu shortcuts
 
-> **🪟 Windows Setup Notice**: For immediate Windows compatibility, use the `scripts/windows-bootstrapper.bat` script which sets up WSL (Windows Subsystem for Linux) to run the Linux builds. Native Windows MSI installers are available through GitHub Actions CI/CD pipeline.
+> **🪟 Windows Development Focus**: The project now prioritizes Windows MSI installer development. Native Windows builds are available through GitHub Actions CI/CD pipeline with professional MSI packaging.
 
 ### **macOS** 🍎
-- **`.app`** bundles
-- **Universal binaries**
-- **Native macOS integration**
+- **Community-driven development**
+- **Requires macOS build environment**
+- **`.app` bundles** handled by volunteer maintainers
 
 > **🍎 Community Development Notice**: macOS and iOS versions can be built using the existing codebase and CI/CD pipeline. Community contributors who create and maintain these versions will be responsible for their ongoing updates, testing, and distribution. The Developer focuses on Linux, Windows, and Android platforms.
 
@@ -159,11 +161,11 @@ echo 'Android builds available but not actively maintained'
 > **💻 Call for macOS Contributors**: We need developers with macOS machines to create native macOS `.app` bundles and iOS versions! The build system is ready - just run the GitHub Actions workflow or use the provided build scripts. Contributors will be credited and can maintain their own release channels.
 
 ### **Android** 🤖
-- **APK** packages for all architectures
+- **Community-maintained** APK packages for all architectures
 - **Minimum API 26** (Android 8.0)
 - **ARM64, ARM32, x86_64, x86** support
 
-> **📱 Android Development Notice**: Native Android builds are currently in development. The game runs well on modern Android devices through the web version, but dedicated APK packages are coming soon for offline play and optimized mobile experience.
+> **📱 Android Development Notice**: Native Android builds are currently community-maintained. The game runs well on modern Android devices through the web version, but dedicated APK packages are available for offline play and optimized mobile experience.
 
 ## 🏗️ **Project Structure**
 
@@ -202,7 +204,7 @@ what-is-life/
 
 ### **🔄 In Progress**
 - [ ] Windows + macOS CI stabilization
-- [ ] Android packaging automation
+- [ ] Android packaging automation (community maintained)
 - [ ] Documentation migration to GitHub Wiki
 
 ### **🎯 Upcoming**
@@ -310,21 +312,7 @@ npm run tauri:build
 - Fixed activity system and save functionality
 - Improved UI with reduced hover glitches
 - Optimized activity cooldowns for better gameplay
-
-**🔄 In Progress:**
-- [ ] Native Windows MSI installer development
-- [ ] Windows + macOS CI stabilization
-- [ ] Android packaging automation (deprioritized)
-- [ ] Documentation migration to GitHub Wiki
-
-### **🚀 How to Contribute**
-
-1. **Fork the repository** on GitHub
-2. **Create your feature branch**: `git checkout -b feature/amazing-feature`
-3. **Make your changes** and test thoroughly
-4. **Commit your changes**: `git commit -m 'Add amazing feature'`
-5. **Push to the branch**: `git push origin feature/amazing-feature`
-6. **Open a Pull Request**
+- Windows MSI installer development
 
 ### **💻 Platform-Specific Contributions**
 
