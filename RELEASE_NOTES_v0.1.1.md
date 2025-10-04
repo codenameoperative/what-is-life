@@ -36,6 +36,9 @@
 - **RPM Package** (.rpm) - For Red Hat/Fedora-based systems
 - **Compressed archives** (.zip) for easy distribution
 
+### ✅ **Revamped UI**
+- **UI was completely revamped** with a modern and professional vibe
+
 ## 🛠️ **Technical Improvements**
 
 ### **Code Quality**
@@ -58,11 +61,7 @@
 - **60+ Search Locations** with unique rewards
 
 ## 🎯 **What's Next (v0.1.2)**
-- **Mobile app improvements** for Android/iOS
-- **Enhanced multiplayer features** for LAN gaming
-- **Additional mini-games** and activities
-- **Improved UI/UX** based on user feedback
-- **Performance optimizations** for smoother gameplay
+- **android and msi coming soon**
 
 ## 📥 **Download Links**
 - **Linux AppImage**: `what-is-life_0.1.1_amd64.AppImage.zip`
@@ -87,3 +86,4 @@
 
 *This is a beta release - please report any issues on our GitHub repository.*
 *Your feedback helps us improve the game for everyone!*
+**Built With ❤️ by CodeNameOperative**

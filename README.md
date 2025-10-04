@@ -1,14 +1,22 @@
-# 🎮 What is Life?
+# 🎮 What is Life? (Development Halted)
+
+**Notice (October 2024):** Development of "What is Life?" has been temporarily halted due to unforeseen circumstances. I am currently focusing all my efforts on another large-scale project that requires my full attention. 
+
+Development may potentially resume between late December 2024 and mid-January 2025, depending on the progress of my current commitments.
+
+All current development work will be pushed to the repository for archival purposes, but no further updates are planned at this time. Thank you for your understanding and support.
+
+---
 
 A modern idle/incremental life simulation game built with React, TypeScript, Rust (Tauri), and modern web technologies. Experience various life activities, collect items, earn WTC (What Are Those Coins?), and build your virtual life across multiple platforms!
 
-![What is Life](https://img.shields.io/badge/What%20is%20Life-Idle%20Game-blue?style=for-the-badge&logo=game&logoColor=white)
-![Windows MSI](https://img.shields.io/badge/Windows-MSI%20Installer-green?style=for-the-badge&logo=windows&logoColor=white)
+![What is Life](https://img.shields.io/badge/What%20is%20Life-Development%20Halted-red?style=for-the-badge&logo=game&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Archived-yellow?style=for-the-badge)
 ![Built with](https://img.shields.io/badge/Built%20with-React%20%7C%20Rust%20%7C%20Tauri-orange?style=for-the-badge)
 
-## 🌟 **Overview**
+## 🌟 **Project Status**
 
-**What is Life?** is a comprehensive life simulation game featuring:
+**Development of "What is Life?" has been temporarily halted.** The codebase is being made available for reference and educational purposes. The game featured:
 
 - 🏆 **50-Level Progression System** with XP, achievements, and dynamic titles
 - 💰 **Multi-Currency Economy** (Wallet, Bank, Stash)
@@ -34,33 +42,22 @@ A modern idle/incremental life simulation game built with React, TypeScript, Rus
 
 ---
 
-## 🚀 **Quick Start**
+## 🚀 **Getting the Code**
 
-### **Web Version** (Development/Testing)
-```bash
-cd web
-npm ci
-npm run dev
-```
+While development is on hold, you can still access the codebase for reference or educational purposes:
 
-### **Desktop Builds** (Windows MSI Focus)
 ```bash
+# Clone the repository
+git clone https://github.com/yourusername/what-is-life.git
+cd what-is-life
+
 # Install dependencies
 npm ci
-npm ci --prefix web
-
-# Build for Windows (MSI installer)
-npm run tauri:build:windows:msi
-
-# Alternative: Build for Linux (development)
-npm run tauri:build -- --target x86_64-unknown-linux-gnu
+cd web
+npm ci
 ```
 
-### **Docker Builds** (Android APK)
-```bash
-# Build Android APK using Docker
-./scripts/build-android.sh
-```
+**Note:** Some features may be incomplete or experimental. The code is provided as-is without support.
 
 ---
 
@@ -126,27 +123,27 @@ npm run tauri:build -- --target x86_64-unknown-linux-gnu
 
 ---
 
-## 📦 **Distribution**
+## 📦 **Project Archive**
 
-### **Windows (Primary)**
-- **MSI Installer** for easy installation and uninstallation
-- **x64 Architecture** for modern Windows systems
-- **Auto-updater** for seamless updates
+This repository serves as an archive of the development work done on "What is Life?" The codebase includes:
 
-### **Linux**
-- **AppImage** and **DEB** packages available
-- **Native integration** with Linux desktop environments
-- **Docker builds** for consistent deployment
+- Complete source code for the web and desktop versions
+- Game mechanics and systems implementation
+- UI components and design assets
+- Build and deployment configurations
 
-### **Android**
-- **APK Generation** via Docker and Gradle
-- **ARM64 and ARM32** support
-- **Native Android** app store ready
+### **What's Included**
+- Web frontend (React/TypeScript)
+- Tauri desktop application code
+- Game logic and state management
+- Asset management system
+- Multiplayer networking code
 
-### **Development**
-- **Web version** for testing and development
-- **Hot reload** for rapid iteration
-- **Cross-platform** testing capabilities
+### **Note on Dependencies**
+Some dependencies may be outdated or require specific versions to work correctly. The project was developed using:
+- Node.js v18+
+- Rust 1.70+
+- Tauri v1.4
 
 ---
 
@@ -174,30 +171,24 @@ npm run tauri:build -- --target x86_64-unknown-linux-gnu
 
 ---
 
-## 🤝 **Contributing**
+## 🤝 **About This Project**
 
-We welcome contributions from the community! Here's how you can help:
+"What is Life?" was an ambitious project that explored game development with modern web technologies. While development is currently on hold, the codebase remains available as a reference for others interested in:
 
-### **Code Contributions**
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+- Game development with React and TypeScript
+- Cross-platform desktop applications with Tauri
+- State management in complex applications
+- Game mechanics implementation
 
-### **Bug Reports**
-- Use the GitHub Issues page
-- Include detailed reproduction steps
-- Add relevant screenshots or logs
-- Tag appropriately (bug, enhancement, etc.)
+### **License**
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### **Feature Requests**
-- Discuss ideas in GitHub Discussions
-- Provide detailed use cases
-- Consider implementation complexity
-- Tag as enhancement
+### **Acknowledgments**
+- All contributors who helped during active development
+- The open-source communities behind the technologies used
+- The game development community for inspiration and support
 
-### **Development Setup**
+### **Development Setup (For Reference Only)**
 ```bash
 # Clone the repository
 git clone https://github.com/your-username/what-is-life.git

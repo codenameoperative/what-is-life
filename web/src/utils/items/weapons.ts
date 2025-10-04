@@ -1565,4 +1565,6 @@ export const weaponsItems: Record<string, Item> = {
     breakChance: 0.0,
     icon: '🕳️'
   }
+
+
 }

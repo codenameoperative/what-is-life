@@ -1,0 +1,115 @@
+# 🚀 What is Life? - Installation Instructions (RPM)
+
+## 📦 Red Hat/Fedora/CentOS Installation
+
+RPM packages provide traditional Linux package management with automatic dependency resolution.
+
+### Quick Install:
+1. Download: `what-is-life-0.1.1-1.x86_64.rpm.zip`
+2. Extract the zip file
+3. Install: `sudo rpm -i what-is-life-0.1.1-1.x86_64.rpm`
+4. Run: `what-is-life` (from terminal) or find in applications menu
+
+### Alternative Methods:
+
+#### Command Line Installation:
+```bash
+# Navigate to download location
+cd ~/Downloads
+
+# Install the package
+sudo rpm -i what-is-life-0.1.1-1.x86_64.rpm
+
+# If dependencies are missing, install them:
+# Fedora/CentOS: sudo dnf install <missing-package>
+# RHEL/CentOS 7: sudo yum install <missing-package>
+
+# Launch the game
+what-is-life
+```
+
+#### GUI Installation:
+1. Open your file manager
+2. Navigate to the .rpm file
+3. Double-click the .rpm file
+4. Click "Install" in the package manager
+5. Search for "What is Life?" in your applications menu
+
+#### System-wide Installation:
+```bash
+# Install for all users
+sudo rpm -i what-is-life-0.1.1-1.x86_64.rpm
+
+# Verify installation
+rpm -qi what-is-life
+
+# List installed files
+rpm -ql what-is-life
+
+# Launch the game
+what-is-life
+```
+
+## 🛠️ Requirements:
+- RPM-based Linux (Fedora, Red Hat Enterprise Linux, CentOS, openSUSE, Mageia, etc.)
+- x86_64 architecture
+- GTK 3.0 or higher
+- WebKit2GTK or similar web engine
+
+## 🔧 Troubleshooting:
+- If installation fails due to dependencies: Install missing packages first
+- If "permission denied": Use `sudo` for installation
+- If not found in menu: Restart session or run `what-is-life` from terminal
+- If missing libraries: Install required system libraries for your distribution
+
+## 🗑️ Uninstallation:
+```bash
+# Remove the package
+sudo rpm -e what-is-life
+
+# Or using package manager:
+# Fedora/CentOS: sudo dnf remove what-is-life
+# RHEL/CentOS 7: sudo yum remove what-is-life
+# openSUSE: sudo zypper remove what-is-life
+```
+
+## 📁 Installation Locations:
+- **Binary**: `/usr/bin/what-is-life`
+- **Desktop File**: `/usr/share/applications/what-is-life.desktop`
+- **Icon**: `/usr/share/icons/hicolor/*/apps/what-is-life.png`
+- **Data**: `/usr/share/what-is-life/`
+
+## 📋 Distribution-Specific Commands:
+
+### Fedora:
+```bash
+# Install
+sudo dnf install what-is-life-0.1.1-1.x86_64.rpm
+
+# Update (if newer version)
+sudo dnf update what-is-life
+
+# Remove
+sudo dnf remove what-is-life
+```
+
+### CentOS/RHEL:
+```bash
+# Install
+sudo yum localinstall what-is-life-0.1.1-1.x86_64.rpm
+
+# Remove
+sudo yum remove what-is-life
+```
+
+### openSUSE:
+```bash
+# Install
+sudo zypper install what-is-life-0.1.1-1.x86_64.rpm
+
+# Remove
+sudo zypper remove what-is-life
+```
+
+---
+*For support, visit: https://github.com/codenameoperative/what-is-life*

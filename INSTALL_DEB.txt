@@ -1,0 +1,79 @@
+# 🚀 What is Life? - Installation Instructions (DEB)
+
+## 📦 Debian/Ubuntu Installation
+
+DEB packages provide traditional Linux package management with automatic dependency resolution.
+
+### Quick Install:
+1. Download: `what-is-life_0.1.1_amd64.deb.zip`
+2. Extract the zip file
+3. Install: `sudo dpkg -i what-is-life_0.1.1_amd64.deb`
+4. Run: `what-is-life` (from terminal) or find in applications menu
+
+### Alternative Methods:
+
+#### Command Line Installation:
+```bash
+# Navigate to download location
+cd ~/Downloads
+
+# Install the package
+sudo dpkg -i what-is-life_0.1.1_amd64.deb
+
+# If dependencies are missing, run:
+sudo apt-get install -f
+
+# Launch the game
+what-is-life
+```
+
+#### GUI Installation:
+1. Open your file manager (Nautilus, Nemo, etc.)
+2. Navigate to the .deb file
+3. Double-click the .deb file
+4. Click "Install Package" in the software center
+5. Search for "What is Life?" in your applications menu
+
+#### System-wide Installation:
+```bash
+# Install for all users
+sudo dpkg -i what-is-life_0.1.1_amd64.deb
+
+# Update package database
+sudo apt-get update
+
+# Verify installation
+dpkg -l | grep what-is-life
+```
+
+## 🛠️ Requirements:
+- Debian-based Linux (Ubuntu, Debian, Linux Mint, elementary OS, Zorin OS, etc.)
+- x86_64 architecture
+- GTK 3.0 or higher
+- WebKit2GTK or similar web engine
+
+## 🔧 Troubleshooting:
+- If installation fails: `sudo apt-get install -f` (fix dependencies)
+- If "permission denied": Use `sudo` for installation
+- If not found in menu: Restart session or run `what-is-life` from terminal
+
+## 🗑️ Uninstallation:
+```bash
+# Remove the package
+sudo apt-get remove what-is-life
+
+# Remove configuration files (optional)
+sudo apt-get purge what-is-life
+
+# Clean up dependencies (optional)
+sudo apt-get autoremove
+```
+
+## 📁 Installation Locations:
+- **Binary**: `/usr/bin/what-is-life`
+- **Desktop File**: `/usr/share/applications/what-is-life.desktop`
+- **Icon**: `/usr/share/icons/hicolor/*/apps/what-is-life.png`
+- **Data**: `/usr/share/what-is-life/`
+
+---
+*For support, visit: https://github.com/codenameoperative/what-is-life*

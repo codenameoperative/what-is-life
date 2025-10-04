@@ -1,0 +1,52 @@
+# 🚀 What is Life? - Installation Instructions (AppImage)
+
+## 📦 AppImage Installation (Universal Linux)
+
+AppImage is a portable format that works on most Linux distributions without installation.
+
+### Quick Install:
+1. Download: `what-is-life_0.1.1_amd64.AppImage.zip`
+2. Extract the zip file
+3. Make the AppImage executable: `chmod +x what-is-life_0.1.1_amd64.AppImage`
+4. Run: `./what-is-life_0.1.1_amd64.AppImage`
+
+### Alternative Methods:
+
+#### Desktop Integration:
+```bash
+# Make executable
+chmod +x what-is-life_0.1.1_amd64.AppImage
+
+# Run directly
+./what-is-life_0.1.1_amd64.AppImage
+
+# Optional: Create desktop shortcut
+./what-is-life_0.1.1_amd64.AppImage --appimage-extract
+# Copy the .desktop file to ~/.local/share/applications/
+```
+
+#### System-wide Installation:
+```bash
+# Move to system path
+sudo cp what-is-life_0.1.1_amd64.AppImage /opt/
+sudo chmod +x /opt/what-is-life_0.1.1_amd64.AppImage
+
+# Create symbolic link
+sudo ln -sf /opt/what-is-life_0.1.1_amd64.AppImage /usr/local/bin/what-is-life
+```
+
+## 🛠️ Requirements:
+- Linux (x86_64)
+- GLIBC 2.17 or higher
+- FUSE 2.6.0 or higher (for mounting)
+
+## 🔧 Troubleshooting:
+- If AppImage doesn't run: `chmod +x what-is-life_0.1.1_amd64.AppImage`
+- If "cannot execute binary file": Install FUSE
+- If missing libraries: Install required system libraries
+
+## 🗑️ Uninstallation:
+Simply delete the AppImage file. No system files are modified.
+
+---
+*For support, visit: https://github.com/codenameoperative/what-is-life*
