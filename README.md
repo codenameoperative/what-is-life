@@ -50,16 +50,16 @@ npm ci --prefix web
 npm run tauri:build:windows:msi
 
 # Legacy builds (Linux - deprioritized)
-npm run tauri:build:linux:x64    # 64-bit Intel/AMD (community maintained)
+npm run tauri:build:linux:x64    # 64-bit Intel/AMD
 # Community builds (require extra setup):
 # npm run tauri:build:linux:arm64  # 64-bit ARM
 # npm run tauri:build:linux:i686   # 32-bit Intel
 ```
 
-### **Android Build** (Community Maintained)
+### **Android Build**
 ```bash
-# Android builds are community-maintained
-echo 'Android builds available but community supported'
+# Android builds are available
+echo 'Android builds available - check BUILD_README.md for instructions'
 ```
 
 ## 🎮 **Core Features**
@@ -132,11 +132,9 @@ echo 'Android builds available but community supported'
 ## 📦 **Distribution**
 
 ### **Linux** 🐧
-- **Community-maintained** `.deb`, `.rpm`, and `.AppImage` bundles
+- **`.deb`**, **`.rpm`**, and **`.AppImage`** bundles
 - **Official support**: x64 (Intel/AMD)
 - **Community builds**: ARM64 / i686 (require additional toolchains)
-
-> **🐧 Linux Notice**: Linux builds are now community-maintained. The focus has shifted to Windows MSI installer development, but Linux builds remain functional for community use.
 
 ### **Windows** 🪟
 - **`.msi`** installer packages (Primary focus)
@@ -161,11 +159,9 @@ echo 'Android builds available but community supported'
 > **💻 Call for macOS Contributors**: We need developers with macOS machines to create native macOS `.app` bundles and iOS versions! The build system is ready - just run the GitHub Actions workflow or use the provided build scripts. Contributors will be credited and can maintain their own release channels.
 
 ### **Android** 🤖
-- **Community-maintained** APK packages for all architectures
+- **APK** packages for all architectures
 - **Minimum API 26** (Android 8.0)
 - **ARM64, ARM32, x86_64, x86** support
-
-> **📱 Android Development Notice**: Native Android builds are currently community-maintained. The game runs well on modern Android devices through the web version, but dedicated APK packages are available for offline play and optimized mobile experience.
 
 ## 🏗️ **Project Structure**
 
@@ -200,15 +196,12 @@ what-is-life/
 - [x] LAN multiplayer functionality
 - [x] Modern UI redesign
 - [x] Cross-platform builds
-- [x] Android support
+- [x] Android support (not fully)
 
 ### **🔄 In Progress**
-- [ ] Windows + macOS CI stabilization
-- [ ] Android packaging automation (community maintained)
 - [ ] Documentation migration to GitHub Wiki
 
 ### **🎯 Upcoming**
-- [ ] Item crafting system
 - [ ] Job progression mechanics
 - [ ] Shop system expansion
 - [ ] Story/quest system
@@ -238,7 +231,7 @@ We welcome contributions! Areas for help:
 ### **Development Setup**
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/what-is-life.git
+git clone https://github.com/codenameoperative/what-is-life.git
 cd what-is-life
 
 # Install dependencies
