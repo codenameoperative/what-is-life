@@ -151,7 +151,6 @@ body {
 
 .btn-primary:hover {
   background: linear-gradient(135deg, var(--primary-dark) 0%, #3c45a5 100%);
-  transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(88, 101, 242, 0.4);
 }
 
@@ -175,7 +174,6 @@ body {
   background: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.3);
   color: var(--text-primary);
-  transform: translateY(-1px);
 }
 
 /***** Enhanced Cards ******/
@@ -191,7 +189,6 @@ body {
 
 .card:hover {
   border-color: var(--primary);
-  transform: translateY(-2px);
   box-shadow: var(--shadow);
 }
 
@@ -557,7 +554,6 @@ body {
 }
 
 .neal-button:hover {
-  transform: scale(1.05) rotate(2deg);
   box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
 }
 
@@ -578,7 +574,6 @@ body {
 }
 
 .neal-card:hover {
-  transform: translateY(-5px) scale(1.02);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
 }
@@ -857,7 +852,6 @@ body {
 }
 
 .activity-card:hover {
-  transform: translateY(-4px) scale(1.02);
   box-shadow: 0 20px 40px rgba(88, 101, 242, 0.3);
   border-color: var(--primary);
 }

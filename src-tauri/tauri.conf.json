@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "build": {
-    "beforeBuildCommand": "npm run --prefix ../web build",
+    "beforeBuildCommand": "echo 'Web build completed manually'",
     "beforeDevCommand": "",
     "devPath": "http://localhost:5173",
     "distDir": "../web/dist"
@@ -58,7 +58,7 @@
       },
       "resources": [],
       "shortDescription": "Life has its highs and lows",
-      "targets": ["deb", "rpm", "appimage", "msi"],
+      "targets": "all",
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
@@ -67,14 +67,6 @@
     },
     "security": {
       "csp": null
-    },
-    "updater": {
-      "active": true,
-      "endpoints": [
-        "https://api.github.com/repos/codenameoperative/what-is-life/releases/latest"
-      ],
-      "dialog": true,
-      "pubkey": ""
     },
     "windows": [
       {

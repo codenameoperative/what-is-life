@@ -1,9 +1,14 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-use tauri::Manager;
+use tauri::{command, Manager, AppHandle};
 use std::path::PathBuf;
 use std::fs;
 use serde_json::{json, Value};
+use rusqlite::Connection;
+use local_ip_address::local_ip;
+use chrono::Utc;
+use tauri::api::version;
+use reqwest; // For HTTP requests in update functions
 
 #[command]
 fn save_game(app_handle: AppHandle, data: String, player_id: String) -> Result<(), String> {
@@ -463,6 +468,8 @@ fn copy_dir_recursive(src: &PathBuf, dst: &PathBuf) -> Result<(), std::io::Error
 fn get_current_version() -> Result<String, String> {
     Ok(env!("CARGO_PKG_VERSION").to_string())
 }
+
+fn main() {
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![
         save_game,

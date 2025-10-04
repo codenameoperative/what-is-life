@@ -108,10 +108,83 @@ function App() {
     localStorage.setItem('username', newUsername)
     localStorage.setItem('playerId', newPlayerId)
 
+    // Create initial save data
+    const initialSaveData = {
+      wallet: 100,
+      bank: 0,
+      stash: 0,
+      currentJobId: undefined,
+      useSeededRNG: false,
+      seed: 12345,
+      inventory: [
+        { id: 'hunting_rifle' },
+        { id: 'fishing_rod' },
+        { id: 'shovel' },
+        { id: 'phone' },
+        { id: 'revival_bill', quantity: 5 },
+      ],
+      equipped: {},
+      activeBoosts: [],
+      shop: {
+        essentials: ['hunting_rifle','fishing_rod','shovel','blanket_common','usb_cable','revival_bill'],
+        rotatingIds: [],
+        nextRefreshAt: Date.now() + 60 * 60 * 1000,
+      },
+      garden: {
+        plots: Array.from({ length: 4 }, (_, i) => ({
+          id: `plot_${i + 1}`,
+          plantId: null,
+          plantedAt: 0,
+          wateredCount: 0,
+          growthProgress: 0,
+          isReady: false
+        })),
+        scarecrowEquipped: false,
+        lastCheckTime: Date.now()
+      },
+      profile: {
+        username: newUsername,
+        description: 'Just started my journey...',
+        playerId: newPlayerId,
+        totalEarnings: 0,
+        totalSpent: 0,
+        activityUsage: {},
+        level: 1,
+        xp: 0,
+        xpToNextLevel: 100,
+        unlockedAchievements: [],
+        availableTitles: [],
+        deathCount: 0,
+        totalTimePlayed: 0
+      },
+      settings: {
+        confirmSell: true,
+        confirmDeposit: true,
+        animationSpeed: 'normal',
+        performanceMode: false
+      },
+      secrets: {
+        retroUnlocked: false,
+        cheatUnlocked: false
+      },
+      lastPlayed: new Date().toISOString()
+    }
+
+    // Save to first available slot
+    for (let i = 1; i <= 5; i++) {
+      const saveKey = `save-slot-${i}`
+      const existingSave = localStorage.getItem(saveKey)
+      if (!existingSave) {
+        localStorage.setItem(saveKey, JSON.stringify(initialSaveData))
+        setCurrentSaveId(saveKey)
+        break
+      }
+    }
+
     setUsername(newUsername)
     setPlayerId(newPlayerId)
     setIsFirstTime(false)
-    setShowSaveSelector(true)
+    setShowSaveSelector(false)
   }
 
   const handleSelectSave = (saveId: string) => {

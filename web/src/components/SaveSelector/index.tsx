@@ -48,14 +48,19 @@ export default function SaveSelector({ onSelectSave, onCreateSave, onDeleteSave 
       if (saveData) {
         try {
           const parsed = JSON.parse(saveData)
+          // Update the save data with current timestamp
+          const updatedData = { ...parsed, lastPlayed: new Date().toISOString() }
+          localStorage.setItem(saveKey, JSON.stringify(updatedData))
+          
           slots.push({
             id: saveKey,
             name: parsed.profile?.username || `Save ${i}`,
-            lastPlayed: parsed.lastPlayed || new Date().toISOString(),
+            lastPlayed: updatedData.lastPlayed,
             level: parsed.profile?.level || 1,
             totalEarnings: parsed.profile?.totalEarnings || 0
           })
         } catch (error) {
+          console.warn(`Failed to parse save data for slot ${i}:`, error)
           slots.push({
             id: saveKey,
             name: `Save ${i}`,

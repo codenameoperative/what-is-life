@@ -21,7 +21,7 @@ class LANDiscoveryService {
   private static instance: LANDiscoveryService
   private discoveredDevices: Map<string, DiscoveredDevice> = new Map()
   private isScanning = false
-  private scanInterval: number | null = null
+  private scanInterval: NodeJS.Timeout | null = null
   private networkInfo: NetworkInfo | null = null
   private listeners: Set<(devices: DiscoveredDevice[]) => void> = new Set()
 
