@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react'
 import { generateUniquePlayerId } from '../utils/playerId'
+import CharacterCreation from './PhaserCharacterCreation'
 
 interface FirstTimeSetupProps {
-  onComplete: (username: string, playerId: string) => void
+  onComplete: (username: string, playerId: string, characterData?: any) => void
 }
 
 export default function FirstTimeSetup({ onComplete }: FirstTimeSetupProps) {
   const [username, setUsername] = useState('')
   const [playerId] = useState(generateUniquePlayerId())
-  const [step, setStep] = useState<'welcome' | 'username' | 'playerId' | 'loading'>('welcome')
+  const [step, setStep] = useState<'welcome' | 'username' | 'character' | 'playerId' | 'loading'>('welcome')
+  const [characterData, setCharacterData] = useState<any>(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -38,13 +40,15 @@ export default function FirstTimeSetup({ onComplete }: FirstTimeSetupProps) {
       setStep('username')
     } else if (step === 'username') {
       if (username.trim().length >= 2 && username.trim().length <= 20) {
-        setStep('playerId')
+        setStep('character')
       }
+    } else if (step === 'character') {
+      setStep('playerId')
     } else if (step === 'playerId') {
       setStep('loading')
       // Complete setup after showing loading for 2 seconds
       setTimeout(() => {
-        onComplete(username.trim(), playerId)
+        onComplete(username.trim(), playerId, characterData)
       }, 2000)
     }
   }
@@ -124,6 +128,13 @@ export default function FirstTimeSetup({ onComplete }: FirstTimeSetupProps) {
             </button>
             <p className="text-xs text-gray-400 text-center">Press Enter when ready</p>
           </div>
+        )}
+
+        {step === 'character' && (
+          <CharacterCreation onComplete={(data) => {
+            setCharacterData(data)
+            setStep('playerId')
+          }} />
         )}
 
         {step === 'playerId' && (

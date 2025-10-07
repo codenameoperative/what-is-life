@@ -77,4 +77,4 @@ temp/
 android/app/build/
 
 # LPC Spritesheet Character Generator (external dependency)
-assets/lpc-spritesheet-generator/
+workspace/Universal-LPC-Spritesheet-Character-Generator/

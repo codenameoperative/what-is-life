@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&family=Sora:wght@400;600;700&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,32 +6,48 @@
 
 :root {
   color-scheme: dark;
-  --primary: #5865f2;
-  --primary-dark: #4752c4;
-  --primary-light: #7289da;
-  --secondary: #36393f;
-  --secondary-dark: #2f3136;
-  --tertiary: #202225;
-  --background: #000000;
-  --background-secondary: #0f0f0f;
-  --text-primary: #ffffff;
-  --text-secondary: #b9bbbe;
-  --text-muted: #72767d;
-  --text-dark: #dcddde;
-  --success: #23a55a;
-  --warning: #f0b232;
-  --error: #f23f43;
-  --accent: #fee75c;
-  --border: rgba(255, 255, 255, 0.1);
-  --border-strong: rgba(255, 255, 255, 0.2);
-  --glass-bg: rgba(0, 0, 0, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --shadow-strong: 0 20px 40px rgba(0, 0, 0, 0.5);
-  --radius: 8px;
-  --radius-lg: 12px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  /* ChatGPT-inspired modern color palette */
+  --primary: #10a37f; /* ChatGPT green */
+  --primary-dark: #0d8d6f;
+  --primary-light: #1dd1a1;
+  --secondary: #343541; /* ChatGPT sidebar color */
+  --secondary-dark: #2d2f36;
+  --tertiary: #444654; /* ChatGPT chat background */
+  --background: #ffffff; /* ChatGPT white background */
+  --background-secondary: #f7f7f8; /* ChatGPT light gray */
+  --text-primary: #202123; /* ChatGPT dark text */
+  --text-secondary: #6b7280; /* ChatGPT secondary text */
+  --text-muted: #9ca3af; /* ChatGPT muted text */
+  --text-dark: #111827; /* ChatGPT dark text variant */
+  --success: #10a37f; /* ChatGPT green */
+  --warning: #f59e0b; /* ChatGPT yellow */
+  --error: #ef4444; /* ChatGPT red */
+  --accent: #7c3aed; /* Discord purple accent */
+  --border: rgba(229, 231, 235, 0.8); /* ChatGPT light border */
+  --border-strong: rgba(209, 213, 219, 0.9);
+  --glass-bg: rgba(255, 255, 255, 0.95); /* ChatGPT glass background */
+  --glass-border: rgba(229, 231, 235, 0.6);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); /* ChatGPT subtle shadow */
+  --shadow-strong: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --radius: 12px; /* ChatGPT rounded corners */
+  --radius-lg: 16px;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* ChatGPT smooth transitions */
+  --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode override for better Discord/ChatGPT fusion */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f0f0f;
+    --background-secondary: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #b9bbbe;
+    --text-muted: #72767d;
+    --border: rgba(255, 255, 255, 0.1);
+    --border-strong: rgba(255, 255, 255, 0.2);
+    --glass-bg: rgba(0, 0, 0, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.1);
+  }
 }
 
 html, body, #root {
@@ -42,11 +58,12 @@ html, body, #root {
 }
 
 body {
-  background: linear-gradient(135deg, #0f0f0f 0%, #000000 50%, #1a1a1a 100%);
+  background: linear-gradient(135deg, var(--background) 0%, var(--background-secondary) 100%);
   background-attachment: fixed;
   color: var(--text-primary);
   margin: 0;
   overflow-x: hidden;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 
 /***** Enhanced Utility Classes ******/
@@ -69,6 +86,60 @@ body {
 .border { border-color: var(--border); }
 .border-border { border-color: var(--border); }
 .border-strong { border-color: var(--border-strong); }
+
+/***** Modern ChatGPT/Discord Inspired Components ******/
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+}
+
+.glass-strong {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-strong);
+}
+
+/***** Enhanced Button Styles ******/
+.btn-primary {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, #0a7a5f 100%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200;
+  background: var(--secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--secondary-dark);
+  border-color: var(--border-strong);
+}
+
+/***** Modern Card Styles ******/
+.card {
+  @apply glass-strong p-6 transition-all duration-200;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+}
 
 /***** Advanced Animations ******/
 @keyframes fadeIn {
@@ -95,10 +166,10 @@ body {
 
 @keyframes pulseGlow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(88, 101, 242, 0.3);
+    box-shadow: 0 0 20px rgba(16, 163, 127, 0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(88, 101, 242, 0.6);
+    box-shadow: 0 0 30px rgba(16, 163, 127, 0.5);
   }
 }
 
@@ -117,79 +188,58 @@ body {
   50% { box-shadow: 0 0 20px rgba(88, 101, 242, 0.8); }
 }
 
-/***** Glass Morphism & Modern Effects ******/
+/***** Modern ChatGPT/Discord Inspired Components ******/
 .glass {
   background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
 }
 
 .glass-strong {
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-strong);
 }
 
-/***** Enhanced Buttons ******/
+/***** Enhanced Button Styles ******/
 .btn-primary {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200;
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  border: none;
-  border-radius: var(--radius);
   color: white;
-  padding: 12px 24px;
-  font-weight: 600;
-  transition: var(--transition-fast);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--primary-dark) 0%, #3c45a5 100%);
-  box-shadow: 0 8px 25px rgba(88, 101, 242, 0.4);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
+  background: linear-gradient(135deg, var(--primary-dark) 0%, #0a7a5f 100%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius);
-  color: var(--text-secondary);
-  padding: 12px 24px;
-  font-weight: 500;
-  transition: var(--transition-fast);
-  cursor: pointer;
-  backdrop-filter: blur(10px);
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200;
+  background: var(--secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-  color: var(--text-primary);
+  background: var(--secondary-dark);
+  border-color: var(--border-strong);
 }
 
-/***** Enhanced Cards ******/
+/***** Modern Card Styles ******/
 .card {
-  background: var(--secondary);
-  border: 1px solid var(--tertiary);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  transition: var(--transition-fast);
-  position: relative;
-  overflow: hidden;
+  @apply glass-strong p-6 transition-all duration-200;
 }
 
 .card:hover {
-  border-color: var(--primary);
-  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
 }
 
 .card-header {
