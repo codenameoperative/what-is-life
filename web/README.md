@@ -1,4 +1,4 @@
-# What is Life — Web Game
+# What is Life
 
 A modern idle/incremental game built with React, TypeScript, and Tailwind CSS. Experience various life activities, collect items, earn WTC (What The Currency), and build your virtual life!
 
