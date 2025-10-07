@@ -892,9 +892,34 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
           </button>
         </div>
 
-        <div className="text-center mt-4 text-sm text-gray-400">
-          Complete LPC spritesheet generator integration with 670+ customization options.
-          Real-time preview with layered LPC sprites. Ready for full game integration!
+        <div className="text-center mt-8 text-sm text-gray-400">
+          <p className="mb-2">
+            Special thanks to the LPC (Liberated Pixel Cup) community for creating these amazing spritesheets.
+          </p>
+          <p className="mb-2">
+            Key contributors: @Gaurav0 (original author), @sanderfrenken (maintainer),
+            @jrconway3, @bluecarrot16, @ElizaWy, and many others from the OpenGameArt.org community.
+          </p>
+          <p className="mb-2">
+            <a
+              href="https://github.com/liberatedpixelcup/Universal-LPC-Spritesheet-Character-Generator"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 underline"
+            >
+              Universal LPC Spritesheet Character Generator
+            </a>
+          </p>
+          <p>
+            <a
+              href="https://opengameart.org/content/lpc-collection"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 underline"
+            >
+              LPC Collection on OpenGameArt.org
+            </a>
+          </p>
         </div>
       </div>
     </div>
