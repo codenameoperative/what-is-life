@@ -100,7 +100,7 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
     { id: 'gray', name: 'Gray' }
   ]
 
-  // Phaser scene functions
+  // Phaser scene functions with access to selections via ref
   function preload(this: Phaser.Scene) {
     // Load basic character sprites - in a real implementation, these would be actual LPC sprites
     this.load.image('character-base', '/assets/characters/base.png')
@@ -115,15 +115,15 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
 
     try {
       // Add body (base layer)
-      const bodySprite = this.add.image(128, 128, `body-${selectedBodyType}-${selectedSkinTone}`)
+      const bodySprite = this.add.image(128, 128, `body-${selectionsRef.current.bodyType}-${selectionsRef.current.skinTone}`)
       character.add(bodySprite)
 
       // Add outfit layer
-      const outfitSprite = this.add.image(128, 128, `outfit-${selectedOutfit}`)
+      const outfitSprite = this.add.image(128, 128, `outfit-${selectionsRef.current.outfit}`)
       character.add(outfitSprite)
 
       // Add hair layer
-      const hairSprite = this.add.image(128, 128, `hair-${selectedHair}-${selectedHairColor}`)
+      const hairSprite = this.add.image(128, 128, `hair-${selectionsRef.current.hair}-${selectionsRef.current.hairColor}`)
       character.add(hairSprite)
 
     } catch (error) {
@@ -137,8 +137,8 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
 
   function createFallbackCharacter(this: Phaser.Scene, character: Phaser.GameObjects.Group) {
     // Create simple colored shapes as fallback
-    const bodyColor = skinTones.find(s => s.id === selectedSkinTone)?.color || '#f4c2a1'
-    const hairColor = hairColors.find(h => h.id === selectedHairColor)?.id || 'brown'
+    const bodyColor = skinTones.find(s => s.id === selectionsRef.current.skinTone)?.color || '#f4c2a1'
+    const hairColor = hairColors.find(h => h.id === selectionsRef.current.hairColor)?.id || 'brown'
 
     // Convert hex color to RGB values for Phaser
     const hexToRgb = (hex: string) => {
@@ -163,7 +163,7 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
 
     // Hair (simple shape based on style)
     let hairShape: Phaser.GameObjects.Shape
-    switch (selectedHair) {
+    switch (selectionsRef.current.hair) {
       case 'long':
         hairShape = this.add.rectangle(128, 85, 28, 20, Phaser.Display.Color.GetColor32(hairRgb.r, hairRgb.g, hairRgb.b, 255))
         break
@@ -189,15 +189,15 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
 
       try {
         // Re-add body
-        const bodySprite = this.add.image(128, 128, `body-${selectedBodyType}-${selectedSkinTone}`)
+        const bodySprite = this.add.image(128, 128, `body-${selectionsRef.current.bodyType}-${selectionsRef.current.skinTone}`)
         characterGroup.add(bodySprite)
 
         // Re-add outfit
-        const outfitSprite = this.add.image(128, 128, `outfit-${selectedOutfit}`)
+        const outfitSprite = this.add.image(128, 128, `outfit-${selectionsRef.current.outfit}`)
         characterGroup.add(outfitSprite)
 
         // Re-add hair
-        const hairSprite = this.add.image(128, 128, `hair-${selectedHair}-${selectedHairColor}`)
+        const hairSprite = this.add.image(128, 128, `hair-${selectionsRef.current.hair}-${selectionsRef.current.hairColor}`)
         characterGroup.add(hairSprite)
 
       } catch (error) {
@@ -219,8 +219,6 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
       eyeColor: selectedEyeColor,
       timestamp: Date.now()
     }
-
-    setCharacterConfig(config)
 
     // In a real implementation, this would generate an actual spritesheet
     // For now, create a data URL representing the character config

@@ -57,11 +57,11 @@ export default function FirstTimeSetup({ onComplete }: FirstTimeSetupProps) {
 
   if (!isVisible) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+      <div className="min-h-screen flex items-center justify-center bg-black">
         <div className="text-center space-y-4">
-          <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
           <div className="text-white text-lg font-semibold">Loading Game...</div>
-          <div className="w-64 bg-black/30 rounded-full h-2 mx-auto overflow-hidden">
+          <div className="w-64 bg-gray-900 rounded-full h-2 mx-auto overflow-hidden">
             <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse" style={{width: '60%'}}></div>
           </div>
         </div>
@@ -70,8 +70,8 @@ export default function FirstTimeSetup({ onComplete }: FirstTimeSetupProps) {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
-      <div className="max-w-md w-full bg-black/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-8 shadow-2xl">
+    <div className="min-h-screen flex items-center justify-center bg-black p-4">
+      <div className="max-w-md w-full glass-strong p-8">
         {step === 'welcome' && (
           <div className="text-center space-y-6">
             <div className="w-16 h-16 mx-auto bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
