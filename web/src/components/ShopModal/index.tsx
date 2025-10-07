@@ -19,9 +19,8 @@ export default function ShopModal({ open, onClose }: Props) {
   const [paySource, setPaySource] = useState<PaySource>('wallet')
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [now, setNow] = useState(() => Date.now())
-  const categories = ['weapons','tools','clothing','collectables'] as const
+  const categories = ['tools','clothing','collectables'] as const
   const [activeCats, setActiveCats] = useState<Record<typeof categories[number], boolean>>({
-    weapons: true,
     tools: true,
     clothing: true,
     collectables: true,

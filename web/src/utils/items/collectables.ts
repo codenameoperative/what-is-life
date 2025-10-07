@@ -2,1578 +2,221 @@
 import { type Item } from './index'
 
 export const collectablesItems: Record<string, Item> = {
-  // Useless Collectables (20 items)
-  broken_glass: {
-    id: 'broken_glass',
-    name: 'Broken Glass',
-    tier: 'useless',
+  // Common Collectables
+  rusty_coin: {
+    id: 'rusty_coin',
+    name: 'Rusty Coin',
+    tier: 'common',
     category: 'collectables',
-    description: 'Shards.',
-    value: 1,
+    description: 'An old, weathered coin covered in rust',
+    value: 25,
     usable: false,
     source: 'Found',
-    breakChance: 0
+    breakChance: 0,
+    icon: '🪙'
   },
-  empty_bottle: {
-    id: 'empty_bottle',
-    name: 'Empty Bottle',
-    tier: 'useless',
+  seashell: {
+    id: 'seashell',
+    name: 'Seashell',
+    tier: 'common',
     category: 'collectables',
-    description: 'Empty.',
+    description: 'A beautiful shell washed up from the sea',
+    value: 15,
+    usable: false,
+    source: 'Beach',
+    breakChance: 0,
+    icon: '🐚'
+  },
+  pine_cone: {
+    id: 'pine_cone',
+    name: 'Pine Cone',
+    tier: 'common',
+    category: 'collectables',
+    description: 'A prickly pine cone from an evergreen tree',
     value: 10,
     usable: false,
-    source: 'Found',
+    source: 'Forest',
     breakChance: 0,
-    craftable: true,
-    recipe: {
-      requiredItems: {
-        'glass_shard': 3,
-        'plastic_cap': 1
-      }
-    }
-  },
-  crumpled_paper: {
-    id: 'crumpled_paper',
-    name: 'Crumpled Paper',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'Just trash.',
-    value: 1,
-    usable: false,
-    source: 'Found',
-    breakChance: 0,
-    craftable: true,
-    recipe: {
-      requiredItems: {
-        'old_newspaper': 2
-      }
-    }
-  },
-  rusty_nail: {
-    id: 'rusty_nail',
-    name: 'Rusty Nail',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'Ouch!',
-    value: 2,
-    usable: false,
-    source: 'Found',
-    breakChance: 0,
-    craftable: true,
-    recipe: {
-      requiredItems: {
-        'scrap_metal': 1,
-        'rust_remover': 1
-      }
-    }
-  },
-  old_gum: {
-    id: 'old_gum',
-    name: 'Old Gum',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'Chewed and discarded.',
-    value: 1,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  plastic_bag: {
-    id: 'plastic_bag',
-    name: 'Plastic Bag',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'More pollution.',
-    value: 1,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  broken_pencil: {
-    id: 'broken_pencil',
-    name: 'Broken Pencil',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'Pointless.',
-    value: 3,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  dirty_sock: {
-    id: 'dirty_sock',
-    name: 'Dirty Sock',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'Lost and found.',
-    value: 2,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  empty_can: {
-    id: 'empty_can',
-    name: 'Empty Can',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'Soda or soup?',
-    value: 2,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  burnt_match: {
-    id: 'burnt_match',
-    name: 'Burnt Match',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'Strike one.',
-    value: 1,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  wrapper: {
-    id: 'wrapper',
-    name: 'Candy Wrapper',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'Sweet memories.',
-    value: 1,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  twig: {
-    id: 'twig',
-    name: 'Twig',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'From a tree.',
-    value: 1,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  pebble: {
-    id: 'pebble',
-    name: 'Pebble',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'Small rock.',
-    value: 1,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  hair_clip: {
-    id: 'hair_clip',
-    name: 'Hair Clip',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'Someone\'s lost accessory.',
-    value: 3,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  button: {
-    id: 'button',
-    name: 'Loose Button',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'From a shirt.',
-    value: 2,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  keychain_empty: {
-    id: 'keychain_empty',
-    name: 'Empty Keychain',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'No keys attached.',
-    value: 5,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  rubber_band: {
-    id: 'rubber_band',
-    name: 'Rubber Band',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'Stretchy.',
-    value: 2,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  pen_cap: {
-    id: 'pen_cap',
-    name: 'Pen Cap',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'bruh, i said stop the cap',
-    value: 1,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  bottle_cap: {
-    id: 'bottle_cap',
-    name: 'Bottle Cap',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'stop the cap.',
-    value: 1,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  shoelace: {
-    id: 'shoelace',
-    name: 'Shoelace',
-    tier: 'useless',
-    category: 'collectables',
-    description: 'dont get caught trippin without a shoe',
-    value: 3,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
+    icon: '🌲'
   },
 
-  // Rare Collectables (20 items)
-  golden_watch: {
-    id: 'golden_watch',
-    name: 'Golden Watch',
-    tier: 'rare',
+  // Uncommon Collectables
+  silver_coin: {
+    id: 'silver_coin',
+    name: 'Silver Coin',
+    tier: 'uncommon',
     category: 'collectables',
-    description: 'Shiny watch.',
-    value: 600,
+    description: 'A shiny silver coin with intricate engravings',
+    value: 100,
     usable: false,
-    source: 'Found',
-    breakChance: 0
+    source: 'Treasure',
+    breakChance: 0,
+    icon: '🪙'
   },
-  hunters_license: {
-    id: 'hunters_license',
-    name: 'Hunter\'s License',
+  ancient_pottery: {
+    id: 'ancient_pottery',
+    name: 'Ancient Pottery',
+    tier: 'uncommon',
+    category: 'collectables',
+    description: 'A fragment of ancient pottery with faded patterns',
+    value: 150,
+    usable: false,
+    source: 'Ruins',
+    breakChance: 0,
+    icon: '🏺'
+  },
+  fossil: {
+    id: 'fossil',
+    name: 'Fossil',
+    tier: 'uncommon',
+    category: 'collectables',
+    description: 'A small fossilized bone or shell',
+    value: 200,
+    usable: false,
+    source: 'Excavation',
+    breakChance: 0,
+    icon: '🦕'
+  },
+
+  // Rare Collectables
+  gold_coin: {
+    id: 'gold_coin',
+    name: 'Gold Coin',
     tier: 'rare',
     category: 'collectables',
-    description: 'John Doe\'s license I bet hes looking for it',
+    description: 'A gleaming gold coin from a forgotten era',
     value: 500,
     usable: false,
-    source: 'Found',
-    breakChance: 0
+    source: 'Treasure',
+    breakChance: 0,
+    icon: '🪙'
   },
-  sapphire_ring: {
-    id: 'sapphire_ring',
-    name: 'Sapphire Ring',
+  emerald_gem: {
+    id: 'emerald_gem',
+    name: 'Emerald Gem',
     tier: 'rare',
     category: 'collectables',
-    description: 'definitely not stolen from a wedding...',
-    value: 1400,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  silver_locket: {
-    id: 'silver_locket',
-    name: 'Silver Locket',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Contains a faded photograph.',
+    description: 'A brilliant green emerald of exceptional quality',
     value: 750,
     usable: false,
-    source: 'Found',
-    breakChance: 0
+    source: 'Mining',
+    breakChance: 0,
+    icon: '💎'
   },
-  antique_coin: {
-    id: 'antique_coin',
-    name: 'Antique Coin',
+  antique_watch: {
+    id: 'antique_watch',
+    name: 'Antique Watch',
     tier: 'rare',
     category: 'collectables',
-    description: 'properly stolen from a old man from the 1910s',
-    value: 800,
+    description: 'A finely crafted pocket watch from the Victorian era',
+    value: 600,
     usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  pearl_earring: {
-    id: 'pearl_earring',
-    name: 'Pearl Earring',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Elegant and timeless.',
-    value: 900,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  bronze_medal: {
-    id: 'bronze_medal',
-    name: 'Bronze Medal',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Third place is still a win.',
-    value: 400,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  crystal_vase: {
-    id: 'crystal_vase',
-    name: 'Crystal Vase',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Fragile but beautiful.',
-    value: 650,
-    usable: false,
-    source: 'Found',
-    breakChance: 0.1
-  },
-  ivory_comb: {
-    id: 'ivory_comb',
-    name: 'Ivory Comb',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Intricately carved.',
-    value: 550,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  brass_key: {
-    id: 'brass_key',
-    name: 'Brass Key',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'What does it unlock?',
-    value: 300,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  leather_journal: {
-    id: 'leather_journal',
-    name: 'Leather Journal',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Filled with secrets.',
-    value: 450,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  silver_cufflinks: {
-    id: 'silver_cufflinks',
-    name: 'Silver Cufflinks',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'For formal occasions.',
-    value: 380,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  ruby_brooch: {
-    id: 'ruby_brooch',
-    name: 'Ruby Brooch',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Blood red beauty.',
-    value: 1200,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  gold_chain: {
-    id: 'gold_chain',
-    name: 'Gold Chain',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Heavy and shiny.',
-    value: 850,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  diamond_stud: {
-    id: 'diamond_stud',
-    name: 'Diamond Stud',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Small but valuable.',
-    value: 1500,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  platinum_ring: {
-    id: 'platinum_ring',
-    name: 'Platinum Ring',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Pure and precious.',
-    value: 1100,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  emerald_pendant: {
-    id: 'emerald_pendant',
-    name: 'Emerald Pendant',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Green with envy.',
-    value: 1300,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  silver_bracelet: {
-    id: 'silver_bracelet',
-    name: 'Silver Bracelet',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Delicate and dainty.',
-    value: 420,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  topaz_necklace: {
-    id: 'topaz_necklace',
-    name: 'Topaz Necklace',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Golden yellow gem.',
-    value: 950,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  gold_pocket_watch: {
-    id: 'gold_pocket_watch',
-    name: 'Gold Pocket Watch',
-    tier: 'rare',
-    category: 'collectables',
-    description: 'Timeless timepiece.',
-    value: 700,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
+    source: 'Estate',
+    breakChance: 0,
+    icon: '⌚'
   },
 
-  // Epic Collectables (20 items)
-  explorer_map: {
-    id: 'explorer_map',
-    name: 'Explorer Map',
+  // Epic Collectables
+  diamond: {
+    id: 'diamond',
+    name: 'Diamond',
     tier: 'epic',
     category: 'collectables',
-    description: 'Map with hidden hints.',
-    value: 900,
-    usable: true,
-    source: 'Found',
-    breakChance: 0.05
-  },
-  phoenix_feather: {
-    id: 'phoenix_feather',
-    name: 'Phoenix Feather',
-    tier: 'epic',
-    category: 'collectables',
-    description: 'plucking from one isnt the best',
-    value: 2200,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  revival_bill: {
-    id: 'revival_bill',
-    name: 'Revival Bill',
-    tier: 'epic',
-    category: 'collectables',
-    description: 'a bill signed by death that brings you back to life',
-    value: 1500,
-    usable: true,
-    source: 'Shop',
-    breakChance: 0
-  },
-  enchanted_compass: {
-    id: 'enchanted_compass',
-    name: 'Enchanted Compass',
-    tier: 'epic',
-    category: 'collectables',
-    description: 'Always points to treasure.',
-    value: 1800,
-    usable: true,
-    source: 'Found',
-    breakChance: 0.1
-  },
-  crystal_orb: {
-    id: 'crystal_orb',
-    name: 'Crystal Orb',
-    tier: 'epic',
-    category: 'collectables',
-    description: 'Glowing with inner light.',
-    value: 2500,
-    usable: false,
-    source: 'Found',
-    breakChance: 0.15
-  },
-  ancient_scroll: {
-    id: 'ancient_scroll',
-    name: 'Ancient Scroll',
-    tier: 'epic',
-    category: 'collectables',
-    description: 'Contains forgotten knowledge.',
-    value: 1600,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  mystic_amulet: {
-    id: 'mystic_amulet',
-    name: 'Mystic Amulet',
-    tier: 'epic',
-    category: 'collectables',
-    description: 'Pulses with strange energy.',
-    value: 2100,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  dragon_bone: {
-    id: 'dragon_bone',
-    name: 'Dragon Bone',
-    tier: 'epic',
-    category: 'collectables',
-    description: 'From an ancient beast.',
-    value: 1900,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  elven_bow: {
-    id: 'elven_bow',
-    name: 'Elven Bow',
-    tier: 'epic',
-    category: 'collectables',
-    description: 'Crafted by master archers.',
-    value: 2300,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  dwarven_axe: {
-    id: 'dwarven_axe',
-    name: 'Dwarven Axe',
-    tier: 'epic',
-    category: 'collectables',
-    description: 'Forged in mountain fires.',
+    description: 'A flawless diamond that sparkles with incredible brilliance',
     value: 2000,
     usable: false,
-    source: 'Found',
-    breakChance: 0
+    source: 'Mining',
+    breakChance: 0,
+    icon: '💎'
   },
-  wizard_staff: {
-    id: 'wizard_staff',
-    name: 'Wizard Staff',
+  ancient_artifact: {
+    id: 'ancient_artifact',
+    name: 'Ancient Artifact',
     tier: 'epic',
     category: 'collectables',
-    description: 'Channels magical power.',
-    value: 2400,
+    description: 'A mysterious artifact from a long-lost civilization',
+    value: 1500,
     usable: false,
-    source: 'Found',
-    breakChance: 0
+    source: 'Archaeology',
+    breakChance: 0,
+    icon: '🏛️'
   },
-  cursed_doll: {
-    id: 'cursed_doll',
-    name: 'Cursed Doll',
+  ruby_gem: {
+    id: 'ruby_gem',
+    name: 'Ruby Gem',
     tier: 'epic',
     category: 'collectables',
-    description: 'Don\'t make it angry.',
-    value: 1700,
+    description: 'A deep red ruby that seems to glow from within',
+    value: 1800,
     usable: false,
-    source: 'Found',
-    breakChance: 0
+    source: 'Mining',
+    breakChance: 0,
+    icon: '💎'
   },
-  pirate_treasure: {
-    id: 'pirate_treasure',
-    name: 'Pirate Treasure',
-    tier: 'epic',
+
+  // Legendary Collectables
+  crown_jewel: {
+    id: 'crown_jewel',
+    name: 'Crown Jewel',
+    tier: 'legendary',
     category: 'collectables',
-    description: 'Doubloons and jewels.',
-    value: 2600,
+    description: 'The legendary jewel that once adorned a royal crown',
+    value: 5000,
     usable: false,
-    source: 'Found',
-    breakChance: 0
+    source: 'Royal Treasury',
+    breakChance: 0,
+    icon: '👑'
   },
-  vampire_fang: {
-    id: 'vampire_fang',
-    name: 'Vampire Fang',
-    tier: 'epic',
+  philosopher_stone: {
+    id: 'philosopher_stone',
+    name: 'Philosopher\'s Stone',
+    tier: 'legendary',
     category: 'collectables',
-    description: 'Sharp and deadly.',
-    value: 1400,
+    description: 'The mythical stone said to transmute base metals into gold',
+    value: 10000,
     usable: false,
-    source: 'Found',
-    breakChance: 0
+    source: 'Alchemy',
+    breakChance: 0,
+    icon: '🪄'
   },
-  werewolf_claw: {
-    id: 'werewolf_claw',
-    name: 'Werewolf Claw',
-    tier: 'epic',
+
+  // Mythical Collectables
+  dragon_scale: {
+    id: 'dragon_scale',
+    name: 'Dragon Scale',
+    tier: 'mythical',
     category: 'collectables',
-    description: 'From a full moon transformation.',
-    value: 1550,
+    description: 'An iridescent scale from an ancient dragon',
+    value: 25000,
     usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  mermaid_scale: {
-    id: 'mermaid_scale',
-    name: 'Mermaid Scale',
-    tier: 'epic',
-    category: 'collectables',
-    description: 'Shimmers underwater.',
-    value: 1650,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
+    source: 'Dragon Hoard',
+    breakChance: 0,
+    icon: '🐲'
   },
   unicorn_horn: {
     id: 'unicorn_horn',
     name: 'Unicorn Horn',
-    tier: 'epic',
-    category: 'collectables',
-    description: 'Magical and pure.',
-    value: 2800,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  griffin_feather: {
-    id: 'griffin_feather',
-    name: 'Griffin Feather',
-    tier: 'epic',
-    category: 'collectables',
-    description: 'From a majestic creature.',
-    value: 1950,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  elemental_crystal: {
-    id: 'elemental_crystal',
-    name: 'Elemental Crystal',
-    tier: 'epic',
-    category: 'collectables',
-    description: 'Contains elemental power.',
-    value: 2200,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-
-  // Legendary Collectables (20 items)
-  dragon_scale: {
-    id: 'dragon_scale',
-    name: 'Dragon Scale',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'toothless must be worried right now',
-    value: 3600,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  excalibur: {
-    id: 'excalibur',
-    name: 'Excalibur',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'The legendary sword in the stone.',
-    value: 5000,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  mjolnir: {
-    id: 'mjolnir',
-    name: 'Mjolnir',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'Thor\'s mighty hammer.',
-    value: 4800,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  trident: {
-    id: 'trident',
-    name: 'Poseidon\'s Trident',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'Commands the seas.',
-    value: 4500,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  death_scythe: {
-    id: 'death_scythe',
-    name: 'Death\'s Scythe',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'The grim reaper\'s tool.',
-    value: 4200,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  infinity_gauntlet: {
-    id: 'infinity_gauntlet',
-    name: 'Infinity Gauntlet',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'With great power comes great responsibility.',
-    value: 10000,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  elder_scroll: {
-    id: 'elder_scroll',
-    name: 'Elder Scroll',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'Contains the history of the world.',
-    value: 3800,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  ring_power: {
-    id: 'ring_power',
-    name: 'The One Ring',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'One ring to rule them all.',
-    value: 6000,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  cloak_invisibility: {
-    id: 'cloak_invisibility',
-    name: 'Cloak of Invisibility',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'Now you see me...',
-    value: 3500,
-    usable: true,
-    source: 'Found',
-    breakChance: 0.05
-  },
-  philosophers_stone: {
-    id: 'philosophers_stone',
-    name: 'Philosopher\'s Stone',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'Turns lead into gold.',
-    value: 5500,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  holy_grail: {
-    id: 'holy_grail',
-    name: 'Holy Grail',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'The cup of eternal life.',
-    value: 4000,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  pandoras_box: {
-    id: 'pandoras_box',
-    name: 'Pandora\'s Box',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'Contains all the evils of the world.',
-    value: 3200,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  ark_covenant: {
-    id: 'ark_covenant',
-    name: 'Ark of the Covenant',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'Holds the Ten Commandments.',
-    value: 4300,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  spear_destiny: {
-    id: 'spear_destiny',
-    name: 'Spear of Destiny',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'The spear that pierced Christ.',
-    value: 3900,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  book_dead: {
-    id: 'book_dead',
-    name: 'Book of the Dead',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'Ancient Egyptian funerary text.',
-    value: 3400,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  crystal_skull: {
-    id: 'crystal_skull',
-    name: 'Crystal Skull',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'Mysterious artifact from ancient civilizations.',
-    value: 3700,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  golden_fleece: {
-    id: 'golden_fleece',
-    name: 'Golden Fleece',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'The prize of the Argonauts.',
-    value: 4100,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  sword_damocles: {
-    id: 'sword_damocles',
-    name: 'Sword of Damocles',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'Hangs by a thread.',
-    value: 3300,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  fountain_youth: {
-    id: 'fountain_youth',
-    name: 'Fountain of Youth',
-    tier: 'legendary',
-    category: 'collectables',
-    description: 'Grants eternal youth.',
-    value: 4400,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-
-  // Mythical Collectables (20 items)
-  philosopher_stone: {
-    id: 'philosopher_stone',
-    name: 'Philosopher Stone',
     tier: 'mythical',
     category: 'collectables',
-    description: 'Where are all the harry potter ops?',
-    value: 5000,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  time_warp_device: {
-    id: 'time_warp_device',
-    name: 'Time Warp Device',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Bend time and space.',
-    value: 8000,
-    usable: true,
-    source: 'Shop',
-    breakChance: 0.2
-  },
-  reality_anchor: {
-    id: 'reality_anchor',
-    name: 'Reality Anchor',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Stabilizes the fabric of reality.',
-    value: 7500,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  dimension_key: {
-    id: 'dimension_key',
-    name: 'Dimension Key',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Opens doors to other worlds.',
-    value: 6800,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  soul_gem: {
-    id: 'soul_gem',
-    name: 'Soul Gem',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Contains trapped souls.',
-    value: 7200,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  chaos_orb: {
-    id: 'chaos_orb',
-    name: 'Chaos Orb',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Unpredictable power source.',
-    value: 6900,
-    usable: false,
-    source: 'Found',
-    breakChance: 0.3
-  },
-  void_crystal: {
-    id: 'void_crystal',
-    name: 'Void Crystal',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Contains the power of nothingness.',
-    value: 7300,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  star_seed: {
-    id: 'star_seed',
-    name: 'Star Seed',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Can grow into a star.',
-    value: 6500,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  dream_catcher: {
-    id: 'dream_catcher',
-    name: 'Dream Catcher',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Traps dreams and nightmares.',
-    value: 5800,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  mirror_truth: {
-    id: 'mirror_truth',
-    name: 'Mirror of Truth',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Shows your true self.',
-    value: 6200,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  wishing_well: {
-    id: 'wishing_well',
-    name: 'Wishing Well',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Grants wishes, with a catch.',
-    value: 7000,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  phoenix_egg: {
-    id: 'phoenix_egg',
-    name: 'Phoenix Egg',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Will hatch into a legendary bird.',
-    value: 6700,
-    usable: false,
-    source: 'Found',
-    breakChance: 0.5
-  },
-  kraken_tentacle: {
-    id: 'kraken_tentacle',
-    name: 'Kraken Tentacle',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'From the depths of the ocean.',
-    value: 6400,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  dragon_heart: {
-    id: 'dragon_heart',
-    name: 'Dragon Heart',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Still beating with ancient power.',
-    value: 7100,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  unicorn_tear: {
-    id: 'unicorn_tear',
-    name: 'Unicorn Tear',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Heals any wound.',
-    value: 5900,
-    usable: true,
-    source: 'Found',
-    breakChance: 0
-  },
-  leviathan_scale: {
-    id: 'leviathan_scale',
-    name: 'Leviathan Scale',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'From the biblical sea monster.',
-    value: 6600,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  titans_blood: {
-    id: 'titans_blood',
-    name: 'Titan\'s Blood',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Grants godly strength.',
-    value: 7400,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  creation_seed: {
-    id: 'creation_seed',
-    name: 'Seed of Creation',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Can create entire worlds.',
-    value: 8500,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  oblivion_gate: {
-    id: 'oblivion_gate',
-    name: 'Oblivion Gate',
-    tier: 'mythical',
-    category: 'collectables',
-    description: 'Portal to the realm of Oblivion.',
-    value: 7800,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-
-  // WDYFT Collectables (20 items)
-  ancient_relic: {
-    id: 'ancient_relic',
-    name: 'Ancient Relic',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'lets act like you didnt steal from a tomb.',
+    description: 'A spiraled horn from a pure white unicorn',
     value: 50000,
     usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  mysterious_map_wdyft: {
-    id: 'mysterious_map_wdyft',
-    name: 'Mysterious Map',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'A recalled map from long ago',
-    value: 75000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  error_404_wdyft: {
-    id: 'error_404_wdyft',
-    name: 'Error 404',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'you broke the game, congrats',
-    value: 10000000000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  debug_console: {
-    id: 'debug_console',
-    name: 'Debug Console',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'Access to the game\'s inner workings.',
-    value: 100000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  easter_egg: {
-    id: 'easter_egg',
-    name: 'Golden Easter Egg',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'You found the hidden treasure!',
-    value: 250000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  cheat_code: {
-    id: 'cheat_code',
-    name: 'Ultimate Cheat Code',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'The forbidden knowledge.',
-    value: 500000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  developer_notes: {
-    id: 'developer_notes',
-    name: 'Developer Notes',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'Secrets from the game creators.',
-    value: 150000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  beta_tester_badge: {
-    id: 'beta_tester_badge',
-    name: 'Beta Tester Badge',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'You helped shape the game!',
-    value: 200000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  time_traveler_watch: {
-    id: 'time_traveler_watch',
-    name: 'Time Traveler\'s Watch',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'From the codenameoperative timeline.',
-    value: 750000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  glitch_artifact: {
-    id: 'glitch_artifact',
-    name: 'Glitch Artifact',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'A piece of corrupted reality.',
-    value: 1000000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  admin_key: {
-    id: 'admin_key',
-    name: 'Admin Key',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'Unlimited access granted.',
-    value: 2500000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  source_code: {
-    id: 'source_code',
-    name: 'Source Code',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'The blueprint of reality.',
-    value: 5000000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  quantum_entangler: {
-    id: 'quantum_entangler',
-    name: 'Quantum Entangler',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'Links particles across dimensions.',
-    value: 10000000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  reality_editor: {
-    id: 'reality_editor',
-    name: 'Reality Editor',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'Change the rules of existence.',
-    value: 25000000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  void_walker_boots: {
-    id: 'void_walker_boots',
-    name: 'Void Walker Boots',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'Walk between realities.',
-    value: 50000000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  omnipotent_crown: {
-    id: 'omnipotent_crown',
-    name: 'Omnipotent Crown',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'Rule over all creation.',
-    value: 100000000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  god_mode_toggle: {
-    id: 'god_mode_toggle',
-    name: 'God Mode Toggle',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'Become invincible.',
-    value: 250000000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  matrix_key: {
-    id: 'matrix_key',
-    name: 'Matrix Key',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'Exit the simulation.',
-    value: 500000000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-  universal_remote: {
-    id: 'universal_remote',
-    name: 'Universal Remote',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'The universe is a freaking tv show',
-    value: 1000000000,
-    usable: false,
-    source: 'WDYFT',
-    breakChance: 0
-  },
-
-  // Additional Common Collectables
-  rubber_duck: {
-    id: 'rubber_duck',
-    name: 'Rubber Duck',
-    tier: 'common',
-    category: 'collectables',
-    description: 'A squeaky bath toy.',
-    value: 15,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  keychain: {
-    id: 'keychain',
-    name: 'Keychain',
-    tier: 'common',
-    category: 'collectables',
-    description: 'A small metal keychain.',
-    value: 8,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  matchbox: {
-    id: 'matchbox',
-    name: 'Matchbox',
-    tier: 'common',
-    category: 'collectables',
-    description: 'A small box of matches.',
-    value: 5,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  pencil_stub: {
-    id: 'pencil_stub',
-    name: 'Pencil Stub',
-    tier: 'common',
-    category: 'collectables',
-    description: 'A very short pencil.',
-    value: 3,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  safety_pin: {
-    id: 'safety_pin',
-    name: 'Safety Pin',
-    tier: 'common',
-    category: 'collectables',
-    description: 'A small safety pin.',
-    value: 2,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  thumbtack: {
-    id: 'thumbtack',
-    name: 'Thumbtack',
-    tier: 'common',
-    category: 'collectables',
-    description: 'A small thumbtack.',
-    value: 1,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-  eraser: {
-    id: 'eraser',
-    name: 'Eraser',
-    tier: 'common',
-    category: 'collectables',
-    description: 'A pink pencil eraser.',
-    value: 3,
-    usable: false,
-    source: 'Found',
-    breakChance: 0
-  },
-
-  // === WDYFT (Where Did You Find This?!) Items - Ultra Rare Collectibles ===
-
-  // WDYFT Artifacts (50k - 100k value range)
-  ancient_scroll: {
-    id: 'ancient_scroll',
-    name: 'Ancient Scroll of Forbidden Knowledge',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'A scroll containing knowledge that was never meant to be discovered. Scholars would pay a fortune for this.',
-    value: 75000,
-    usable: false,
-    source: 'WDYFT',
-    icon: '📜'
-  },
-
-  cursed_diamond: {
-    id: 'cursed_diamond',
-    name: 'Cursed Diamond of Eternal Night',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'A diamond that seems to absorb all light around it. Those who possess it report strange dreams.',
-    value: 85000,
-    usable: false,
-    source: 'WDYFT',
-    icon: '💎'
-  },
-
-  phoenix_feather: {
-    id: 'phoenix_feather',
-    name: 'Phoenix Feather of Rebirth',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'A feather from the legendary phoenix. It glows with an inner fire that never extinguishes.',
-    value: 95000,
-    usable: false,
-    source: 'WDYFT',
-    icon: '🔥'
-  },
-
-  // WDYFT Relics (100k - 1M value range)
-  dragon_scale: {
-    id: 'dragon_scale',
-    name: 'Ancient Dragon Scale',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'A scale from an ancient dragon, harder than diamond and warm to the touch.',
-    value: 150000,
-    usable: false,
-    source: 'WDYFT',
-    icon: '🐲'
-  },
-
-  mermaid_tear: {
-    id: 'mermaid_tear',
-    name: 'Mermaid\'s Tear of the Deep',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'A tear shed by a mermaid in the deepest ocean trenches. It shimmers with impossible colors.',
-    value: 200000,
-    usable: false,
-    source: 'WDYFT',
-    icon: '🧜‍♀️'
-  },
-
-  unicorn_horn: {
-    id: 'unicorn_horn',
-    name: 'Unicorn Horn of Purity',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'A horn from a pure unicorn. It radiates healing energy and wards off evil.',
-    value: 300000,
-    usable: false,
-    source: 'WDYFT',
+    source: 'Enchanted Forest',
+    breakChance: 0,
     icon: '🦄'
   },
 
-  // WDYFT Artifacts (1M - 10M value range)
-  time_crystal: {
-    id: 'time_crystal',
-    name: 'Time Crystal of Eternity',
+  // WDYFT Collectables
+  meaning_of_life: {
+    id: 'meaning_of_life',
+    name: 'Meaning of Life',
     tier: 'wdyft',
     category: 'collectables',
-    description: 'A crystal that bends time itself. Scientists and mages alike would kill for this artifact.',
-    value: 1000000,
+    description: 'The answer to the ultimate question of life, the universe, and everything',
+    value: 42,
     usable: false,
     source: 'WDYFT',
-    icon: '⏳'
-  },
-
-  void_essence: {
-    id: 'void_essence',
-    name: 'Essence of the Void',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'Pure nothingness condensed into physical form. It whispers secrets of the universe.',
-    value: 2500000,
-    usable: false,
-    source: 'WDYFT',
-    icon: '🌑'
-  },
-
-  god_forged_relic: {
-    id: 'god_forged_relic',
-    name: 'God-Forged Relic of Creation',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'An artifact said to be forged by the gods themselves during the creation of the world.',
-    value: 5000000,
-    usable: false,
-    source: 'WDYFT',
-    icon: '⚡'
-  },
-
-  // WDYFT Legends (10M - 100M value range)
-  infinity_stone: {
-    id: 'infinity_stone',
-    name: 'Infinity Stone Fragment',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'A fragment of an Infinity Stone. It contains power beyond mortal comprehension.',
-    value: 25000000,
-    usable: false,
-    source: 'WDYFT',
-    icon: '💫'
-  },
-
-  philosopher_stone: {
-    id: 'philosopher_stone',
-    name: 'Philosopher\'s Stone',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'The legendary stone that can transmute any metal into gold and grant immortality.',
-    value: 50000000,
-    usable: false,
-    source: 'WDYFT',
-    icon: '🪄'
-  },
-
-  // WDYFT Ultimates (100M - 1B value range)
-  universe_core: {
-    id: 'universe_core',
-    name: 'Core of the Universe',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'The very core of existence itself. Holding it feels like holding the weight of creation.',
-    value: 100000000,
-    usable: false,
-    source: 'WDYFT',
+    breakChance: 0,
     icon: '🌌'
-  },
-
-  reality_engine: {
-    id: 'reality_engine',
-    name: 'Reality Engine',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'A device capable of reshaping reality itself. Governments would start wars over this.',
-    value: 500000000,
-    usable: false,
-    source: 'WDYFT',
-    icon: '⚙️'
-  },
-
-  // WDYFT Supreme (1B+ value range)
-  god_particle: {
-    id: 'god_particle',
-    name: 'God Particle',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'The fundamental particle that gives rise to all existence. Worth more than all the wealth in the world.',
-    value: 1000000000,
-    usable: false,
-    source: 'WDYFT',
-    icon: '✨'
-  },
-
-  existence_matrix: {
-    id: 'existence_matrix',
-    name: 'Matrix of All Existence',
-    tier: 'wdyft',
-    category: 'collectables',
-    description: 'The blueprint of reality itself. Contains the code that defines everything that is, was, and will be.',
-    value: 999999999999,
-    usable: false,
-    source: 'WDYFT',
-    icon: '🌀'
   }
 }

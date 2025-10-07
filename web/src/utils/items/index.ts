@@ -10,7 +10,7 @@ export type ItemTier =
   | 'wdyft'
 
 // Item categories
-export type ItemCategory = 'weapons' | 'tools' | 'clothing' | 'collectables' | 'animals' | 'fish' | 'ores'
+export type ItemCategory = 'tools' | 'clothing' | 'collectables' | 'animals' | 'fish' | 'ores'
 
 // Item interface - Base template for all items
 export interface Item {
@@ -53,7 +53,7 @@ const registerItems = (items: Record<string, Item>) => {
 
 // Helper function to check if an item is stackable
 export const isStackable = (item: Item): boolean => {
-  return ['animals', 'clothing', 'collectables', 'ores'].includes(item.category)
+  return ['animals', 'collectables', 'ores'].includes(item.category)
 }
 
 // Helper function to get default quantity for stackable items
@@ -65,9 +65,7 @@ export const getDefaultQuantity = (item: Item): number => {
 export const items = itemRegistry
 
 // Import and register all category items
-import { weaponsItems } from './weapons'
 import { toolsItems } from './tools'
-import { clothingItems } from './clothing'
 import { collectablesItems } from './collectables'
 import { animalsItems } from './animals'
 import { fishItems } from './fish'
@@ -75,9 +73,7 @@ import { oresItems } from './ores'
 import { carsItems } from './cars'
 
 // Register all items
-registerItems(weaponsItems)
 registerItems(toolsItems)
-registerItems(clothingItems)
 registerItems(collectablesItems)
 registerItems(animalsItems)
 registerItems(fishItems)

@@ -1465,15 +1465,15 @@ export const weaponsItems: Record<string, Item> = {
   // Epic Weapons
   thunder_hammer: {
     id: 'thunder_hammer',
-    name: 'Thunder Hammer',
-    tier: 'epic',
+    name: 'Mjolnir\'s Hammer',
+    tier: 'legendary',
     category: 'weapons',
-    description: 'Mjolnir\'s long-lost cousin - a hammer that calls down lightning with every strike.',
-    value: 3000,
+    description: 'Thor\'s mighty hammer, capable of calling down lightning and shattering mountains.',
+    value: 5000,
     usable: false,
     source: 'Legend',
-    breakChance: 0.0005,
-    icon: '🕳️'
+    breakChance: 0.0001,
+    icon: '🔨'
   },
   neutron_sniper: {
     id: 'neutron_sniper',

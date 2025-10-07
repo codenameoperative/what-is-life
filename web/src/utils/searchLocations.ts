@@ -860,7 +860,7 @@ export const searchLocations: Record<string, SearchLocation> = {
       mythical: 0.0015,
       wdyft: 0.0007
     },
-    specialEffect: 'Higher chance for medieval weapons and armor',
+    specialEffect: 'Higher chance for medieval armor and artifacts',
     rarity: 'uncommon'
   },
 
@@ -965,7 +965,7 @@ export const searchLocations: Record<string, SearchLocation> = {
       mythical: 0.001,
       wdyft: 0.0005
     },
-    specialEffect: 'Higher chance for ancient weapons and battle-worn items',
+    specialEffect: 'Higher chance for ancient armor and battle-worn items',
     rarity: 'common'
   },
 
@@ -1028,6 +1028,8 @@ export const searchLocations: Record<string, SearchLocation> = {
       mythical: 0.0022,
       wdyft: 0.0011
     },
+    specialEffect: 'Higher chance for zero-gravity artifacts and space-age technology',
+    rarity: 'rare'
   },
 
   // === ADDITIONAL 20 NEW LOCATIONS (41-60) ===

@@ -20,9 +20,8 @@ const tierOrder: Record<string, number> = {
 export default function ItemSearchModal({ open, onClose }: Props) {
   const [query, setQuery] = useState('')
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const categories = ['weapons','tools','clothing','collectables','animals','fish'] as const
+  const categories = ['tools','clothing','collectables','animals','fish'] as const
   const [activeCats, setActiveCats] = useState<Record<typeof categories[number], boolean>>({
-    weapons: true,
     tools: true,
     clothing: true,
     collectables: true,

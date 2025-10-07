@@ -261,26 +261,6 @@ export const triviaQuestionTemplates = {
     points: 10
   }
 }
-
-// ===== WEAPON TEMPLATES =====
-export const weaponTemplates = {
-  // Common Weapon Template
-  common_weapon: {
-    id: 'weapon_name',
-    name: 'Weapon Name',
-    tier: 'common' as ItemTier,
-    category: 'weapons' as ItemCategory,
-    description: 'Description of the weapon.',
-    value: 45,
-    usable: false,
-    source: 'Shop',
-    breakChance: 0.05
-  }
-
-  // Template continues for all tiers...
-}
-
-// ===== TOOL TEMPLATES =====
 export const toolTemplates = {
   // Common Tool Template
   common_tool: {
@@ -315,8 +295,6 @@ export const clothingTemplates = {
 
   // Template continues for all tiers...
 }
-
-// ===== ORE TEMPLATES =====
 export const oreTemplates = {
   // Common Ore Template
   common_ore: {

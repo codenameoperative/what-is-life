@@ -261,13 +261,7 @@ export const jobs: Record<string, JobDefinition> = {
     requirements: { minWTC: 30 },
   },
 
-  gas_station_attendant: {
-    id: 'gas_station_attendant',
-    name: 'Gas Station Attendant',
-    tier: 'entry',
-    description: 'Pump gas, stock shelves, and handle customer payments at a busy gas station.',
-    payPerWork: { min: 9, max: 22 },
-  },
+
 
   library_assistant: {
     id: 'library_assistant',
