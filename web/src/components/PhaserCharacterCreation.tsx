@@ -28,7 +28,6 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
   const [selectedSkinTone, setSelectedSkinTone] = useState('light')
   const [selectedHairColor, setSelectedHairColor] = useState('brown')
   const [selectedEyeColor, setSelectedEyeColor] = useState('brown')
-  const [selectedWeapon, setSelectedWeapon] = useState('none')
   const gameRef = useRef<HTMLDivElement>(null)
   const phaserGameRef = useRef<Phaser.Game | null>(null)
 
@@ -39,8 +38,7 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
     outfit: 'casual',
     skinTone: 'light',
     hairColor: 'brown',
-    eyeColor: 'brown',
-    weapon: 'none'
+    eyeColor: 'brown'
   })
 
   useEffect(() => {
@@ -51,10 +49,9 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
       outfit: selectedOutfit,
       skinTone: selectedSkinTone,
       hairColor: selectedHairColor,
-      eyeColor: selectedEyeColor,
-      weapon: selectedWeapon
+      eyeColor: selectedEyeColor
     }
-  }, [selectedBodyType, selectedHair, selectedOutfit, selectedSkinTone, selectedHairColor, selectedEyeColor, selectedWeapon])
+  }, [selectedBodyType, selectedHair, selectedOutfit, selectedSkinTone, selectedHairColor, selectedEyeColor])
 
   useEffect(() => {
     // Animate in after component mounts
@@ -328,13 +325,29 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
 
   // LPC Integration - Load actual LPC sprite assets from public directory
   const loadLPCAssets = () => {
-    // Dynamic loading based on actual LPC structure
+    // Dynamic loading based on actual LPC structure with animation support
     const lpcAssets = {
       body: {
-        male: '/lpc/body/bodies/male',
-        female: '/lpc/body/bodies/female',
-        child: '/lpc/body/bodies/child',
-        muscular: '/lpc/body/bodies/muscular'
+        male: {
+          idle: '/lpc/body/bodies/male/idle.png',
+          walk: '/lpc/body/bodies/male/walk.png',
+          run: '/lpc/body/bodies/male/run.png'
+        },
+        female: {
+          idle: '/lpc/body/bodies/female/idle.png',
+          walk: '/lpc/body/bodies/female/walk.png',
+          run: '/lpc/body/bodies/female/run.png'
+        },
+        child: {
+          idle: '/lpc/body/bodies/child/idle.png',
+          walk: '/lpc/body/bodies/child/walk.png',
+          run: '/lpc/body/bodies/child/run.png'
+        },
+        muscular: {
+          idle: '/lpc/body/bodies/muscular/idle.png',
+          walk: '/lpc/body/bodies/muscular/walk.png',
+          run: '/lpc/body/bodies/muscular/run.png'
+        }
       },
       hair: {
         bald: '/lpc/hair/bald',
@@ -349,16 +362,35 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
         adventurer: '/lpc/torso/adventurer'
       },
       armor: {
-        leather: '/lpc/torso/armor/leather',
-        chainmail: '/lpc/torso/armor/chainmail',
-        plate: '/lpc/torso/armor/plate',
-        robe: '/lpc/torso/armor/robe'
+        leather: {
+          idle: '/lpc/torso/armor/leather/idle.png',
+          walk: '/lpc/torso/armor/leather/walk.png'
+        },
+        chainmail: {
+          idle: '/lpc/torso/armor/chainmail/idle.png',
+          walk: '/lpc/torso/armor/chainmail/walk.png'
+        },
+        plate: {
+          idle: '/lpc/torso/armor/plate/idle.png',
+          walk: '/lpc/torso/armor/plate/walk.png'
+        },
+        robe: {
+          idle: '/lpc/torso/armor/robe/idle.png',
+          walk: '/lpc/torso/armor/robe/walk.png'
+        }
       },
       accessories: {
         hats: '/lpc/hat',
         facial: '/lpc/facial',
         cape: '/lpc/cape',
-        shield: '/lpc/shield'
+        shield: '/lpc/shield',
+        belt: '/lpc/belt',
+        gloves: '/lpc/wrists'
+      },
+      weapons: {
+        sword: '/lpc/weapon/sword',
+        bow: '/lpc/weapon/bow',
+        pickaxe: '/lpc/tools/pickaxe'
       }
     }
 
@@ -369,12 +401,11 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
   function preload(this: Phaser.Scene) {
     const lpcAssets = loadLPCAssets()
 
-    // Load all LPC body sprites based on current selections
-    Object.entries(lpcAssets.body).forEach(([bodyType, path]) => {
-      // Load all PNG files in the body directory
-      this.load.image(`body-${bodyType}`, `${path}/idle.png`)
-      this.load.image(`body-${bodyType}-walk`, `${path}/walk.png`)
-      this.load.image(`body-${bodyType}-run`, `${path}/run.png`)
+    // Load all LPC body sprites with animation frames
+    Object.entries(lpcAssets.body).forEach(([bodyType, animations]) => {
+      Object.entries(animations).forEach(([animation, path]) => {
+        this.load.image(`body-${bodyType}-${animation}`, path)
+      })
     })
 
     // Load all hair sprites
@@ -387,10 +418,11 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
       this.load.image(`torso-${outfitType}`, `${path}/idle.png`)
     })
 
-    // Load armor sprites with special effects
-    Object.entries(lpcAssets.armor).forEach(([armorType, path]) => {
-      this.load.image(`armor-${armorType}`, `${path}/idle.png`)
-      this.load.image(`armor-${armorType}-walk`, `${path}/walk.png`)
+    // Load armor sprites with animation frames
+    Object.entries(lpcAssets.armor).forEach(([armorType, animations]) => {
+      Object.entries(animations).forEach(([animation, path]) => {
+        this.load.image(`armor-${armorType}-${animation}`, path)
+      })
     })
 
     // Load accessories
@@ -398,12 +430,16 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
       this.load.image(`accessory-${accessoryType}`, `${path}/idle.png`)
     })
 
-    // Load weapons and tools
-    this.load.image('weapon-sword', '/lpc/weapon/sword/idle.png')
-    this.load.image('weapon-bow', '/lpc/weapon/bow/idle.png')
-    this.load.image('tool-pickaxe', '/lpc/tools/pickaxe/idle.png')
+    // Load weapons for future use
+    Object.entries(lpcAssets.weapons).forEach(([weaponType, path]) => {
+      this.load.image(`weapon-${weaponType}`, `${path}/idle.png`)
+    })
 
-    console.log('✅ All LPC assets loaded successfully')
+    // Set up parallel loading (Phaser handles this automatically)
+    // Maximum concurrent loads set to 50 for better performance
+    ;(this.load as any).maxParallelDownloads = 50
+
+    console.log('✅ All LPC assets loading with parallel optimization')
   }
 
   function create(this: Phaser.Scene) {
@@ -415,13 +451,13 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
       // 1. Body (base layer) - with skin tone tinting
       // 2. Torso/Clothing - with special effects for armor
       // 3. Hair - with hair color tinting
-      // 4. Accessories - hats, facial features, etc.
+      // 4. Accessories - hats, facial features, belts, gloves, etc.
 
       const bodyType = selectionsRef.current.bodyType
       const outfit = selectionsRef.current.outfit
 
-      // Add body layer (base) with skin tone
-      const bodySprite = this.add.sprite(64, 64, `body-${bodyType}`)
+      // Add body layer (base) with skin tone - using idle animation
+      const bodySprite = this.add.sprite(64, 64, `body-${bodyType}-idle`)
       applySkinTone(bodySprite, selectionsRef.current.skinTone)
       bodySprite.setOrigin(0.5, 0.5)
       character.add(bodySprite)
@@ -429,8 +465,8 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
       // Add torso/clothing layer with special effects
       let torsoSprite
       if (outfit.includes('armor') || outfit.includes('robe')) {
-        // Special armor effects
-        torsoSprite = this.add.sprite(64, 64, `armor-${outfit}`)
+        // Special armor effects - using idle animation
+        torsoSprite = this.add.sprite(64, 64, `armor-${outfit}-idle`)
         applyArmorEffect(torsoSprite, outfit)
       } else {
         torsoSprite = this.add.sprite(64, 64, `torso-${outfit}`)
@@ -444,24 +480,26 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
       hairSprite.setOrigin(0.5, 0.5)
       character.add(hairSprite)
 
-      // Add accessories (hats, facial features, etc.)
-      if (selectionsRef.current.accessories?.hat) {
-        const hatSprite = this.add.sprite(64, 64, `accessory-hats`)
-        hatSprite.setOrigin(0.5, 0.5)
-        character.add(hatSprite)
-      }
+      // Add accessories (hats, facial features, belts, gloves, etc.)
+      const accessories = [
+        'hats', 'facial', 'cape', 'shield', 'belt', 'gloves'
+      ]
 
-      // Add weapons/tools if equipped
-      if (selectionsRef.current.weapon && selectionsRef.current.weapon !== 'none') {
-        const weaponSprite = this.add.sprite(80, 64, `weapon-${selectionsRef.current.weapon}`)
-        weaponSprite.setOrigin(0.5, 0.5)
-        character.add(weaponSprite)
-      }
+      accessories.forEach(accessory => {
+        try {
+          const accessorySprite = this.add.sprite(64, 64, `accessory-${accessory}`)
+          accessorySprite.setOrigin(0.5, 0.5)
+          character.add(accessorySprite)
+        } catch (error) {
+          // Accessory not available, skip silently
+        }
+      })
 
-      // Store reference for updates
+      // Store reference for updates and animations
       ;(this as any).characterGroup = character
+      ;(this as any).currentAnimation = 'idle'
 
-      console.log('✅ LPC character created with special effects')
+      console.log('✅ LPC character created with animation support and accessories')
 
     } catch (error) {
       console.error('❌ Error creating LPC character:', error)
@@ -597,7 +635,6 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
       skinTone: selectedSkinTone,
       hairColor: selectedHairColor,
       eyeColor: selectedEyeColor,
-      weapon: selectedWeapon,
       timestamp: Date.now()
     }
 
@@ -655,10 +692,22 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
       const savedCharacter = localStorage.getItem('playerCharacter')
       if (savedCharacter) {
         const characterData = JSON.parse(savedCharacter)
-        return characterData
+
+        // Validate character data structure
+        if (characterData.config && characterData.spritesheetUrl) {
+          console.log('✅ Loading existing character from localStorage')
+          return characterData
+        } else {
+          console.warn('⚠️ Invalid character data structure, using defaults')
+          // Clean up invalid data
+          localStorage.removeItem('playerCharacter')
+          return null
+        }
       }
     } catch (error) {
-      console.error('Error loading existing character:', error)
+      console.error('❌ Error loading existing character:', error)
+      // Clean up corrupted data
+      localStorage.removeItem('playerCharacter')
     }
     return null
   }
@@ -673,7 +722,6 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
       setSelectedSkinTone(existingCharacter.config.skinTone || 'light')
       setSelectedHairColor(existingCharacter.config.hairColor || 'brown')
       setSelectedEyeColor(existingCharacter.config.eyeColor || 'brown')
-      setSelectedWeapon(existingCharacter.config.weapon || 'none')
     }
   }, [])
 
@@ -706,7 +754,7 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
             {bodyTypes.find(b => b.id === selectedBodyType)?.name} Character
           </h3>
           <p className="text-gray-400">
-            {hairStyles.find(h => h.id === selectedHair)?.name} • {outfits.find(o => o.id === selectedOutfit)?.name} • {weapons.find(w => w.id === selectedWeapon)?.name}
+            {hairStyles.find(h => h.id === selectedHair)?.name} • {outfits.find(o => o.id === selectedOutfit)?.name}
           </p>
         </div>
 
@@ -808,26 +856,6 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
                   }`}
                 >
                   {outfit.name}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Weapon */}
-          <div className="bg-gray-900 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-purple-400 mb-4">Weapon</h3>
-            <div className="space-y-3">
-              {weapons.map((weapon) => (
-                <button
-                  key={weapon.id}
-                  onClick={() => setSelectedWeapon(weapon.id)}
-                  className={`w-full py-2 px-4 rounded-lg transition-colors ${
-                    selectedWeapon === weapon.id
-                      ? 'bg-purple-600 text-white'
-                      : 'bg-gray-700 text-gray-300'
-                  }`}
-                >
-                  {weapon.name}
                 </button>
               ))}
             </div>
