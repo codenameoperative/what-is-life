@@ -1,8 +1,18 @@
+<<<<<<< HEAD
 # 🎮 What is Life? (Development Halted)
 
 **Notice (October 2025):** I'm back! Development of "What is Life?" is resuming after a brief hiatus. An exciting update is coming in late October to early november with new features and improvements. Stay tuned for more details!
 
 ---
+=======
+# 🎮 What is Life? ( Development Halted)
+
+**NOTICE: (October 2025)**: Developed of "What is Life?" due to unforseen circumstances. I am Currently Focusing all my efforts on another large scale project that requires my full attention
+
+Development may potentially Resume between late December 2025 and Mid to late August 2026, Depending on the progress of my current commitments
+
+All current development work will be pushed to repository for archival purposes, but no further updates are planned at this time. Thank you for your understanding and support 
+>>>>>>> 809ea9f24284c613266a72dce9b39b8045ef4803
 
 A modern idle/incremental life simulation game built with React, TypeScript, Rust (Tauri), and modern web technologies. Experience various life activities, collect items, earn WTC (What Are Those Coins?), and build your virtual life across multiple platforms!
 
