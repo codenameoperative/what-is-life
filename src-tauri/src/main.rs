@@ -1,13 +1,12 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-use tauri::{command, Manager, AppHandle};
+use tauri::{command, AppHandle};
 use std::path::PathBuf;
 use std::fs;
 use serde_json::{json, Value};
 use rusqlite::Connection;
 use local_ip_address::local_ip;
 use chrono::Utc;
-use tauri::api::version;
 use reqwest; // For HTTP requests in update functions
 
 #[command]
@@ -434,7 +433,7 @@ async fn install_update(app_handle: AppHandle, update_path: String) -> Result<bo
 
     // Mark the update as installed by creating a marker file
     let install_marker = app_dir.join("updates").join(".installed");
-    fs::write(&install_marker, format!("installed_at_{}", chrono::Utc::now().timestamp()))
+    fs::write(&install_marker, format!("installed_at_{}", Utc::now().timestamp()))
         .map_err(|e| format!("Failed to create install marker: {}", e))?;
 
     // In a real implementation, this would restart the app

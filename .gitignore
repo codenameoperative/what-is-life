@@ -23,7 +23,11 @@ wget-log
 dist/
 build/
 target/
-src-tauri/target/
+src-tauri/
+workspace/
+scripts/
+android/
+android-sdk/
 
 # Environment variables
 .env

@@ -329,28 +329,28 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
     const lpcAssets = {
       body: {
         male: {
-          idle: '/lpc/body/bodies/male/idle',
-          walk: '/lpc/body/bodies/male/walk',
-          run: '/lpc/body/bodies/male/run'
+          idle: '/lpc/body/bodies/male/idle.png',
+          walk: '/lpc/body/bodies/male/walk.png',
+          run: '/lpc/body/bodies/male/run.png'
         },
         female: {
-          idle: '/lpc/body/bodies/female/idle',
-          walk: '/lpc/body/bodies/female/walk',
-          run: '/lpc/body/bodies/female/run'
+          idle: '/lpc/body/bodies/female/idle.png',
+          walk: '/lpc/body/bodies/female/walk.png',
+          run: '/lpc/body/bodies/female/run.png'
         },
         child: {
-          idle: '/lpc/body/bodies/child/idle',
-          walk: '/lpc/body/bodies/child/walk',
-          run: '/lpc/body/bodies/child/run'
+          idle: '/lpc/body/bodies/child/idle.png',
+          walk: '/lpc/body/bodies/child/walk.png',
+          run: '/lpc/body/bodies/child/run.png'
         },
         muscular: {
-          idle: '/lpc/body/bodies/muscular/idle',
-          walk: '/lpc/body/bodies/muscular/walk',
-          run: '/lpc/body/bodies/muscular/run'
+          idle: '/lpc/body/bodies/muscular/idle.png',
+          walk: '/lpc/body/bodies/muscular/walk.png',
+          run: '/lpc/body/bodies/muscular/run.png'
         }
       },
       hair: {
-        bald: '/lpc/body/child/hair_bald',
+        bald: '/lpc/hair/bald',
         short: '/lpc/hair/short',
         long: '/lpc/hair/long',
         ponytail: '/lpc/hair/ponytail'
@@ -363,20 +363,20 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
       },
       armor: {
         leather: {
-          idle: '/lpc/torso/armor/leather/idle',
-          walk: '/lpc/torso/armor/leather/walk'
+          idle: '/lpc/torso/armor/leather/idle.png',
+          walk: '/lpc/torso/armor/leather/walk.png'
         },
         chainmail: {
-          idle: '/lpc/torso/armor/chainmail/idle',
-          walk: '/lpc/torso/armor/chainmail/walk'
+          idle: '/lpc/torso/armor/chainmail/idle.png',
+          walk: '/lpc/torso/armor/chainmail/walk.png'
         },
         plate: {
-          idle: '/lpc/torso/armor/plate/idle',
-          walk: '/lpc/torso/armor/plate/walk'
+          idle: '/lpc/torso/armor/plate/idle.png',
+          walk: '/lpc/torso/armor/plate/walk.png'
         },
         robe: {
-          idle: '/lpc/torso/armor/robe/idle',
-          walk: '/lpc/torso/armor/robe/walk'
+          idle: '/lpc/torso/armor/robe/idle.png',
+          walk: '/lpc/torso/armor/robe/walk.png'
         }
       },
       accessories: {
@@ -410,12 +410,12 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
 
     // Load all hair sprites
     Object.entries(lpcAssets.hair).forEach(([hairStyle, path]) => {
-      this.load.image(`hair-${hairStyle}`, `${path}/idle`)
+      this.load.image(`hair-${hairStyle}`, `${path}/idle.png`)
     })
 
     // Load torso/clothing sprites
     Object.entries(lpcAssets.torso).forEach(([outfitType, path]) => {
-      this.load.image(`torso-${outfitType}`, `${path}/idle`)
+      this.load.image(`torso-${outfitType}`, `${path}/idle.png`)
     })
 
     // Load armor sprites with animation frames
@@ -427,12 +427,12 @@ export default function CharacterCreation({ onComplete }: CharacterCreationProps
 
     // Load accessories
     Object.entries(lpcAssets.accessories).forEach(([accessoryType, path]) => {
-      this.load.image(`accessory-${accessoryType}`, `${path}/idle`)
+      this.load.image(`accessory-${accessoryType}`, `${path}/idle.png`)
     })
 
     // Load weapons for future use
     Object.entries(lpcAssets.weapons).forEach(([weaponType, path]) => {
-      this.load.image(`weapon-${weaponType}`, `${path}/idle`)
+      this.load.image(`weapon-${weaponType}`, `${path}/idle.png`)
     })
 
     // Set up parallel loading (Phaser handles this automatically)

@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "build": {
-    "beforeBuildCommand": "echo 'Web build completed manually'",
+    "beforeBuildCommand": "",
     "beforeDevCommand": "",
     "devPath": "http://localhost:5173",
     "distDir": "../web/dist"
@@ -58,7 +58,7 @@
       },
       "resources": [],
       "shortDescription": "Life has its highs and lows",
-      "targets": "all",
+      "targets": ["deb", "rpm"],
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
