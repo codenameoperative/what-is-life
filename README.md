@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 # 🎮 What is Life? (Development Halted)
 
-**Notice (October 2025):** I'm back! Development of "What is Life?" is resuming after a brief hiatus. An exciting update is coming in late October to early november with new features and improvements. Stay tuned for more details!
+**Notice (October 2025):** Development of "What is Life?" has resumed after a brief hiatus. The latest build includes performance improvements and bug fixes. Development is now active with regular updates planned.
 
 ---
 =======
@@ -22,7 +22,7 @@ A modern idle/incremental life simulation game built with React, TypeScript, Rus
 
 ## 🌟 **Project Status**
 
-**Development of "What is Life?" has been temporarily halted.** The codebase is being made available for reference and educational purposes. The game featured:
+**Development of "What is Life?" is now active!** The latest build includes performance improvements and bug fixes. The game features:
 
 - 🏆 **50-Level Progression System** with XP, achievements, and dynamic titles
 - 💰 **Multi-Currency Economy** (Wallet, Bank, Stash)

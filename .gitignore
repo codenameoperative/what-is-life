@@ -18,6 +18,15 @@ lerna-debug.log*
 *.tmp
 *.temp
 wget-log
+build.log
+
+# Test files
+test
+test.rs
+
+# Development files
+Dockerfile.android
+capacitor/
 
 # Build outputs
 dist/
