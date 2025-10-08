@@ -29,6 +29,9 @@ scripts/
 android/
 android-sdk/
 
+# Keep lpc directory in version control
+!web/public/lpc/
+
 # Environment variables
 .env
 .env.local
