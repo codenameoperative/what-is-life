@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useMultiplayer } from '../../contexts/MultiplayerContext'
 import { useGame } from '../../contexts/GameContext'
-import { invoke } from '@tauri-apps/api/core'
+import { invoke } from '@tauri-apps/api/tauri'
 
 interface LANPartyModalProps {
   open: boolean

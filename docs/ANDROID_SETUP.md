@@ -1,22 +1,45 @@
-# Android Build Setup - Docker-Based Approach
+# Android Build Setup (v0.1.1)
 
 ## 🚀 Quick Start with Docker (Recommended)
 
 ### Prerequisites
-- **Docker** installed on your system
-- **Git** for cloning the repository
+- **Docker** 20.10+ installed on your system
+- **Git** 2.30+ for cloning the repository
+- **At least 8GB of free disk space** for the build environment
 - **Basic command line knowledge**
+- **Android device** or emulator with Android 8.0+ (API level 26+)
 
 ### Build Android APKs
+
+#### Using Docker (Recommended)
 ```bash
-# Clone the repository
-cd /home/arcelus/Desktop/
+# Clone the repository (if not already cloned)
 git clone https://github.com/codenameoperative/what-is-life.git
 cd what-is-life
 
-# Build Android APKs for ARM32 and ARM64
+# Make the build script executable (first time only)
+chmod +x scripts/build-android.sh
+
+# Build Android APKs for ARM64 (ARM32 is deprecated as of v0.1.1)
 ./scripts/build-android.sh
+
+# The built APK will be available at:
+# - build/app/outputs/flutter-apk/app-release.apk (debug)
+# - build/app/outputs/bundle/release/app-release.aab (release bundle)
 ```
+
+#### Manual Build (Advanced)
+If you prefer to build without Docker, you'll need to set up the Android development environment manually:
+
+1. Install Flutter SDK and Android Studio
+2. Set up Android SDK and NDK
+3. Run:
+   ```bash
+   flutter pub get
+   flutter build apk --release  # For APK
+   # OR
+   flutter build appbundle  # For AAB (Google Play Store)
+   ```
 
 ### What happens during the build:
 1. **Docker image creation** - Builds a complete Android development environment

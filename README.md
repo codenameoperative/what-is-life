@@ -1,24 +1,13 @@
-<<<<<<< HEAD
-# 🎮 What is Life? (Development Halted)
+# 🎮 What is Life? (Active Development)
 
-**Notice (October 2025):** Development of "What is Life?" has resumed after a brief hiatus. The latest build includes performance improvements and bug fixes. Development is now active with regular updates planned.
-
----
-=======
-# 🎮 What is Life? ( Development Halted)
-
-**NOTICE: (October 2025)**: Developed of "What is Life?" due to unforseen circumstances. I am Currently Focusing all my efforts on another large scale project that requires my full attention
-
-Development may potentially Resume between late December 2025 and Mid to late August 2026, Depending on the progress of my current commitments
-
-All current development work will be pushed to repository for archival purposes, but no further updates are planned at this time. Thank you for your understanding and support 
->>>>>>> 809ea9f24284c613266a72dce9b39b8045ef4803
+**Latest Update (October 2025):** Development of "What is Life?" has resumed with a new update (v0.1.1) that includes performance improvements and bug fixes. The project is now under active development with regular updates planned.
 
 A modern idle/incremental life simulation game built with React, TypeScript, Rust (Tauri), and modern web technologies. Experience various life activities, collect items, earn WTC (What Are Those Coins?), and build your virtual life across multiple platforms!
 
-![What is Life](https://img.shields.io/badge/What%20is%20Life-Development%20Halted-red?style=for-the-badge&logo=game&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Archived-yellow?style=for-the-badge)
+![What is Life](https://img.shields.io/badge/What%20is%20Life-v0.1.1-blue?style=for-the-badge&logo=game&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Active%20Development-brightgreen?style=for-the-badge)
 ![Built with](https://img.shields.io/badge/Built%20with-React%20%7C%20Rust%20%7C%20Tauri-orange?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 ## 🌟 **Project Status**
 

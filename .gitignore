@@ -32,7 +32,7 @@ capacitor/
 dist/
 build/
 target/
-src-tauri/
+
 workspace/
 scripts/
 android/

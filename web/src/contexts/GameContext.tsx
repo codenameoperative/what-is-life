@@ -3,7 +3,7 @@ import { items, type Item, type OwnedItem, isStackable, getDefaultQuantity } fro
 import { jobs, type JobDefinition } from '../utils/jobs'
 import { achievements, type Achievement } from '../utils/achievements'
 import { safeUUID, generatePlayerId } from '../utils/safeUUID'
-import { invoke } from '@tauri-apps/api/core'
+import { invoke } from '@tauri-apps/api/tauri'
 
 const getInitialSecrets = (): { retroUnlocked: boolean; cheatUnlocked: boolean } => {
   if (typeof window === 'undefined') {

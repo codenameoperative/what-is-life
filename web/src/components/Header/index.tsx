@@ -2,7 +2,7 @@ import { useGame } from '../../contexts/GameContext'
 import { useState, useEffect } from 'react'
 import ProfileButton from '../ProfileButton'
 import SettingsModal from '../SettingsModal'
-import { invoke } from '@tauri-apps/api/core'
+import { invoke } from '@tauri-apps/api/tauri'
 
 export default function Header({ retroModeActive, onCheat, onLoad }: { retroModeActive?: boolean; onCheat?: () => void; onLoad?: () => void }) {
   const { state, actions } = useGame()

@@ -1,21 +1,23 @@
-# 📋 What is Life - System Requirements (not offical)
+# 📋 What is Life - System Requirements (v0.1.1)
 
 ## 🎮 **Minimum Requirements**
 
 ### **All Platforms**
-- **OS**: Windows 10+, macOS 10.15+, Linux (Ubuntu 18.04+, Fedora 30+, etc.)
-- **RAM**: 2 GB
-- **Storage**: 500 MB free space
-- **Display**: 1280x720 resolution
-- **Network**: Stable internet connection for multiplayer features (Optional)
+- **OS**: Windows 10 64-bit (21H2+), macOS 11.0+ (Big Sur), Linux (Ubuntu 20.04+, Fedora 34+)
+- **RAM**: 4 GB (8 GB recommended for better performance)
+- **Storage**: 1 GB free space (SSD recommended)
+- **Display**: 1366x768 resolution (1920x1080 recommended)
+- **Network**: Stable internet connection for updates and multiplayer features
 
 ### **Platform-Specific**
 
 #### **Windows** 🪟
-- **OS**: Windows 10 version 1903 or later (64-bit)
-- **Processor**: Intel Core i3 / AMD Ryzen 3 or equivalent
-- **Graphics**: DirectX 11 compatible
-- **Additional**: WebView2 runtime (installed automatically if missing)
+- **OS**: Windows 10 64-bit (21H2) or Windows 11 (21H2)
+- **Processor**: Intel Core i3-8100 / AMD Ryzen 3 1200 or better
+- **Graphics**: DirectX 12 compatible with 2GB VRAM
+- **Additional**: 
+  - WebView2 runtime (installed automatically if missing)
+  - Visual C++ Redistributable 2019 or later
 
 #### **macOS** 🍎
 - **OS**: macOS 10.15 (Catalina) or later

@@ -1,20 +1,30 @@
-# What Is Life - Multi-Platform Build Guide
+# What Is Life - Multi-Platform Build Guide (v0.1.1)
 
 ## Overview
-This guide covers building "What Is Life" for multiple platforms and architectures including Linux (x32/x64/ARM), Windows, macOS, and Android.
+This guide covers building "What Is Life" (v0.1.1) for multiple platforms and architectures including Linux (x64), Windows, macOS, and Android. The latest version includes performance improvements and bug fixes.
+
+> **Note**: As of v0.1.1, 32-bit (x32) support has been deprecated. Please use 64-bit systems for building and running the application.
 
 ## Prerequisites
 
 ### For All Platforms
-- Node.js 18+ and npm
-- Rust 1.70+
-- Git
+- Node.js 20+ and npm 10+
+- Rust 1.75+ (stable)
+- Git 2.30+
+- Tauri CLI (install with `npm install -g @tauri-apps/cli`)
 
-### For Linux Builds
-- Linux system with development tools
-- GTK development libraries
-- WebKitGTK development libraries
-- AppIndicator libraries
+### For Linux Builds (x86_64)
+- Ubuntu 22.04+ or equivalent
+- Development tools: `build-essential`, `libgtk-3-dev`, `libwebkit2gtk-4.0-dev`
+- Additional dependencies:
+  ```bash
+  sudo apt update
+  sudo apt install -y \
+    libgtk-3-dev \
+    libwebkit2gtk-4.0-dev \
+    libappindicator3-dev \
+    librsvg2-dev \
+    libssl-dev
 
 ### For Windows Builds
 - Windows 10/11

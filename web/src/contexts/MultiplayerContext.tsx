@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect, useCallback, ReactNode 
 import { useGame } from './GameContext'
 import { generatePlayerId } from '../utils/safeUUID'
 import { multiplayerManager, type MultiplayerState, type MultiplayerActions } from '../services/MultiplayerManager'
-import { invoke } from '@tauri-apps/api/core'
+import { invoke } from '@tauri-apps/api/tauri'
 
 interface MultiplayerContextType {
   // Legacy interface for backward compatibility

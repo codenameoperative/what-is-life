@@ -23,7 +23,6 @@
     "android:build:all": "echo 'Android builds handled separately'"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1.6.1",
     "typescript": "^5.9.2"
   },
   "dependencies": {
@@ -31,6 +30,7 @@
     "@capacitor/cli": "^7.4.3",
     "@capacitor/core": "^7.4.3",
     "@phaserjs/phaser": "^0.2.2",
+    "@tauri-apps/cli": "^1.6.3",
     "phaser": "^3.90.0"
   },
   "description": "**Notice (October 2025):** I'm back! Development of \"What is Life?\" is resuming after a brief hiatus. An exciting update is coming in late October to early november with new features and improvements. Stay tuned for more details!",
